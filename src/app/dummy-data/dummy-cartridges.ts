@@ -4,7 +4,12 @@ export const cartridges = [
     brand: 'Canon',
     model: '737',
     analog: ['737 starter L', 'HP CRG737/CF283X', 'HP 83A'],
-    printers: [''],
+    compatiblePrinters: [
+      'Canon mf212w',
+      'Canon mf232w',
+      'Canon mf237w',
+      'Canon mf244w',
+    ],
     ean13: '1234567890123',
   },
   {
@@ -18,9 +23,9 @@ export const cartridges = [
   {
     id: 3,
     brand: 'Canon',
-    model: 'R-051',
+    model: '071',
     analog: [],
-    printers: [],
+    compatiblePrinters: ['Canon mf275w'],
     ean13: '1234567890123',
   },
 ];

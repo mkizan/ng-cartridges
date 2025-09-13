@@ -30,6 +30,11 @@ export const printers = [
     model: 'mf275w',
   },
   {
+    id: 6,
+    brand: 'Canon',
+    model: 'mf453w',
+  },
+  {
     id: 7,
     brand: 'Epson',
     model: 'L8180',

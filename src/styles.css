@@ -1,1 +1,30 @@
 /* You can add global styles to this file, and also import other style files */
+@import "./normalize.min.css";
+
+:root {
+  --accent-background-color: #5ed5dd;
+  --primary-background-color: #f6f7f9;
+  --primary-dark-background-color: #333131;
+  --card-background-color: #fcfcfe;
+  --dark-background-color: #5c5c5c;
+  --field-text-color: #86939b;
+  --value-text-color: #000000;
+  --field-text-dark-color: #f5f5f5;
+  --status-filled-color: #24c35d;
+  --status-on-filler-color: #ffee00;
+  --status-in-printer-color: #62a3f5;
+  --status-ended-color: #ec4243;
+  --status-on-repair-color: #ff5f02;
+  --status-non-working-color: #942a2a;
+  --error-background-color: #f02929;
+  --btn-dark-background-color: #ff5c5c;
+  --dashboard-card-title-text-size: 14px;
+  --dashboard-title-text-size: 26px;
+  --card-border-color: #dddddd;
+}
+
+body {
+  font-family: "Roboto", "sans-serif";
+  font-size: 14px;
+  background-color: var(--primary-background-color);
+}

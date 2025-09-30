@@ -21,10 +21,22 @@
   --dashboard-card-title-text-size: 14px;
   --dashboard-title-text-size: 26px;
   --card-border-color: #dddddd;
+  --field-border-color: rgb(71, 68, 68, 0.2);
 }
 
 body {
   font-family: "Roboto", "sans-serif";
   font-size: 14px;
   background-color: var(--primary-background-color);
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  border: 0;
+  clip: rect(0 0 0 0);
 }

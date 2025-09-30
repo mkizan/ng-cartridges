@@ -1,0 +1,63 @@
+<div class="cartridge-card">
+  <div class="cartridge-card__wrapper">
+    <h3 class="cartridge-card__title">
+      {{ cartridge().brand }} {{ cartridge().model }}
+    </h3>
+    <div class="cartridge-card__actions">
+      <button class="cartridge-card__actions-btn" (click)="toggleActionsBtn()">
+        ...
+      </button>
+      <div
+        class="cartridge-card__actions-wrapper"
+        [class.visually-hidden]="isActionsVisible"
+        #actionsWrapper
+      >
+        <p class="cartridge-card__actions-title">Дії</p>
+        <ul class="cartridge-card__actions-list">
+          <li class="cartridge-card__show-sku">Показати штрихкод</li>
+          <li class="cartridge-card__edit-cartridge">Редагувати</li>
+        </ul>
+        <p class="cartridge-card__change-status">Змінити статус</p>
+        <ul class="cartridge-card__status-list">
+          @for (item of cartridgeStatus(); track item.id) {
+          <li
+            class="cartridge-card__status-item cartridge-status"
+            [class]="item.state"
+            (click)="selectStatus(item.status)"
+          >
+            {{ item.status }}
+          </li>
+          }
+        </ul>
+        <button class="cartridge-card__delete-cartridge">Видалити</button>
+      </div>
+    </div>
+  </div>
+  <br />
+  <span
+    class="cartridge-card__status"
+    [class]="cartridge().status | translateStatus"
+  >
+    {{ cartridge().status }}
+  </span>
+  <p class="compatible-printers__title">Сумісні принтери</p>
+  <ul class="compatible-printers__list">
+    @for (compatiblePrinter of cartridge().compatiblePrinters; track $index) {
+    <li class="compatible-printers__item">{{ compatiblePrinter }}</li>
+    }
+  </ul>
+  <p class="cartridge-card__responsible">
+    <span>icon</span>відповідальний: <span>Some Name</span>
+  </p>
+  <p><span>icon</span>локація: <span>Some Location</span></p>
+  <p>
+    <span>icon</span>остання заправка:
+    <time datetime="15-09-2025">15.09.2025</time>
+  </p>
+  <p>
+    <span>icon </span>~наступна заправка:
+    <time datetime="30-09-2025">30.09.2025</time>
+  </p>
+  <p>Примітки:</p>
+  <p>Регулярне використання</p>
+</div>

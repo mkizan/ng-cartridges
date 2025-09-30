@@ -1,0 +1,112 @@
+.cartridge-card {
+  width: 400px;
+  margin: 30px 20px;
+  padding: 30px 20px;
+  background-color: var(--card-background-color);
+}
+
+.cartridge-card__wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.cartridge-card__actions {
+  position: relative;
+  /* margin-left: auto; */
+}
+
+.cartridge-card__actions-btn {
+  cursor: pointer;
+}
+
+.cartridge-card__actions-wrapper {
+  width: 150px;
+  position: absolute;
+  bottom: 22px;
+  right: 0px;
+  padding: 5px 5px;
+  background-color: var(--card-background-color);
+  border: 1px solid var(--card-border-color);
+  border-radius: 5px;
+}
+
+.cartridge-card__actions-title {
+  padding-bottom: 5px;
+  border-bottom: 1px solid var(--field-border-color);
+}
+.cartridge-card__actions-list {
+  padding-top: 5px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid var(--field-border-color);
+}
+
+.cartridge-card__status-list {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  padding-bottom: 5px;
+  font-size: 14px;
+  color: var(--field-text-color);
+  border-bottom: 1px solid var(--field-border-color);
+}
+
+.cartridge-card__change-status {
+  padding-top: 5px;
+}
+
+.cartridge-card__status-item {
+  margin-bottom: 5px;
+  &:first-child {
+    margin-top: 5px;
+  }
+}
+
+.cartridge-card__status-item:last-child {
+  margin-bottom: 0;
+}
+
+.cartridge-status::before {
+  display: inline-block;
+  margin-right: 5px;
+  content: "";
+  width: 10px;
+  height: 10px;
+  flex-shrink: 0;
+  border-radius: 50%;
+}
+
+.cartridge-card__delete-cartridge {
+  color: var(--btn-dark-background-color);
+  background-color: var(--card-background-color);
+  cursor: pointer;
+  border: none;
+}
+.cartridge-card__status.filled,
+.filled::before {
+  background-color: var(--status-filled-color);
+}
+
+.cartridge-card__status.on-filler,
+.on-filler::before {
+  background-color: var(--status-on-filler-color);
+}
+
+.cartridge-card__status.in-printer,
+.in-printer::before {
+  background-color: var(--status-in-printer-color);
+}
+
+.cartridge-card__status.ended,
+.ended::before {
+  background-color: var(--status-ended-color);
+}
+
+.cartridge-card__status.on-repair,
+.on-repair::before {
+  background-color: var(--status-on-repair-color);
+}
+
+.cartridge-card__status.non-working,
+.non-working::before {
+  background-color: var(--status-non-working-color);
+}

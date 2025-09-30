@@ -1,0 +1,8 @@
+<button (click)="logCartridges()">Log Current Cartridges</button>
+
+@for (item of cartridges(); track item.id) {
+<app-cartridge
+  [cartridge]="item"
+  (changeCartridgeStatus)="changeCartridgeStatus($event)"
+/>
+}

@@ -1,9 +1,10 @@
 import { Component, signal } from '@angular/core';
 import { Dashboard } from './dashboard/dashboard';
+import { CartridgesList } from './cartridges-list/cartridges-list';
 
 @Component({
   selector: 'app-root',
-  imports: [Dashboard],
+  imports: [Dashboard, CartridgesList],
   templateUrl: './app.html',
   styleUrl: './app.css',
 })

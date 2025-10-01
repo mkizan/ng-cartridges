@@ -3,7 +3,7 @@
   margin: 30px 20px;
 }
 
-.dashboard-card {
+.counter-cartridges {
   padding: 30px 20px;
   background-color: var(--card-background-color);
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
@@ -11,14 +11,14 @@
   border-radius: 10px;
 }
 
-.dashboard-card__wrapper {
+.counter-cartridges__wrapper {
   width: 280px;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.dashboard-card__title {
+.counter-cartridges__title {
   color: var(--field-text-color);
   font-weight: normal;
   font-size: var(--dashboard-card-title-text-size);
@@ -27,16 +27,16 @@
   }
 }
 
-.dashboard-card__icon {
+.counter-cartridges__icon {
 }
 
-.dashboard-card__total-count {
+.counter-cartridges__total-count {
   margin: 15px 0px 15px 0;
   font-size: var(--dashboard-title-text-size);
   font-weight: bold;
 }
 
-.dashboard-card__list {
+.counter-cartridges__list {
   list-style: none;
   padding: 0;
   margin: 0;
@@ -45,14 +45,14 @@
   gap: 12px 8px;
 }
 
-.dashboard-card__list-item {
+.counter-cartridges__list-item {
   display: flex;
   align-items: center;
   font-size: 14px;
   color: var(--field-text-color);
 }
 
-.dashboard-card__list-item::before {
+.counter-cartridges__list-item::before {
   margin-right: 5px;
   content: "";
   width: 10px;
@@ -72,26 +72,26 @@
   font-weight: 600;
 }
 
-.dashboard-card__list-item.filled::before {
+.counter-cartridges__list-item.filled::before {
   background-color: var(--status-filled-color);
 }
 
-.dashboard-card__list-item.on-filler::before {
+.counter-cartridges__list-item.on-filler::before {
   background-color: var(--status-on-filler-color);
 }
 
-.dashboard-card__list-item.in-printer::before {
+.counter-cartridges__list-item.in-printer::before {
   background-color: var(--status-in-printer-color);
 }
 
-.dashboard-card__list-item.ended::before {
+.counter-cartridges__list-item.ended::before {
   background-color: var(--status-ended-color);
 }
 
-.dashboard-card__list-item.on-repair::before {
+.counter-cartridges__list-item.on-repair::before {
   background-color: var(--status-on-repair-color);
 }
 
-.dashboard-card__list-item.non-working::before {
+.counter-cartridges__list-item.non-working::before {
   background-color: var(--status-non-working-color);
 }

@@ -22,7 +22,7 @@
           @for (item of cartridgeStatus(); track item.id) {
           <li
             class="cartridge-card__status-item cartridge-status"
-            [class]="item.state"
+            [class]="item.status | translateStatus"
             (click)="selectStatus(item.status)"
           >
             {{ item.status }}

@@ -1,14 +1,15 @@
 import { Component, signal } from '@angular/core';
-import { Cartridge, ICartridge } from './cartridge/cartridge';
-import { cartridges } from '../dummy-data/dummy-cartridges';
+import { Cartridge } from '../cartridge/cartridge';
+import { cartridges } from '../../../../dummy-data/dummy-cartridges';
+import { ICartridge } from '../../models/cartridge-interfaces';
 
 @Component({
-  selector: 'app-cartridges-list',
+  selector: 'app-cartridge-list',
   imports: [Cartridge],
-  templateUrl: './cartridges-list.html',
-  styleUrl: './cartridges-list.css',
+  templateUrl: './cartridge-list.html',
+  styleUrl: './cartridge-list.css',
 })
-export class CartridgesList {
+export class CartridgeList {
   cartridges = signal<ICartridge[]>(cartridges);
 
   changeCartridgeStatus(obj: { id: number; status: string }) {

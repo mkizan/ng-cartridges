@@ -24,6 +24,16 @@ export class CartridgesService {
   allCartridges = this.cartridges.asReadonly();
   allCartridgeStatuses = this.cartridgeStatus.asReadonly();
 
+  changeCartridgeStatus(cartridgeData: { id: string; status: string }) {
+    this.cartridges.update((currentCartridges) =>
+      currentCartridges.map((cartridge) =>
+        cartridge.id === cartridgeData.id
+          ? { ...cartridge, status: cartridgeData.status }
+          : cartridge
+      )
+    );
+  }
+
   addCartridge(cartridgeData: ICartridgeData) {
     const newCartridge: ICartridge = {
       ...cartridgeData,
@@ -34,13 +44,19 @@ export class CartridgesService {
     this.cartridges.update((oldCartridges) => [...oldCartridges, newCartridge]);
   }
 
-  changeCartridgeStatus(cartridgeData: { id: string; status: string }) {
+  removeCartridge(id: string) {
     this.cartridges.update((currentCartridges) =>
-      currentCartridges.map((cartridge) =>
-        cartridge.id === cartridgeData.id
-          ? { ...cartridge, status: cartridgeData.status }
-          : cartridge
-      )
+      currentCartridges.filter((cartridge) => cartridge.id !== id)
     );
   }
+
+  // removeCartridge(id: string) {
+  //   const index = this.cartridges().findIndex(
+  //     (cartridge) => cartridge.id === id
+  //   );
+  //   if (index !== -1) {
+  //     console.log(this.cartridges().splice(index, 1));
+  //     this.cartridges().splice(index, 1);
+  //   }
+  // }
 }

@@ -39,4 +39,8 @@ export class Cartridge {
   toggleActionsBtn() {
     this.isActionsVisible = !this.isActionsVisible;
   }
+
+  removeCartridge() {
+    this.cartridgesService.removeCartridge(this.cartridge().id);
+  }
 }

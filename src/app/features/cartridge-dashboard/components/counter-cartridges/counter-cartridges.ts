@@ -1,9 +1,16 @@
-import { Component } from '@angular/core';
+import { Component, computed, inject } from '@angular/core';
+import { CartridgesService } from '../../../cartridges/services/cartridges-service';
+import { TranslateStatusPipe } from '../../../../shared/pipes/translate-status-pipe';
 
 @Component({
   selector: 'app-counter-cartridges',
-  imports: [],
+  imports: [TranslateStatusPipe],
   templateUrl: './counter-cartridges.html',
   styleUrl: './counter-cartridges.css',
 })
-export class CounterCartridges {}
+export class CounterCartridges {
+  cartridgesService = inject(CartridgesService);
+  cartridges = this.cartridgesService.allCartridges;
+  cartridgeStatuses = this.cartridgesService.allCartridgeStatuses;
+  countCartridgesByStatus = this.cartridgesService.cartridgeStatusCounts;
+}

@@ -4,32 +4,20 @@
       <h3 class="counter-cartridges__title">всього картриджів</h3>
       <span class="counter-cartridges__icon">test</span>
     </div>
-    <p class="counter-cartridges__total-count">6</p>
+    <p class="counter-cartridges__total-count">
+      {{ cartridgesService.totalCartridgesCount() }}
+    </p>
     <ul class="counter-cartridges__list">
-      <li class="counter-cartridges__list-item filled">
-        <p class="list-item__title">заправлено</p>
-        <p class="list-item__count">1</p>
+      @for (cartridgeStatus of countCartridgesByStatus(); track
+      cartridgeStatus.id){
+      <li
+        class="counter-cartridges__list-item"
+        [class]="cartridgeStatus.status | translateStatus"
+      >
+        <p class="list-item__title">{{ cartridgeStatus.status }}</p>
+        <p class="list-item__count">{{ cartridgeStatus.count }}</p>
       </li>
-      <li class="counter-cartridges__list-item on-filler">
-        <p class="list-item__title">на заправці</p>
-        <p class="list-item__count">1</p>
-      </li>
-      <li class="counter-cartridges__list-item in-printer">
-        <p class="list-item__title">в принтері</p>
-        <p class="list-item__count">1</p>
-      </li>
-      <li class="counter-cartridges__list-item ended">
-        <p class="list-item__title">закінчився</p>
-        <p class="list-item__count">1</p>
-      </li>
-      <li class="counter-cartridges__list-item on-repair">
-        <p class="list-item__title">в ремонті</p>
-        <p class="list-item__count">1</p>
-      </li>
-      <li class="counter-cartridges__list-item non-working">
-        <p class="list-item__title">неробочий</p>
-        <p class="list-item__count">1</p>
-      </li>
+      }
     </ul>
   </div>
 </section>

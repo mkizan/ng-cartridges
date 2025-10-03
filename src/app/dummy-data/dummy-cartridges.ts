@@ -1,6 +1,6 @@
 export const cartridges = [
   {
-    id: 1,
+    id: '1',
     brand: 'Canon',
     model: '737',
     analog: ['737 starter L', 'HP CRG737/CF283X', 'HP 83A'],
@@ -14,7 +14,7 @@ export const cartridges = [
     status: 'заправлений',
   },
   {
-    id: 2,
+    id: '2',
     brand: 'Canon',
     model: '051',
     analog: ['HP 30A'],
@@ -23,7 +23,7 @@ export const cartridges = [
     status: 'заправлений',
   },
   {
-    id: 3,
+    id: '3',
     brand: 'Canon',
     model: '057',
     analog: [],
@@ -32,7 +32,7 @@ export const cartridges = [
     status: 'на заправці',
   },
   {
-    id: 4,
+    id: '4',
     brand: 'Canon',
     model: '057',
     analog: [],
@@ -41,7 +41,7 @@ export const cartridges = [
     status: 'в принтері',
   },
   {
-    id: 5,
+    id: '5',
     brand: 'Canon',
     model: '071',
     analog: [],
@@ -50,7 +50,7 @@ export const cartridges = [
     status: 'закінчився',
   },
   {
-    id: 6,
+    id: '6',
     brand: 'Canon',
     model: '071',
     analog: [],

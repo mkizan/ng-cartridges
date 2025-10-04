@@ -1,6 +1,7 @@
 import {
   Component,
   ElementRef,
+  inject,
   input,
   output,
   signal,
@@ -11,6 +12,7 @@ import {
   ICartridge,
   ICartridgeStatuses,
 } from '../../models/cartridge-interfaces';
+import { CartridgesService } from '../../services/cartridges-service';
 
 @Component({
   selector: 'app-cartridge',
@@ -19,22 +21,16 @@ import {
   styleUrl: './cartridge.css',
 })
 export class Cartridge {
+  cartridgesService = inject(CartridgesService);
+  cartridgeStatus = this.cartridgesService.allCartridgeStatuses;
+
   cartridge = input.required<ICartridge>();
-  changeCartridgeStatus = output<{ id: number; status: string }>();
+  changeCartridgeStatus = output<{ id: string; status: string }>();
   isActionsVisible = true;
   contentActionsBtn = viewChild<ElementRef<HTMLDivElement>>('actionsWrapper');
 
-  cartridgeStatus = signal<ICartridgeStatuses[]>([
-    { id: 1, status: 'заправлений' },
-    { id: 2, status: 'на заправці' },
-    { id: 3, status: 'в принтері' },
-    { id: 4, status: 'закінчився' },
-    { id: 5, status: 'в ремонті' },
-    { id: 6, status: 'неробочий' },
-  ]);
-
   selectStatus(status: string) {
-    return this.changeCartridgeStatus.emit({
+    this.cartridgesService.changeCartridgeStatus({
       id: this.cartridge().id,
       status,
     });
@@ -42,5 +38,9 @@ export class Cartridge {
 
   toggleActionsBtn() {
     this.isActionsVisible = !this.isActionsVisible;
+  }
+
+  removeCartridge() {
+    this.cartridgesService.removeCartridge(this.cartridge().id);
   }
 }

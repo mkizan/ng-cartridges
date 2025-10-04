@@ -19,6 +19,12 @@ export interface ICartridgeStatuses {
     | 'неробочий';
 }
 
+export interface ICartridgeStatusCount {
+  id: string;
+  status: string;
+  count: number;
+}
+
 export interface ICartridgeData {
   brand: string;
   model: string;

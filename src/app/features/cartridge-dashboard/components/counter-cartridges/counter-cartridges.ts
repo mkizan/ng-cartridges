@@ -11,6 +11,5 @@ import { TranslateStatusPipe } from '../../../../shared/pipes/translate-status-p
 export class CounterCartridges {
   cartridgesService = inject(CartridgesService);
   cartridges = this.cartridgesService.allCartridges;
-  cartridgeStatuses = this.cartridgesService.allCartridgeStatuses;
-  countCartridgesByStatus = this.cartridgesService.cartridgeStatusCounts;
+  countCartridgesByStatus = this.cartridgesService.allCartridgeStatusCounts;
 }

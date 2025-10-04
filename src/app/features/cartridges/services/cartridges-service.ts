@@ -2,6 +2,7 @@ import { computed, effect, Injectable, signal, untracked } from '@angular/core';
 import {
   ICartridge,
   ICartridgeData,
+  ICartridgeStatusCount,
   ICartridgeStatuses,
 } from '../models/cartridge-interfaces';
 import { cartridges } from '../../../dummy-data/dummy-cartridges';
@@ -19,15 +20,13 @@ export class CartridgesService {
     { id: '5', status: 'в ремонті' },
     { id: '6', status: 'неробочий' },
   ]);
-  totalCartridgesCount = signal(0);
+  // вираховує кількість картриджів відповідно до статусу
+  private cartridgeStatusCounts = signal<ICartridgeStatusCount[]>([]);
 
   allCartridges = this.cartridges.asReadonly();
   allCartridgeStatuses = this.cartridgeStatus.asReadonly();
+  allCartridgeStatusCounts = this.cartridgeStatusCounts.asReadonly();
 
-  // вираховує кількість картриджів по статусах
-  cartridgeStatusCounts = signal<
-    Array<{ id: string; status: string; count: number }>
-  >([]);
   constructor() {
     effect(() => {
       const carts = this.cartridges();
@@ -45,6 +44,11 @@ export class CartridgesService {
       );
     });
   }
+
+  // вираховує загальну кількість картриджів по статусах
+  totalCartridgesCount = computed(() =>
+    this.cartridgeStatusCounts().reduce((acc, status) => acc + status.count, 0)
+  );
 
   changeCartridgeStatus(cartridgeData: { id: string; status: string }) {
     this.cartridges.update((currentCartridges) =>
@@ -70,6 +74,5 @@ export class CartridgesService {
     this.cartridges.update((currentCartridges) =>
       currentCartridges.filter((cartridge) => cartridge.id !== id)
     );
-    console.log(this.cartridgeStatusCounts());
   }
 }

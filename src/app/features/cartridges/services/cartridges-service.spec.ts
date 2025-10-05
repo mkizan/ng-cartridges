@@ -1,13 +1,12 @@
 import { TestBed } from '@angular/core/testing';
-
-import { CartridgeService } from './cartridge-service';
+import { CartridgesService } from './cartridges-service';
 
 describe('CartridgeService', () => {
-  let service: CartridgeService;
+  let service: CartridgesService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(CartridgeService);
+    service = TestBed.inject(CartridgesService);
   });
 
   it('should be created', () => {

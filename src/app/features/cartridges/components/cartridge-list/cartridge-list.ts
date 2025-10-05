@@ -1,7 +1,5 @@
-import { Component, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Cartridge } from '../cartridge/cartridge';
-import { cartridges } from '../../../../dummy-data/dummy-cartridges';
-import { ICartridge } from '../../models/cartridge-interfaces';
 import { CartridgesService } from '../../services/cartridges-service';
 
 @Component({
@@ -9,6 +7,7 @@ import { CartridgesService } from '../../services/cartridges-service';
   imports: [Cartridge],
   templateUrl: './cartridge-list.html',
   styleUrl: './cartridge-list.css',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CartridgeList {
   cartridgesService = inject(CartridgesService);

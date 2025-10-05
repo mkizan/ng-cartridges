@@ -1,4 +1,5 @@
 import {
+  ChangeDetectionStrategy,
   Component,
   ElementRef,
   inject,
@@ -8,10 +9,7 @@ import {
   viewChild,
 } from '@angular/core';
 import { TranslateStatusPipe } from '../../../../shared/pipes/translate-status-pipe';
-import {
-  ICartridge,
-  ICartridgeStatuses,
-} from '../../models/cartridge-interfaces';
+import { ICartridge } from '../../models/cartridge-interfaces';
 import { CartridgesService } from '../../services/cartridges-service';
 
 @Component({
@@ -19,6 +17,7 @@ import { CartridgesService } from '../../services/cartridges-service';
   imports: [TranslateStatusPipe],
   templateUrl: './cartridge.html',
   styleUrl: './cartridge.css',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Cartridge {
   cartridgesService = inject(CartridgesService);

@@ -12,6 +12,7 @@ export const cartridges = [
     ],
     ean13: '1234567890123',
     status: 'заправлений',
+    responsible: 'Mykola',
   },
   {
     id: '2',
@@ -21,6 +22,7 @@ export const cartridges = [
     compatiblePrinters: ['Canon mf264dw', 'Canon mf267dw'],
     ean13: '1234567890124',
     status: 'заправлений',
+    responsible: 'Mykola',
   },
   {
     id: '3',
@@ -30,6 +32,7 @@ export const cartridges = [
     compatiblePrinters: ['Canon mf453dw', 'Canon mf455dw'],
     ean13: '1234567890125',
     status: 'на заправці',
+    responsible: 'Mykola',
   },
   {
     id: '4',
@@ -39,6 +42,7 @@ export const cartridges = [
     compatiblePrinters: ['Canon mf453dw', 'Canon mf455dw'],
     ean13: '1234567890126',
     status: 'в принтері',
+    responsible: 'Mykola',
   },
   {
     id: '5',
@@ -48,6 +52,7 @@ export const cartridges = [
     compatiblePrinters: ['Canon mf275w'],
     ean13: '1234567890127',
     status: 'закінчився',
+    responsible: 'Mykola',
   },
   {
     id: '6',
@@ -55,7 +60,8 @@ export const cartridges = [
     model: '071',
     analog: [],
     compatiblePrinters: ['Canon mf275w'],
-    ean13: '1234567890125',
+    ean13: '1234567890128',
     status: 'в принтері',
+    responsible: 'Mykola',
   },
 ];

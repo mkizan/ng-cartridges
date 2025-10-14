@@ -1,0 +1,14 @@
+<button class="add-cartridge__title" (click)="toggleModalBtn()">
+  Додати картридж
+</button>
+
+<div
+  class="modal-overlay"
+  [class.is-open]="isOpen()"
+  (click)="handleOverlayClick($event)"
+>
+  <div class="modal" (click)="$event.stopPropagation()">
+    <h3 class="modal__title">Додати новий картридж</h3>
+    <app-cartridge-form />
+  </div>
+</div>

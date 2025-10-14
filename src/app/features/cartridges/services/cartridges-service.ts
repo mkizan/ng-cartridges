@@ -64,7 +64,6 @@ export class CartridgesService {
     const newCartridge: ICartridge = {
       ...cartridgeData,
       id: crypto.randomUUID(),
-      status: 'заправлений',
     };
 
     this.cartridges.update((oldCartridges) => [...oldCartridges, newCartridge]);

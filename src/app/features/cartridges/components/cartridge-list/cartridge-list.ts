@@ -13,7 +13,7 @@ export class CartridgeList {
   cartridgesService = inject(CartridgesService);
   cartridges = this.cartridgesService.allCartridges;
 
-  logCartridges() {
-    console.log('Current cartridges:', this.cartridges());
-  }
+  // logCartridges() {
+  //   console.log('Current cartridges:', this.cartridges());
+  // }
 }

@@ -1,18 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FormCartridge } from './form-cartridge';
+import { CartridgeForm } from './cartridge-form';
 
-describe('FormCartridge', () => {
-  let component: FormCartridge;
-  let fixture: ComponentFixture<FormCartridge>;
+describe('CartridgeForm', () => {
+  let component: CartridgeForm;
+  let fixture: ComponentFixture<CartridgeForm>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [FormCartridge]
-    })
-    .compileComponents();
+      imports: [CartridgeForm],
+    }).compileComponents();
 
-    fixture = TestBed.createComponent(FormCartridge);
+    fixture = TestBed.createComponent(CartridgeForm);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -9,11 +9,11 @@ import {
   viewChild,
 } from '@angular/core';
 import { CartridgesService } from '../../services/cartridges-service';
-import { FormCartridge } from '../form-cartridge/form-cartridge';
+import { CartridgeForm } from '../cartridge-form/cartridge-form';
 
 @Component({
   selector: 'app-add-cartridge',
-  imports: [FormCartridge],
+  imports: [CartridgeForm],
   templateUrl: './add-cartridge.html',
   styleUrl: './add-cartridge.css',
 })

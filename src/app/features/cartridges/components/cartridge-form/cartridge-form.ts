@@ -13,6 +13,7 @@ import {
   ICartridgeStatuses,
   ICartridgeUsers,
 } from '../../models/cartridge-interfaces';
+import { ModalService } from '../../../../core/services/modal-service';
 
 @Component({
   selector: 'app-cartridge-form',
@@ -21,6 +22,7 @@ import {
   styleUrl: './cartridge-form.css',
 })
 export class CartridgeForm {
+  modalService = inject(ModalService);
   cartridgesService = inject(CartridgesService);
   cartridgeStatuses = this.cartridgesService.allCartridgeStatuses;
   locations = signal(locations);
@@ -101,5 +103,6 @@ export class CartridgeForm {
     console.log(this.cartridgeForm);
     const cartridgeData = this.cartridgeForm.getRawValue();
     this.cartridgesService.addCartridge(cartridgeData);
+    this.modalService.toggleModalBtn();
   }
 }

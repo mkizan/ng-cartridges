@@ -13,13 +13,13 @@ import { ICartridge } from '../../models/cartridge-interfaces';
 import { CartridgesService } from '../../services/cartridges-service';
 
 @Component({
-  selector: 'app-cartridge',
+  selector: 'app-cartridge-card',
   imports: [TranslateStatusPipe],
-  templateUrl: './cartridge.html',
-  styleUrl: './cartridge.css',
+  templateUrl: './cartridge-card.html',
+  styleUrl: './cartridge-card.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class Cartridge {
+export class CartridgeCard {
   cartridgesService = inject(CartridgesService);
   cartridgeStatus = this.cartridgesService.allCartridgeStatuses;
 

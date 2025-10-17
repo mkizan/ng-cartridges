@@ -1,10 +1,10 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { Cartridge } from '../cartridge/cartridge';
+import { CartridgeCard } from '../cartridge-card/cartridge-card';
 import { CartridgesService } from '../../services/cartridges-service';
 
 @Component({
   selector: 'app-cartridge-list',
-  imports: [Cartridge],
+  imports: [CartridgeCard],
   templateUrl: './cartridge-list.html',
   styleUrl: './cartridge-list.css',
   changeDetection: ChangeDetectionStrategy.OnPush,

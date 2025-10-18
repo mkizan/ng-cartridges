@@ -8,37 +8,91 @@
 .cartridge-card__wrapper {
   display: flex;
   justify-content: space-between;
-  align-items: flex-end;
+  align-items: center;
 }
 
 .cartridge-card__actions {
   position: relative;
-  /* margin-left: auto; */
+  padding: 5px;
 }
 
 .cartridge-card__actions-btn {
+  color: var(--btn-dark-background-color);
   cursor: pointer;
 }
 
 .cartridge-card__actions-wrapper {
-  width: 150px;
   position: absolute;
-  bottom: 22px;
-  right: 0px;
+  width: 150px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  border: 1px solid var(--card-border-color);
+  clip: rect(0 0 0 0);
+  background-color: var(--card-background-color);
+  border-radius: 5px;
+  transition: all 0.3s ease-out;
+}
+
+.cartridge-card__actions:hover .cartridge-card__actions-wrapper {
+  width: 150px;
+  height: auto;
+  position: absolute;
+  /* bottom: 0px; */
+  top: 21px;
+  right: 5px;
+  overflow: visible;
+  clip: auto;
   padding: 5px 5px;
   background-color: var(--card-background-color);
   border: 1px solid var(--card-border-color);
   border-radius: 5px;
+  z-index: 10;
 }
 
 .cartridge-card__actions-title {
   padding-bottom: 5px;
   border-bottom: 1px solid var(--field-border-color);
+  text-transform: capitalize;
 }
 .cartridge-card__actions-list {
+  /* padding-top: 5px;
+  padding-bottom: 5px; */
+  border-bottom: 1px solid var(--field-border-color);
+}
+
+.cartridge-card__actions-list > li {
+  width: 100%;
   padding-top: 5px;
   padding-bottom: 5px;
-  border-bottom: 1px solid var(--field-border-color);
+  cursor: pointer;
+}
+
+.cartridge-card__show-sku {
+  display: flex;
+  align-items: center;
+  color: var(--field-text-color);
+}
+
+.cartridge-card__show-sku > p {
+  padding-left: 3px;
+  &::first-letter {
+    text-transform: capitalize;
+  }
+}
+
+.cartridge-card__edit-cartridge {
+  display: flex;
+  align-items: center;
+  color: var(--field-text-color);
+}
+
+.cartridge-card__edit-cartridge > p {
+  padding-left: 3px;
+  &::first-letter {
+    text-transform: capitalize;
+  }
 }
 
 .cartridge-card__status-list {
@@ -52,10 +106,15 @@
 
 .cartridge-card__change-status {
   padding-top: 5px;
+  &::first-letter {
+    text-transform: capitalize;
+  }
 }
 
 .cartridge-card__status-item {
   margin-bottom: 5px;
+  cursor: pointer;
+
   &:first-child {
     margin-top: 5px;
   }
@@ -75,11 +134,8 @@
   border-radius: 50%;
 }
 
-.cartridge-card__delete-cartridge {
-  color: var(--btn-dark-background-color);
-  background-color: var(--card-background-color);
-  cursor: pointer;
-  border: none;
+.cartridge-card__status::first-letter {
+  text-transform: capitalize;
 }
 .cartridge-card__status.filled,
 .filled::before {
@@ -109,4 +165,19 @@
 .cartridge-card__status.non-working,
 .non-working::before {
   background-color: var(--status-non-working-color);
+}
+
+.cartridge-card__delete-cartridge {
+  display: flex;
+  align-items: flex-start;
+  color: var(--btn-dark-background-color);
+}
+
+.cartridge-card__delete-btn {
+  width: 100%;
+  color: var(--btn-dark-background-color);
+  background-color: inherit;
+  border: none;
+  text-transform: capitalize;
+  text-align: start;
 }

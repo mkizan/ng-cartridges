@@ -1,42 +1,44 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  ElementRef,
   inject,
   input,
   output,
-  signal,
-  viewChild,
 } from '@angular/core';
+import {
+  LucideAngularModule,
+  SquarePen,
+  ScanBarcode,
+  Pencil,
+  Trash2,
+} from 'lucide-angular';
 import { TranslateStatusPipe } from '../../../../shared/pipes/translate-status-pipe';
 import { ICartridge } from '../../models/cartridge-interfaces';
 import { CartridgesService } from '../../services/cartridges-service';
 
 @Component({
   selector: 'app-cartridge-card',
-  imports: [TranslateStatusPipe],
+  imports: [LucideAngularModule, TranslateStatusPipe],
   templateUrl: './cartridge-card.html',
   styleUrl: './cartridge-card.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CartridgeCard {
+  readonly SquarePen = SquarePen;
+  readonly ScanBarcode = ScanBarcode;
+  readonly Pencil = Pencil;
+  readonly Trash2 = Trash2;
   cartridgesService = inject(CartridgesService);
   cartridgeStatus = this.cartridgesService.allCartridgeStatuses;
 
   cartridge = input.required<ICartridge>();
   changeCartridgeStatus = output<{ id: string; status: string }>();
-  isActionsVisible = true;
-  contentActionsBtn = viewChild<ElementRef<HTMLDivElement>>('actionsWrapper');
 
   selectStatus(status: string) {
     this.cartridgesService.changeCartridgeStatus({
       id: this.cartridge().id,
       status,
     });
-  }
-
-  toggleActionsBtn() {
-    this.isActionsVisible = !this.isActionsVisible;
   }
 
   removeCartridge() {

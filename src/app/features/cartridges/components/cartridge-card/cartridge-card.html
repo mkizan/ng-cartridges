@@ -3,21 +3,26 @@
     <h3 class="cartridge-card__title">
       {{ cartridge().brand }} {{ cartridge().model }}
     </h3>
+
     <div class="cartridge-card__actions">
-      <button class="cartridge-card__actions-btn" (click)="toggleActionsBtn()">
-        ...
-      </button>
-      <div
-        class="cartridge-card__actions-wrapper"
-        [class.visually-hidden]="isActionsVisible"
-        #actionsWrapper
-      >
-        <p class="cartridge-card__actions-title">Дії</p>
+      <lucide-icon
+        [img]="SquarePen"
+        size="16"
+        class="cartridge-card__actions-btn"
+      ></lucide-icon>
+      <div class="cartridge-card__actions-wrapper">
+        <p class="cartridge-card__actions-title">дії</p>
         <ul class="cartridge-card__actions-list">
-          <li class="cartridge-card__show-sku">Показати штрихкод</li>
-          <li class="cartridge-card__edit-cartridge">Редагувати</li>
+          <li class="cartridge-card__show-sku">
+            <lucide-icon [img]="ScanBarcode" size="16"></lucide-icon>
+            <p>показати штрихкод</p>
+          </li>
+          <li class="cartridge-card__edit-cartridge">
+            <lucide-icon [img]="Pencil" size="16"></lucide-icon>
+            <p>редагувати</p>
+          </li>
         </ul>
-        <p class="cartridge-card__change-status">Змінити статус</p>
+        <p class="cartridge-card__change-status">змінити статус</p>
         <ul class="cartridge-card__status-list">
           @for (item of cartridgeStatus(); track item.id) {
           <li
@@ -29,12 +34,15 @@
           </li>
           }
         </ul>
-        <button
-          class="cartridge-card__delete-cartridge"
-          (click)="removeCartridge()"
-        >
-          Видалити
-        </button>
+        <div class="cartridge-card__delete-cartridge">
+          <lucide-icon [img]="Trash2" size="16"></lucide-icon>
+          <button
+            class="cartridge-card__delete-btn"
+            (click)="removeCartridge()"
+          >
+            видалити
+          </button>
+        </div>
       </div>
     </div>
   </div>
@@ -45,7 +53,7 @@
   >
     {{ cartridge().status }}
   </span>
-  <p class="compatible-printers__title">Сумісні принтери</p>
+  <p class="compatible-printers__title">сумісні принтери</p>
   <ul class="compatible-printers__list">
     @for (compatiblePrinter of cartridge().compatiblePrinters; track $index) {
     <li class="compatible-printers__item">{{ compatiblePrinter }}</li>
@@ -63,6 +71,6 @@
     <span>icon </span>~наступна заправка:
     <time datetime="30-09-2025">30.09.2025</time>
   </p>
-  <p>Примітки:</p>
-  <p>Регулярне використання</p>
+  <p>примітки:</p>
+  <p>регулярне використання</p>
 </div>

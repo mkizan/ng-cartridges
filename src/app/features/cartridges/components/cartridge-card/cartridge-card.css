@@ -180,4 +180,5 @@
   border: none;
   text-transform: capitalize;
   text-align: start;
+  cursor: pointer;
 }

@@ -68,7 +68,7 @@
 
 .cartridge-card__show-sku {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   color: var(--field-text-color);
 }
 
@@ -81,7 +81,7 @@
 
 .cartridge-card__edit-cartridge {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   color: var(--field-text-color);
 }
 

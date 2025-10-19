@@ -39,9 +39,8 @@
   width: 150px;
   height: auto;
   position: absolute;
-  /* bottom: 0px; */
-  top: 21px;
-  right: 5px;
+  top: 6px;
+  right: 21px;
   overflow: visible;
   clip: auto;
   padding: 5px 5px;
@@ -57,8 +56,6 @@
   text-transform: capitalize;
 }
 .cartridge-card__actions-list {
-  /* padding-top: 5px;
-  padding-bottom: 5px; */
   border-bottom: 1px solid var(--field-border-color);
 }
 
@@ -71,7 +68,7 @@
 
 .cartridge-card__show-sku {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   color: var(--field-text-color);
 }
 
@@ -84,7 +81,7 @@
 
 .cartridge-card__edit-cartridge {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   color: var(--field-text-color);
 }
 

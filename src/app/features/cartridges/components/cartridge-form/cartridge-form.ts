@@ -13,7 +13,7 @@ import {
   ICartridgeStatuses,
   ICartridgeUsers,
 } from '../../models/cartridge-interfaces';
-import { ModalService } from '../../../../core/services/modal-service';
+import { ModalService } from '../../../../core/services/modal/modal-service';
 
 @Component({
   selector: 'app-cartridge-form',

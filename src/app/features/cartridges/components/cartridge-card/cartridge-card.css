@@ -11,6 +11,10 @@
   align-items: center;
 }
 
+.cartridge-card__title {
+  color: var(--value-text-color);
+}
+
 .cartridge-card__actions {
   position: relative;
   padding: 5px;
@@ -54,6 +58,7 @@
   padding-bottom: 5px;
   border-bottom: 1px solid var(--field-border-color);
   text-transform: capitalize;
+  color: var(--value-text-color);
 }
 .cartridge-card__actions-list {
   border-bottom: 1px solid var(--field-border-color);
@@ -64,12 +69,12 @@
   padding-top: 5px;
   padding-bottom: 5px;
   cursor: pointer;
+  color: var(--value-text-color);
 }
 
 .cartridge-card__show-sku {
   display: flex;
   align-items: center;
-  color: var(--field-text-color);
 }
 
 .cartridge-card__show-sku > p {
@@ -97,12 +102,13 @@
   margin-bottom: 5px;
   padding-bottom: 5px;
   font-size: 14px;
-  color: var(--field-text-color);
+  color: var(--value-text-color);
   border-bottom: 1px solid var(--field-border-color);
 }
 
 .cartridge-card__change-status {
   padding-top: 5px;
+  color: var(--value-text-color);
   &::first-letter {
     text-transform: capitalize;
   }

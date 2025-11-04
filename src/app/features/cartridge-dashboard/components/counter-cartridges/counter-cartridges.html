@@ -2,7 +2,11 @@
   <div class="counter-cartridges">
     <div class="counter-cartridges__wrapper">
       <h3 class="counter-cartridges__title">всього картриджів</h3>
-      <span class="counter-cartridges__icon">test</span>
+      <lucide-icon
+        [img]="ChartNoAxesCombined"
+        [size]="20"
+        class="counter-cartridges__icon"
+      ></lucide-icon>
     </div>
     <p class="counter-cartridges__total-count">
       {{ cartridgesService.totalCartridgesCount() }}

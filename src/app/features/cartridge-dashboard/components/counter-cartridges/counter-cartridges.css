@@ -28,10 +28,12 @@
 }
 
 .counter-cartridges__icon {
+  color: var(--btn-dark-background-color);
 }
 
 .counter-cartridges__total-count {
   margin: 15px 0px 15px 0;
+  color: var(--value-text-color);
   font-size: var(--dashboard-title-text-size);
   font-weight: bold;
 }

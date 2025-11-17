@@ -11,6 +11,11 @@ import {
   ScanBarcode,
   Pencil,
   Trash2,
+  Printer,
+  PrinterCheck,
+  PaintBucket,
+  User,
+  MapPin,
 } from 'lucide-angular';
 import { TranslateStatusPipe } from '../../../../shared/pipes/translate-status-pipe';
 import { ICartridge } from '../../models/cartridge-interfaces';
@@ -28,6 +33,12 @@ export class CartridgeCard {
   readonly ScanBarcode = ScanBarcode;
   readonly Pencil = Pencil;
   readonly Trash2 = Trash2;
+  readonly Printer = Printer;
+  readonly PrinterCheck = PrinterCheck;
+  readonly PaintBucket = PaintBucket;
+  readonly User = User;
+  readonly MapPin = MapPin;
+
   cartridgesService = inject(CartridgesService);
   cartridgeStatus = this.cartridgesService.allCartridgeStatuses;
 

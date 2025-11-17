@@ -2,12 +2,15 @@
   <div class="cartridge-card__wrapper">
     <h3 class="cartridge-card__title">
       {{ cartridge().brand }} {{ cartridge().model }}
+      <span class="cartridge-card__barcode"
+        >(ШК: {{ cartridge().barcode }})</span
+      >
     </h3>
 
     <div class="cartridge-card__actions">
       <lucide-icon
         [img]="SquarePen"
-        size="16"
+        size="20"
         class="cartridge-card__actions-btn"
       ></lucide-icon>
       <div class="cartridge-card__actions-wrapper">
@@ -47,30 +50,73 @@
     </div>
   </div>
   <br />
-  <span
-    class="cartridge-card__status"
-    [class]="cartridge().status | translateStatus"
-  >
-    {{ cartridge().status }}
-  </span>
-  <p class="compatible-printers__title">сумісні принтери</p>
+  <div class="cartrdige-card__status-wrapper">
+    <span
+      class="cartridge-card__status"
+      [class]="cartridge().status | translateStatus"
+    >
+      {{ cartridge().status }}
+    </span>
+  </div>
+  <div class="compatible-printers__wrapper">
+    <lucide-icon
+      [img]="Printer"
+      size="18"
+      class="compatible-printers__icon"
+    ></lucide-icon>
+    <p class="compatible-printers__title">сумісні принтери:</p>
+  </div>
+
   <ul class="compatible-printers__list">
     @for (compatiblePrinter of cartridge().compatiblePrinters; track $index) {
     <li class="compatible-printers__item">{{ compatiblePrinter }}</li>
     }
   </ul>
-  <p class="cartridge-card__responsible">
-    <span>icon</span>відповідальний: <span>Some Name</span>
-  </p>
-  <p><span>icon</span>локація: <span>Some Location</span></p>
-  <p>
-    <span>icon</span>остання заправка:
-    <time datetime="15-09-2025">15.09.2025</time>
-  </p>
-  <p>
-    <span>icon </span>~наступна заправка:
-    <time datetime="30-09-2025">30.09.2025</time>
-  </p>
-  <p>примітки:</p>
-  <p>регулярне використання</p>
+
+  <div class="alternative-cartridges__wrapper">
+    <lucide-icon
+      [img]="PrinterCheck"
+      size="18"
+      class="alternative-cartridges__icon"
+    ></lucide-icon>
+    <p class="alternative-cartridges__title">альтернативні картриджі:</p>
+  </div>
+  <ul class="alternative-cartridges__list">
+    @for(alternativeCartridge of cartridge().alternativeCartridges; track
+    $index){
+    <li class="alternative-cartridges__item">
+      {{ alternativeCartridge }}
+    </li>
+    }
+  </ul>
+  <div class="cartridge-card__data">
+    <div class="cartridge-card__responsible-wrapper">
+      <lucide-icon [img]="User" size="18"></lucide-icon>
+      <p class="cartridge-card__responsible">відповідальний:</p>
+      <p class="cartridge-card__responsible-value">
+        {{ cartridge().responsible }}
+      </p>
+    </div>
+    <div class="cartridge-card__location-wrapper">
+      <lucide-icon [img]="MapPin" size="18"></lucide-icon>
+      <p class="cartridge-card__location">локація:</p>
+      <p class="cartridge-card__location-value">{{ cartridge().location }}</p>
+    </div>
+  </div>
+  <div class="cartridge-card__data">
+    <div class="cartridge-card__refill-wrapper">
+      <lucide-icon [img]="PaintBucket" size="18"></lucide-icon>
+      <p class="cartridge-card__last-refill">ост. заправка:</p>
+      <time datetime="15-09-2025" class="cartridge-card__refill-value"
+        >15.09.2025
+      </time>
+    </div>
+    <div class="cartridge-card__refill-wrapper">
+      <lucide-icon [img]="PaintBucket" size="18"></lucide-icon>
+      <p class="cartridge-card__next-refill">наст. заправка:</p>
+      <time datetime="30-09-2025" class="cartridge-card__refill-value"
+        >30.09.2025
+      </time>
+    </div>
+  </div>
 </div>

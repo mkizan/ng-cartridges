@@ -1,5 +1,9 @@
 <!-- <button (click)="logCartridges()">Log Current Cartridges</button> -->
 
+<!-- <div class="test-margin">
+  
+</div> -->
+
 @for (cartridge of cartridges(); track cartridge.id) {
 <app-cartridge-card [cartridge]="cartridge" />
 }

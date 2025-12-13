@@ -43,10 +43,15 @@
   --dashboard-title-text-size: 26px;
 }
 
+* {
+  box-sizing: border-box;
+}
+
 body {
   font-family: "Roboto", "sans-serif";
   font-size: 14px;
   background-color: var(--primary-background-color);
+  overflow-x: hidden;
 }
 
 .visually-hidden {

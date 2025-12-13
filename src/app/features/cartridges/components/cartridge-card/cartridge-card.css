@@ -1,14 +1,17 @@
-:host {
-  margin-left: auto;
-  margin-right: auto;
-}
-
 .cartridge-card {
-  width: 400px;
+  width: 100%;
+  max-width: 370px;
+  min-height: 375px;
   margin-top: 15px;
   margin-bottom: 15px;
+  margin-left: 20px;
+  margin-left: 0px;
+  margin-right: 0;
   padding: 30px 10px;
   background-color: var(--card-background-color);
+  border: 1px solid var(--card-border-color);
+  border-radius: 10px;
+  box-sizing: border-box;
 }
 
 .cartridge-card__wrapper {
@@ -37,6 +40,7 @@
 }
 
 .cartridge-card__actions-wrapper {
+  display: none;
   position: absolute;
   width: 150px;
   height: 1px;
@@ -51,11 +55,12 @@
 }
 
 .cartridge-card__actions:hover .cartridge-card__actions-wrapper {
+  display: block;
   width: 150px;
   height: auto;
   position: absolute;
   top: 6px;
-  right: 21px;
+  right: 25px;
   overflow: visible;
   clip: auto;
   padding: 5px 5px;
@@ -288,14 +293,34 @@
   color: var(--field-text-color);
 }
 
-@media screen and (max-width: 480px) {
+@media screen and (max-width: 479px) {
   :host {
     margin-left: auto;
     margin-right: auto;
   }
   .cartridge-card {
-    width: 320px;
+    width: 100%;
+    max-width: 350px;
     margin-top: 10px;
     margin-bottom: 10px;
+    min-height: auto;
+  }
+}
+
+@media screen and (min-width: 480px) and (max-width: 1599px) {
+  :host {
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .cartridge-card {
+    width: 100%;
+    max-width: 420px;
+  }
+}
+
+@media screen and (min-width: 1600px) {
+  :host {
+    margin-left: 10px;
+    margin-right: 0;
   }
 }

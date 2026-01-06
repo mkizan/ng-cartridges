@@ -1,4 +1,13 @@
-import { computed, effect, Injectable, signal, untracked } from '@angular/core';
+import {
+  computed,
+  DestroyRef,
+  effect,
+  inject,
+  Injectable,
+  OnInit,
+  signal,
+  untracked,
+} from '@angular/core';
 import {
   ICartridge,
   ICartridgeData,
@@ -6,12 +15,17 @@ import {
   ICartridgeStatuses,
 } from '../models/cartridge-interfaces';
 import { cartridges } from '../../../dummy-data/dummy-cartridges';
+import { HttpClient } from '@angular/common/http';
+import { BASE_URL } from '../../../shared/utils/server-url';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CartridgesService {
-  private cartridges = signal<ICartridge[]>(cartridges);
+  private httpClient = inject(HttpClient);
+
+  // --- SIGNALS ---
+  private cartridges = signal<ICartridge[]>([]);
   private cartridgeStatus = signal<ICartridgeStatuses[]>([
     { id: '1', status: 'заправлений' },
     { id: '2', status: 'на заправці' },
@@ -23,6 +37,7 @@ export class CartridgesService {
   // вираховує кількість картриджів відповідно до статусу
   private cartridgeStatusCounts = signal<ICartridgeStatusCount[]>([]);
 
+  // --- READONLY SIGNALS для компонента ---
   allCartridges = this.cartridges.asReadonly();
   allCartridgeStatuses = this.cartridgeStatus.asReadonly();
   allCartridgeStatusCounts = this.cartridgeStatusCounts.asReadonly();
@@ -50,28 +65,90 @@ export class CartridgesService {
     this.cartridgeStatusCounts().reduce((acc, status) => acc + status.count, 0)
   );
 
+  // updateStatusCounts(){}
+
+  // --- LOAD DATA з бекенду ---
+  loadCartridges() {
+    this.httpClient.get<ICartridge[]>(`${BASE_URL}/cartridges`).subscribe({
+      next: (data) => {
+        this.cartridges.set(data);
+        // this.updateStatusCounts();
+      },
+      error: (err) => console.error('Load error', err),
+    });
+  }
+
   changeCartridgeStatus(cartridgeData: { id: string; status: string }) {
-    this.cartridges.update((currentCartridges) =>
-      currentCartridges.map((cartridge) =>
+    const prev = this.cartridges();
+
+    this.cartridges.update((currentCartridge) =>
+      currentCartridge.map((cartridge) =>
         cartridge.id === cartridgeData.id
           ? { ...cartridge, status: cartridgeData.status }
           : cartridge
       )
     );
+
+    // this.updateStatusCounts();
+
+    this.httpClient
+      .patch(`${BASE_URL}/cartridges/${cartridgeData.id}`, {
+        status: cartridgeData.status,
+      })
+      .subscribe({
+        error: () => {
+          this.cartridges.set(prev);
+          // this.updateStatusCounts();
+        },
+      });
   }
 
+  // --- CREATE ---
   addCartridge(cartridgeData: ICartridgeData) {
+    const prev = this.cartridges();
     const newCartridge: ICartridge = {
       ...cartridgeData,
       id: crypto.randomUUID(),
     };
 
     this.cartridges.update((oldCartridges) => [...oldCartridges, newCartridge]);
+
+    this.httpClient
+      .post<ICartridge>(`${BASE_URL}/cartridges`, newCartridge)
+      .subscribe({
+        next: (saved) => {
+          // якщо сервер повернув щось відмінне
+          this.cartridges.update((items) =>
+            items.map((cartridge) =>
+              cartridge.id === newCartridge.id ? saved : cartridge
+            )
+          );
+          // this.updateStatusCounts();
+        },
+        // rollback при помилці
+        error: () => {
+          this.cartridges.update((items) =>
+            items.filter((cartridge) => cartridge.id !== newCartridge.id)
+          );
+          // this.updateStatusCounts();
+        },
+      });
   }
 
+  // --- DELETE ---
   removeCartridge(id: string) {
+    const prev = this.cartridges();
+
     this.cartridges.update((currentCartridges) =>
       currentCartridges.filter((cartridge) => cartridge.id !== id)
     );
+    // this.updateStatusCounts();
+
+    this.httpClient.delete(`${BASE_URL}/cartridges/${id}`).subscribe({
+      error: () => {
+        this.cartridges.set(prev);
+        // this.updateStatusCounts();
+      },
+    });
   }
 }

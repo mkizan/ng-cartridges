@@ -40,14 +40,14 @@ export interface ICartridgeStatuses {
     | 'неробочий';
 }
 
-export interface ICartridgeUsers {
+export interface ICartridgeUser {
   id: string;
   name: 'Микола' | 'Дмитро';
 }
 
 export interface ICartridgeLocations {
   id: string;
-  location:
+  name:
     | 'Цех 1'
     | 'Цех 2'
     | 'Цех 3'
@@ -62,4 +62,9 @@ export interface ICartridgeLocations {
     | 'Склад 6'
     | 'Склад 7'
     | 'Склад 9';
+}
+
+export interface ICartridgeLocation {
+  id: string;
+  name: string;
 }

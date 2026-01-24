@@ -53,9 +53,9 @@
     autocomplete="on"
   >
     @for (cartridgeStatus of cartridgeStatuses(); track cartridgeStatus.id) {
-    <option [value]="cartridgeStatus.status">
-      {{ cartridgeStatus.status }}
-    </option>
+      <option [value]="cartridgeStatus.status">
+        {{ cartridgeStatus.status }}
+      </option>
     }
   </select>
   <label for="location" class="cartridge-form__label-location">локація*</label>
@@ -65,7 +65,7 @@
     formControlName="location"
   >
     @for (location of locations(); track location.id) {
-    <option [value]="location.location">{{ location.location }}</option>
+      <option [value]="location.name">{{ location.name }}</option>
     }
   </select>
   <label for="compatiblePrinters" class="cartridge-form__label-printers"
@@ -89,7 +89,7 @@
     formControlName="responsible"
   >
     @for (user of users(); track user.id) {
-    <option [value]="user.name">{{ user.name }}</option>
+      <option [value]="user.name">{{ user.name }}</option>
     }
   </select>
   <label for="notes" class="cartridge-form__label-notes">примітки</label>

@@ -1,4 +1,4 @@
-import { Component, computed, inject, signal } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -6,14 +6,15 @@ import {
   Validators,
 } from '@angular/forms';
 import { CartridgesService } from '../../services/cartridges-service';
-import { locations } from '../../../../dummy-data/dummy-locations';
-import { users } from '../../../../dummy-data/dummy-users';
 import {
+  ICartridgeLocation,
   ICartridgeLocations,
   ICartridgeStatuses,
-  ICartridgeUsers,
+  ICartridgeUser,
 } from '../../models/cartridge-interfaces';
 import { ModalService } from '../../../../core/services/modal/modal-service';
+import { HttpClient } from '@angular/common/http';
+import { BASE_URL } from '../../../../shared/utils/server-url';
 
 @Component({
   selector: 'app-cartridge-form',
@@ -21,12 +22,31 @@ import { ModalService } from '../../../../core/services/modal/modal-service';
   templateUrl: './cartridge-form.html',
   styleUrl: './cartridge-form.css',
 })
-export class CartridgeForm {
+export class CartridgeForm implements OnInit {
+  constructor(private http: HttpClient) {}
+
   modalService = inject(ModalService);
   cartridgesService = inject(CartridgesService);
   cartridgeStatuses = this.cartridgesService.allCartridgeStatuses;
-  locations = signal(locations);
-  users = signal(users);
+
+  locations = signal<ICartridgeLocation[]>([]);
+  users = signal<ICartridgeUser[]>([]);
+
+  ngOnInit(): void {
+    this.http.get<ICartridgeLocation[]>(`${BASE_URL}/locations`).subscribe({
+      next: (data) => {
+        this.locations.set(data);
+      },
+      error: (err) => console.error('Locations error', err),
+    });
+
+    this.http.get<ICartridgeUser[]>(`${BASE_URL}/users`).subscribe({
+      next: (data) => {
+        this.users.set(data);
+      },
+      error: (err) => console.error('Users error', err),
+    });
+  }
 
   cartridgeForm = new FormGroup({
     barcode: new FormControl('', {
@@ -61,7 +81,7 @@ export class CartridgeForm {
       nonNullable: true,
       validators: [Validators.required],
     }),
-    location: new FormControl<ICartridgeLocations['location']>('Цех 1', {
+    location: new FormControl<ICartridgeLocations['name']>('Цех 1', {
       nonNullable: true,
       validators: [
         Validators.required,
@@ -73,7 +93,7 @@ export class CartridgeForm {
       nonNullable: true,
       validators: [Validators.required, Validators.minLength(1)],
     }),
-    responsible: new FormControl<ICartridgeUsers['name']>('Микола', {
+    responsible: new FormControl<ICartridgeUser['name']>('Микола', {
       nonNullable: true,
       validators: [
         Validators.required,

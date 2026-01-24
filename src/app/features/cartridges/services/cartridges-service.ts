@@ -4,6 +4,7 @@ import {
   effect,
   inject,
   Injectable,
+  model,
   OnInit,
   signal,
   untracked,
@@ -14,7 +15,6 @@ import {
   ICartridgeStatusCount,
   ICartridgeStatuses,
 } from '../models/cartridge-interfaces';
-import { cartridges } from '../../../dummy-data/dummy-cartridges';
 import { HttpClient } from '@angular/common/http';
 import { BASE_URL } from '../../../shared/utils/server-url';
 
@@ -22,7 +22,7 @@ import { BASE_URL } from '../../../shared/utils/server-url';
   providedIn: 'root',
 })
 export class CartridgesService {
-  private httpClient = inject(HttpClient);
+  private http = inject(HttpClient);
 
   // --- SIGNALS ---
   private cartridges = signal<ICartridge[]>([]);
@@ -55,21 +55,21 @@ export class CartridgesService {
           id: s.id,
           status: s.status,
           count: counts.get(s.status) ?? 0,
-        }))
+        })),
       );
     });
   }
 
   // вираховує загальну кількість картриджів по статусах
   totalCartridgesCount = computed(() =>
-    this.cartridgeStatusCounts().reduce((acc, status) => acc + status.count, 0)
+    this.cartridgeStatusCounts().reduce((acc, status) => acc + status.count, 0),
   );
 
   // updateStatusCounts(){}
 
-  // --- LOAD DATA з бекенду ---
+  // --- READ ---
   loadCartridges() {
-    this.httpClient.get<ICartridge[]>(`${BASE_URL}/cartridges`).subscribe({
+    this.http.get<ICartridge[]>(`${BASE_URL}/cartridges`).subscribe({
       next: (data) => {
         this.cartridges.set(data);
         // this.updateStatusCounts();
@@ -85,13 +85,13 @@ export class CartridgesService {
       currentCartridge.map((cartridge) =>
         cartridge.id === cartridgeData.id
           ? { ...cartridge, status: cartridgeData.status }
-          : cartridge
-      )
+          : cartridge,
+      ),
     );
 
     // this.updateStatusCounts();
 
-    this.httpClient
+    this.http
       .patch(`${BASE_URL}/cartridges/${cartridgeData.id}`, {
         status: cartridgeData.status,
       })
@@ -113,25 +113,57 @@ export class CartridgesService {
 
     this.cartridges.update((oldCartridges) => [...oldCartridges, newCartridge]);
 
-    this.httpClient
+    this.http
       .post<ICartridge>(`${BASE_URL}/cartridges`, newCartridge)
       .subscribe({
         next: (saved) => {
           // якщо сервер повернув щось відмінне
           this.cartridges.update((items) =>
             items.map((cartridge) =>
-              cartridge.id === newCartridge.id ? saved : cartridge
-            )
+              cartridge.id === newCartridge.id ? saved : cartridge,
+            ),
           );
           // this.updateStatusCounts();
         },
         // rollback при помилці
         error: () => {
           this.cartridges.update((items) =>
-            items.filter((cartridge) => cartridge.id !== newCartridge.id)
+            items.filter((cartridge) => cartridge.id !== newCartridge.id),
           );
           // this.updateStatusCounts();
         },
+      });
+  }
+
+  // id: cartridge.id,
+  //     brand: cartridge.brand,
+  //     model: cartridge.model,
+  //     alternativeCartridges: cartridge.alternativeCartridges,
+  //     compatiblePrinters: cartridge.compatiblePrinters,
+  //     barcode: cartridge.barcode,
+  //     status: cartridge.status,
+  //     location: cartridge.location,
+  //     responsible: cartridge.responsible,
+  //     notes: cartridge.notes,
+
+  // --- UPDATE ---
+  editCartridge(cartridge: ICartridge) {
+    this.http
+      .put<ICartridge>(`${BASE_URL}/cartridges/${cartridge.id}`, {
+        ...cartridge,
+      })
+      .subscribe({
+        next: (editedCartridge: ICartridge) => {
+          this.cartridges.update((items) =>
+            items.map((item) =>
+              item.id === editedCartridge.id ? editedCartridge : item,
+            ),
+          );
+        },
+        error: () =>
+          this.cartridges.update((items) =>
+            items.filter((value) => value.id !== cartridge.id),
+          ),
       });
   }
 
@@ -140,11 +172,11 @@ export class CartridgesService {
     const prev = this.cartridges();
 
     this.cartridges.update((currentCartridges) =>
-      currentCartridges.filter((cartridge) => cartridge.id !== id)
+      currentCartridges.filter((cartridge) => cartridge.id !== id),
     );
     // this.updateStatusCounts();
 
-    this.httpClient.delete(`${BASE_URL}/cartridges/${id}`).subscribe({
+    this.http.delete(`${BASE_URL}/cartridges/${id}`).subscribe({
       error: () => {
         this.cartridges.set(prev);
         // this.updateStatusCounts();

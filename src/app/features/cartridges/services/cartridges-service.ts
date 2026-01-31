@@ -135,17 +135,6 @@ export class CartridgesService {
       });
   }
 
-  // id: cartridge.id,
-  //     brand: cartridge.brand,
-  //     model: cartridge.model,
-  //     alternativeCartridges: cartridge.alternativeCartridges,
-  //     compatiblePrinters: cartridge.compatiblePrinters,
-  //     barcode: cartridge.barcode,
-  //     status: cartridge.status,
-  //     location: cartridge.location,
-  //     responsible: cartridge.responsible,
-  //     notes: cartridge.notes,
-
   // --- UPDATE ---
   editCartridge(cartridge: ICartridge) {
     this.http

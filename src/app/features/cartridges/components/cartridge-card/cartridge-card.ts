@@ -3,6 +3,7 @@ import {
   Component,
   inject,
   input,
+  OnInit,
   output,
 } from '@angular/core';
 import {
@@ -28,7 +29,7 @@ import { CartridgesService } from '../../services/cartridges-service';
   styleUrl: './cartridge-card.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CartridgeCard {
+export class CartridgeCard implements OnInit {
   readonly SquarePen = SquarePen;
   readonly ScanBarcode = ScanBarcode;
   readonly Pencil = Pencil;
@@ -45,11 +46,19 @@ export class CartridgeCard {
   cartridge = input.required<ICartridge>();
   changeCartridgeStatus = output<{ id: string; status: string }>();
 
+  ngOnInit(): void {
+    // this.cartridgeForm
+  }
+
   selectStatus(status: string) {
     this.cartridgesService.changeCartridgeStatus({
       id: this.cartridge().id,
       status,
     });
+  }
+
+  editCartridge() {
+    this.cartridgesService.editCartridge(this.cartridge());
   }
 
   removeCartridge() {

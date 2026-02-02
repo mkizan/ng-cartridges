@@ -1,5 +1,6 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, inject, input, OnInit, signal } from '@angular/core';
 import {
+  FormBuilder,
   FormControl,
   FormGroup,
   ReactiveFormsModule,
@@ -7,6 +8,7 @@ import {
 } from '@angular/forms';
 import { CartridgesService } from '../../services/cartridges-service';
 import {
+  ICartridge,
   ICartridgeLocation,
   ICartridgeLocations,
   ICartridgeStatuses,
@@ -23,6 +25,8 @@ import { BASE_URL } from '../../../../shared/utils/server-url';
   styleUrl: './cartridge-form.css',
 })
 export class CartridgeForm implements OnInit {
+  nnfb = new FormBuilder().nonNullable;
+  cartridgeData = input<Omit<ICartridge, 'id'> | undefined>();
   constructor(private http: HttpClient) {}
 
   modalService = inject(ModalService);
@@ -31,22 +35,6 @@ export class CartridgeForm implements OnInit {
 
   locations = signal<ICartridgeLocation[]>([]);
   users = signal<ICartridgeUser[]>([]);
-
-  ngOnInit(): void {
-    this.http.get<ICartridgeLocation[]>(`${BASE_URL}/locations`).subscribe({
-      next: (data) => {
-        this.locations.set(data);
-      },
-      error: (err) => console.error('Locations error', err),
-    });
-
-    this.http.get<ICartridgeUser[]>(`${BASE_URL}/users`).subscribe({
-      next: (data) => {
-        this.users.set(data);
-      },
-      error: (err) => console.error('Users error', err),
-    });
-  }
 
   cartridgeForm = new FormGroup({
     barcode: new FormControl('', {
@@ -77,11 +65,11 @@ export class CartridgeForm implements OnInit {
     alternativeCartridges: new FormControl<string | string[]>('', {
       nonNullable: true,
     }),
-    status: new FormControl<ICartridgeStatuses['status']>('заправлений', {
+    status: new FormControl<any>('', {
       nonNullable: true,
       validators: [Validators.required],
     }),
-    location: new FormControl<ICartridgeLocations['name']>('Цех 1', {
+    location: new FormControl<any>('', {
       nonNullable: true,
       validators: [
         Validators.required,
@@ -104,11 +92,32 @@ export class CartridgeForm implements OnInit {
     notes: new FormControl('', { nonNullable: true }),
   });
 
+  ngOnInit(): void {
+    this.http.get<ICartridgeLocation[]>(`${BASE_URL}/locations`).subscribe({
+      next: (data) => {
+        this.locations.set(data);
+      },
+      error: (err) => console.error('Locations error', err),
+    });
+
+    this.http.get<ICartridgeUser[]>(`${BASE_URL}/users`).subscribe({
+      next: (data) => {
+        this.users.set(data);
+      },
+      error: (err) => console.error('Users error', err),
+    });
+
+    if (this.cartridgeData()) {
+      this.cartridgeForm.patchValue(this.cartridgeData() as any);
+    }
+  }
+
   handleSubmit() {
     if (this.cartridgeForm.invalid) {
-      console.log("Form doesn't submit");
+      console.log('Form is invalid');
       return;
     }
+
     const altCartridges = this.cartridgeForm.value.alternativeCartridges;
     const compPrinters = this.cartridgeForm.value.compatiblePrinters;
     if (altCartridges && typeof altCartridges === 'string') {

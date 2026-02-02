@@ -23,6 +23,12 @@
           <li class="cartridge-card__edit-cartridge">
             <lucide-icon [img]="Pencil" size="16"></lucide-icon>
             <p (click)="editCartridge()">редагувати</p>
+            @if (cartridge()) {
+              <app-modal>
+                <h3 class="modal__title">Редагувати картридж</h3>
+                <app-cartridge-form [cartridgeData]="cartridge()" />
+              </app-modal>
+            }
           </li>
         </ul>
         <p class="cartridge-card__change-status">змінити статус</p>

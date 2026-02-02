@@ -1,19 +1,17 @@
 import {
   computed,
-  DestroyRef,
   effect,
   inject,
   Injectable,
-  model,
-  OnInit,
   signal,
   untracked,
 } from '@angular/core';
 import {
   ICartridge,
-  ICartridgeData,
   ICartridgeStatusCount,
   ICartridgeStatuses,
+  CartridgeStatus,
+  CARTRIDGE_STATUSES,
 } from '../models/cartridge-interfaces';
 import { HttpClient } from '@angular/common/http';
 import { BASE_URL } from '../../../shared/utils/server-url';
@@ -27,12 +25,12 @@ export class CartridgesService {
   // --- SIGNALS ---
   private cartridges = signal<ICartridge[]>([]);
   private cartridgeStatus = signal<ICartridgeStatuses[]>([
-    { id: '1', status: 'заправлений' },
-    { id: '2', status: 'на заправці' },
-    { id: '3', status: 'в принтері' },
-    { id: '4', status: 'закінчився' },
-    { id: '5', status: 'в ремонті' },
-    { id: '6', status: 'неробочий' },
+    { id: '1', status: CARTRIDGE_STATUSES.REFILLED },
+    { id: '2', status: CARTRIDGE_STATUSES.REFILLING },
+    { id: '3', status: CARTRIDGE_STATUSES.IN_PRINTER },
+    { id: '4', status: CARTRIDGE_STATUSES.OUT },
+    { id: '5', status: CARTRIDGE_STATUSES.REPAIR },
+    { id: '6', status: CARTRIDGE_STATUSES.BROKEN },
   ]);
   // вираховує кількість картриджів відповідно до статусу
   private cartridgeStatusCounts = signal<ICartridgeStatusCount[]>([]);
@@ -47,8 +45,10 @@ export class CartridgesService {
       const carts = this.cartridges();
       const statuses = untracked(() => this.cartridgeStatus());
       const counts = new Map<string, number>();
-      for (const c of carts)
-        counts.set(c.status, (counts.get(c.status) ?? 0) + 1);
+      for (const c of carts) {
+        const status = c.status as string;
+        counts.set(status, (counts.get(status) ?? 0) + 1);
+      }
 
       this.cartridgeStatusCounts.set(
         statuses.map((s) => ({
@@ -68,23 +68,41 @@ export class CartridgesService {
   // updateStatusCounts(){}
 
   // --- READ ---
+  private isValidStatus(s: any): s is CartridgeStatus {
+    return Object.values(CARTRIDGE_STATUSES).includes(s as CartridgeStatus);
+  }
+
   loadCartridges() {
-    this.http.get<ICartridge[]>(`${BASE_URL}/cartridges`).subscribe({
+    this.http.get<any[]>(`${BASE_URL}/cartridges`).subscribe({
       next: (data) => {
-        this.cartridges.set(data);
+        const normalized = data.map((d) => ({
+          ...d,
+          status: this.isValidStatus(d.status)
+            ? d.status
+            : CARTRIDGE_STATUSES.EMPTY,
+        })) as ICartridge[];
+        this.cartridges.set(normalized);
         // this.updateStatusCounts();
       },
       error: (err) => console.error('Load error', err),
     });
   }
 
-  changeCartridgeStatus(cartridgeData: { id: string; status: string }) {
+  changeCartridgeStatus(cartridgeData: {
+    id: string;
+    status: CartridgeStatus | string;
+  }) {
+    if (!this.isValidStatus(cartridgeData.status)) {
+      console.warn('Invalid status:', cartridgeData.status);
+      return;
+    }
+
     const prev = this.cartridges();
 
     this.cartridges.update((currentCartridge) =>
       currentCartridge.map((cartridge) =>
         cartridge.id === cartridgeData.id
-          ? { ...cartridge, status: cartridgeData.status }
+          ? { ...cartridge, status: cartridgeData.status as CartridgeStatus }
           : cartridge,
       ),
     );
@@ -104,7 +122,7 @@ export class CartridgesService {
   }
 
   // --- CREATE ---
-  addCartridge(cartridgeData: ICartridgeData) {
+  addCartridge(cartridgeData: Omit<ICartridge, 'id'>) {
     const prev = this.cartridges();
     const newCartridge: ICartridge = {
       ...cartridgeData,

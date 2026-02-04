@@ -22,19 +22,25 @@
           </li>
           <li class="cartridge-card__edit-cartridge">
             <lucide-icon [img]="Pencil" size="16"></lucide-icon>
-            <p>редагувати</p>
+            <p (click)="editCartridge()">редагувати</p>
+            @if (cartridge()) {
+              <app-modal>
+                <h3 class="modal__title">Редагувати картридж</h3>
+                <app-cartridge-form [cartridgeData]="cartridge()" />
+              </app-modal>
+            }
           </li>
         </ul>
         <p class="cartridge-card__change-status">змінити статус</p>
         <ul class="cartridge-card__status-list">
           @for (item of cartridgeStatus(); track item.id) {
-          <li
-            class="cartridge-card__status-item cartridge-status"
-            [class]="item.status | translateStatus"
-            (click)="selectStatus(item.status)"
-          >
-            {{ item.status }}
-          </li>
+            <li
+              class="cartridge-card__status-item cartridge-status"
+              [class]="item.status | translateStatus"
+              (click)="selectStatus(item.status)"
+            >
+              {{ item.status }}
+            </li>
           }
         </ul>
         <div class="cartridge-card__delete-cartridge">
@@ -69,7 +75,7 @@
 
   <ul class="compatible-printers__list">
     @for (compatiblePrinter of cartridge().compatiblePrinters; track $index) {
-    <li class="compatible-printers__item">{{ compatiblePrinter }}</li>
+      <li class="compatible-printers__item">{{ compatiblePrinter }}</li>
     }
   </ul>
 
@@ -82,11 +88,13 @@
     <p class="alternative-cartridges__title">альтернативні картриджі:</p>
   </div>
   <ul class="alternative-cartridges__list">
-    @for(alternativeCartridge of cartridge().alternativeCartridges; track
-    $index){
-    <li class="alternative-cartridges__item">
-      {{ alternativeCartridge }}
-    </li>
+    @for (
+      alternativeCartridge of cartridge().alternativeCartridges;
+      track $index
+    ) {
+      <li class="alternative-cartridges__item">
+        {{ alternativeCartridge }}
+      </li>
     }
   </ul>
   <div class="cartridge-card__data">

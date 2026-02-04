@@ -4,6 +4,6 @@
   
 </div> -->
 
-@for (cartridge of cartridges(); track cartridge.id) {
+@for (cartridge of service.allCartridges(); track cartridge.id) {
 <app-cartridge-card [cartridge]="cartridge" />
 }

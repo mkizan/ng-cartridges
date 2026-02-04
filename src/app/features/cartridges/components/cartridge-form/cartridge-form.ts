@@ -1,19 +1,22 @@
-import { Component, computed, inject, signal } from '@angular/core';
+import { Component, inject, input, OnInit, signal } from '@angular/core';
 import {
+  FormBuilder,
   FormControl,
   FormGroup,
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
 import { CartridgesService } from '../../services/cartridges-service';
-import { locations } from '../../../../dummy-data/dummy-locations';
-import { users } from '../../../../dummy-data/dummy-users';
 import {
+  ICartridge,
+  ICartridgeLocation,
   ICartridgeLocations,
   ICartridgeStatuses,
-  ICartridgeUsers,
+  ICartridgeUser,
 } from '../../models/cartridge-interfaces';
 import { ModalService } from '../../../../core/services/modal/modal-service';
+import { HttpClient } from '@angular/common/http';
+import { BASE_URL } from '../../../../shared/utils/server-url';
 
 @Component({
   selector: 'app-cartridge-form',
@@ -21,12 +24,17 @@ import { ModalService } from '../../../../core/services/modal/modal-service';
   templateUrl: './cartridge-form.html',
   styleUrl: './cartridge-form.css',
 })
-export class CartridgeForm {
+export class CartridgeForm implements OnInit {
+  nnfb = new FormBuilder().nonNullable;
+  cartridgeData = input<ICartridge | undefined>();
+  constructor(private http: HttpClient) {}
+
   modalService = inject(ModalService);
   cartridgesService = inject(CartridgesService);
   cartridgeStatuses = this.cartridgesService.allCartridgeStatuses;
-  locations = signal(locations);
-  users = signal(users);
+
+  locations = signal<ICartridgeLocation[]>([]);
+  users = signal<ICartridgeUser[]>([]);
 
   cartridgeForm = new FormGroup({
     barcode: new FormControl('', {
@@ -57,11 +65,11 @@ export class CartridgeForm {
     alternativeCartridges: new FormControl<string | string[]>('', {
       nonNullable: true,
     }),
-    status: new FormControl<ICartridgeStatuses['status']>('заправлений', {
+    status: new FormControl<any>('', {
       nonNullable: true,
       validators: [Validators.required],
     }),
-    location: new FormControl<ICartridgeLocations['location']>('Цех 1', {
+    location: new FormControl<any>('', {
       nonNullable: true,
       validators: [
         Validators.required,
@@ -73,7 +81,7 @@ export class CartridgeForm {
       nonNullable: true,
       validators: [Validators.required, Validators.minLength(1)],
     }),
-    responsible: new FormControl<ICartridgeUsers['name']>('Микола', {
+    responsible: new FormControl<ICartridgeUser['name']>('Микола', {
       nonNullable: true,
       validators: [
         Validators.required,
@@ -84,25 +92,62 @@ export class CartridgeForm {
     notes: new FormControl('', { nonNullable: true }),
   });
 
+  ngOnInit(): void {
+    this.http.get<ICartridgeLocation[]>(`${BASE_URL}/locations`).subscribe({
+      next: (data) => {
+        this.locations.set(data);
+      },
+      error: (err) => console.error('Locations error', err),
+    });
+
+    this.http.get<ICartridgeUser[]>(`${BASE_URL}/users`).subscribe({
+      next: (data) => {
+        this.users.set(data);
+      },
+      error: (err) => console.error('Users error', err),
+    });
+
+    if (this.cartridgeData()) {
+      this.cartridgeForm.patchValue(this.cartridgeData() as any);
+    }
+  }
+
   handleSubmit() {
     if (this.cartridgeForm.invalid) {
-      console.log("Form doesn't submit");
+      console.log(this.cartridgeForm);
+      console.log('Form is invalid');
       return;
     }
-    const altCartridges = this.cartridgeForm.value.alternativeCartridges;
-    const compPrinters = this.cartridgeForm.value.compatiblePrinters;
-    if (altCartridges && typeof altCartridges === 'string') {
-      const arrAltCartridges = altCartridges.trim().split(',');
-      this.cartridgeForm.value.alternativeCartridges = arrAltCartridges;
+
+    const cartridgeFormData = this.cartridgeForm.getRawValue();
+
+    const payload = {
+      ...cartridgeFormData,
+      alternativeCartridges:
+        typeof cartridgeFormData.alternativeCartridges === 'string'
+          ? cartridgeFormData.alternativeCartridges
+              .split(',')
+              .map((s) => s.trim())
+              .filter((s) => s !== '')
+          : cartridgeFormData.alternativeCartridges,
+
+      compatiblePrinters:
+        typeof cartridgeFormData.compatiblePrinters === 'string'
+          ? cartridgeFormData.compatiblePrinters
+              .split(',')
+              .map((s) => s.trim())
+              .filter((s) => s !== '')
+          : cartridgeFormData.compatiblePrinters,
+    };
+
+    console.log(payload);
+
+    if (this.cartridgeData()) {
+      this.cartridgesService.editCartridge(this.cartridgeData()!.id, payload);
+      this.modalService.toggleModalBtn();
+    } else {
+      this.cartridgesService.addCartridge(payload);
+      this.modalService.toggleModalBtn();
     }
-    if (compPrinters && typeof compPrinters === 'string') {
-      const arrCompPrinters = compPrinters.trim().split(',');
-      this.cartridgeForm.value.compatiblePrinters = arrCompPrinters;
-    }
-    console.log('Form submit');
-    console.log(this.cartridgeForm);
-    const cartridgeData = this.cartridgeForm.getRawValue();
-    this.cartridgesService.addCartridge(cartridgeData);
-    this.modalService.toggleModalBtn();
   }
 }

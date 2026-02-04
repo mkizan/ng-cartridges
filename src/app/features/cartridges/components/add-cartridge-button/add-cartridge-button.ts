@@ -4,11 +4,11 @@ import { ModalService } from '../../../../core/services/modal/modal-service';
 import { Modal } from '../../../../shared/components/modal/modal/modal';
 
 @Component({
-  selector: 'app-add-cartridge',
+  selector: 'app-add-cartridge-button',
   imports: [CartridgeForm, Modal],
-  templateUrl: './add-cartridge.html',
-  styleUrl: './add-cartridge.css',
+  templateUrl: './add-cartridge-button.html',
+  styleUrl: './add-cartridge-button.css',
 })
-export class AddCartridge {
+export class AddCartridgeButton {
   modalService = inject(ModalService);
 }

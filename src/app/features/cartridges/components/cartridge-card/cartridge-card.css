@@ -59,8 +59,8 @@
   width: 150px;
   height: auto;
   position: absolute;
-  top: 6px;
-  right: 25px;
+  top: 5px;
+  right: 5px;
   overflow: visible;
   clip: auto;
   padding: 5px 5px;
@@ -76,6 +76,7 @@
   text-transform: capitalize;
   color: var(--value-text-color);
 }
+
 .cartridge-card__actions-list {
   border-bottom: 1px solid var(--field-border-color);
 }

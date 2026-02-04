@@ -58,7 +58,7 @@ export class CartridgeCard {
 
   editCartridge() {
     this.modalService.toggleModalBtn();
-    this.cartridgesService.editCartridge(this.cartridge());
+    this.cartridgesService.editCartridge(this.cartridge().id, this.cartridge());
   }
 
   removeCartridge() {

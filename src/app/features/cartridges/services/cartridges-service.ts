@@ -154,22 +154,24 @@ export class CartridgesService {
   }
 
   // --- UPDATE ---
-  editCartridge(cartridge: ICartridge) {
+  editCartridge(id: string, cartridge: Omit<ICartridge, 'id'>) {
     this.http
-      .put<ICartridge>(`${BASE_URL}/cartridges/${cartridge.id}`, {
+      .put<ICartridge>(`${BASE_URL}/cartridges/${id}`, {
         ...cartridge,
       })
       .subscribe({
         next: (editedCartridge: ICartridge) => {
           this.cartridges.update((items) =>
             items.map((item) =>
-              item.id === editedCartridge.id ? editedCartridge : item,
+              item.id === editedCartridge.id
+                ? { ...item, ...editedCartridge }
+                : item,
             ),
           );
         },
         error: () =>
           this.cartridges.update((items) =>
-            items.filter((value) => value.id !== cartridge.id),
+            items.filter((value) => value.id !== id),
           ),
       });
   }

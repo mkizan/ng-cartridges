@@ -20,13 +20,14 @@
 }
 
 .modal {
-  background-color: #fff;
   padding: 16px;
   border-radius: 4px;
   width: 100%;
   max-width: 479px;
   max-height: 80%;
   overflow-y: auto;
+  background-color: var(--card-background-color);
+  color: var(--value-text-color);
 }
 
 @media screen and (max-width: 479px) {

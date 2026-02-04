@@ -26,7 +26,7 @@ import { BASE_URL } from '../../../../shared/utils/server-url';
 })
 export class CartridgeForm implements OnInit {
   nnfb = new FormBuilder().nonNullable;
-  cartridgeData = input<Omit<ICartridge, 'id'> | undefined>();
+  cartridgeData = input<ICartridge | undefined>();
   constructor(private http: HttpClient) {}
 
   modalService = inject(ModalService);
@@ -114,24 +114,40 @@ export class CartridgeForm implements OnInit {
 
   handleSubmit() {
     if (this.cartridgeForm.invalid) {
+      console.log(this.cartridgeForm);
       console.log('Form is invalid');
       return;
     }
 
-    const altCartridges = this.cartridgeForm.value.alternativeCartridges;
-    const compPrinters = this.cartridgeForm.value.compatiblePrinters;
-    if (altCartridges && typeof altCartridges === 'string') {
-      const arrAltCartridges = altCartridges.trim().split(',');
-      this.cartridgeForm.value.alternativeCartridges = arrAltCartridges;
+    const cartridgeFormData = this.cartridgeForm.getRawValue();
+
+    const payload = {
+      ...cartridgeFormData,
+      alternativeCartridges:
+        typeof cartridgeFormData.alternativeCartridges === 'string'
+          ? cartridgeFormData.alternativeCartridges
+              .split(',')
+              .map((s) => s.trim())
+              .filter((s) => s !== '')
+          : cartridgeFormData.alternativeCartridges,
+
+      compatiblePrinters:
+        typeof cartridgeFormData.compatiblePrinters === 'string'
+          ? cartridgeFormData.compatiblePrinters
+              .split(',')
+              .map((s) => s.trim())
+              .filter((s) => s !== '')
+          : cartridgeFormData.compatiblePrinters,
+    };
+
+    console.log(payload);
+
+    if (this.cartridgeData()) {
+      this.cartridgesService.editCartridge(this.cartridgeData()!.id, payload);
+      this.modalService.toggleModalBtn();
+    } else {
+      this.cartridgesService.addCartridge(payload);
+      this.modalService.toggleModalBtn();
     }
-    if (compPrinters && typeof compPrinters === 'string') {
-      const arrCompPrinters = compPrinters.trim().split(',');
-      this.cartridgeForm.value.compatiblePrinters = arrCompPrinters;
-    }
-    console.log('Form submit');
-    console.log(this.cartridgeForm);
-    const cartridgeData = this.cartridgeForm.getRawValue();
-    this.cartridgesService.addCartridge(cartridgeData);
-    this.modalService.toggleModalBtn();
   }
 }

@@ -100,5 +100,7 @@
     name="notes"
     formControlName="notes"
   />
-  <button type="submit" class="cartridge-form__submit">додати</button>
+  <button type="submit" class="cartridge-form__submit">
+    {{ cartridgeData() ? "Редагувати картридж" : "Додати картридж" }}
+  </button>
 </form>

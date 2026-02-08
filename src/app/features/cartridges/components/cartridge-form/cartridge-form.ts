@@ -48,19 +48,11 @@ export class CartridgeForm implements OnInit {
     }),
     brand: new FormControl('', {
       nonNullable: true,
-      validators: [
-        Validators.required,
-        Validators.minLength(2),
-        Validators.maxLength(20),
-      ],
+      validators: [Validators.required, Validators.minLength(2)],
     }),
     model: new FormControl('', {
       nonNullable: true,
-      validators: [
-        Validators.required,
-        Validators.minLength(2),
-        Validators.maxLength(20),
-      ],
+      validators: [Validators.required, Validators.minLength(2)],
     }),
     alternativeCartridges: new FormControl<string | string[]>('', {
       nonNullable: true,
@@ -71,11 +63,7 @@ export class CartridgeForm implements OnInit {
     }),
     location: new FormControl<any>('', {
       nonNullable: true,
-      validators: [
-        Validators.required,
-        Validators.minLength(2),
-        Validators.maxLength(20),
-      ],
+      validators: [Validators.required, Validators.minLength(2)],
     }),
     compatiblePrinters: new FormControl<string | string[]>('', {
       nonNullable: true,
@@ -83,11 +71,7 @@ export class CartridgeForm implements OnInit {
     }),
     responsible: new FormControl<ICartridgeUser['name']>('Микола', {
       nonNullable: true,
-      validators: [
-        Validators.required,
-        Validators.minLength(2),
-        Validators.maxLength(20),
-      ],
+      validators: [Validators.required, Validators.minLength(2)],
     }),
     notes: new FormControl('', { nonNullable: true }),
   });

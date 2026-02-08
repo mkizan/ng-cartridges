@@ -1,5 +1,3 @@
-import { max } from 'rxjs';
-
 export const TEXT = {
   fields: {
     totalCartridges: 'Всього картриджів',
@@ -25,6 +23,11 @@ export const TEXT = {
     changeStatus: 'Змінити статус',
     addCartridge: 'Додати картридж',
     editCartridge: 'Редагувати картридж',
+  },
+  placeholders: {
+    enterBarcode: 'Введіть штрихкод EAN13',
+    enterAlternativeCartridges: 'Введіть картриджі через кому',
+    enterCompatiblePrinters: 'Введіть принтери через кому',
   },
   validation: {
     required: "Це поле є обов'язковим",

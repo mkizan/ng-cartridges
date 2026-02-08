@@ -17,6 +17,7 @@ import {
 import { ModalService } from '../../../../core/services/modal/modal-service';
 import { HttpClient } from '@angular/common/http';
 import { BASE_URL } from '../../../../shared/utils/server-url';
+import { TEXT } from '../../../../core/constants/text';
 
 @Component({
   selector: 'app-cartridge-form',
@@ -25,7 +26,8 @@ import { BASE_URL } from '../../../../shared/utils/server-url';
   styleUrl: './cartridge-form.css',
 })
 export class CartridgeForm implements OnInit {
-  nnfb = new FormBuilder().nonNullable;
+  // nnfb = new FormBuilder().nonNullable;
+  protected readonly TEXT = TEXT;
   cartridgeData = input<ICartridge | undefined>();
   constructor(private http: HttpClient) {}
 

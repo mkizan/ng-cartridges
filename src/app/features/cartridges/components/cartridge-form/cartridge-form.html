@@ -3,7 +3,9 @@
   [formGroup]="cartridgeForm"
   (ngSubmit)="handleSubmit()"
 >
-  <label for="barcode" class="cartridge-form__label-barcode">штрихкод*</label>
+  <label for="barcode" class="cartridge-form__label-barcode">{{
+    TEXT.fields.barcode
+  }}</label>
   <input
     type="text"
     id="barcode"
@@ -14,7 +16,9 @@
     formControlName="barcode"
     autocomplete="on"
   />
-  <label for="brand" class="cartridge-form__label-brand">бренд*</label>
+  <label for="brand" class="cartridge-form__label-brand">{{
+    TEXT.fields.brand
+  }}</label>
   <input
     type="text"
     id="brand"
@@ -23,7 +27,9 @@
     formControlName="brand"
     autocomplete="on"
   />
-  <label for="model" class="cartridge-form__label-model">модель*</label>
+  <label for="model" class="cartridge-form__label-model">{{
+    TEXT.fields.model
+  }}</label>
   <input
     type="text"
     id="model"
@@ -35,7 +41,7 @@
   <label
     for="alternative-cartridges"
     class="cartridge-form__label-alternative-cartridges"
-    >аналоговий картридж</label
+    >{{ TEXT.fields.alternativeCartridges }}</label
   >
   <input
     type="text"
@@ -43,9 +49,24 @@
     class="cartridge-form__input-alternative-cartridges"
     name="alternative-cartridges"
     formControlName="alternativeCartridges"
+    placeholder="{{ TEXT.placeholders.enterAlternativeCartridges }}"
     autocomplete="on"
   />
-  <label for="status" class="cartridge-form__label-status">статус*</label>
+  <label for="compatiblePrinters" class="cartridge-form__label-printers">{{
+    TEXT.fields.compatiblePrinters
+  }}</label>
+  <input
+    type="text"
+    id="compatiblePrinters"
+    class="cartridge-form__input-printers"
+    name="compatiblePrinters"
+    formControlName="compatiblePrinters"
+    placeholder="{{ TEXT.placeholders.enterCompatiblePrinters }}"
+    autocomplete="on"
+  />
+  <label for="status" class="cartridge-form__label-status">{{
+    TEXT.fields.status
+  }}</label>
   <select
     id="status"
     class="cartridge-form__input-status"
@@ -58,7 +79,18 @@
       </option>
     }
   </select>
-  <label for="location" class="cartridge-form__label-location">локація*</label>
+  <label for="responsible" class="cartridge-form__label-responsible">{{
+    TEXT.fields.responsible
+  }}</label>
+  <select
+    id="responsible"
+    class="cartridge-form__input-responsible"
+    formControlName="responsible"
+  >
+    @for (user of users(); track user.id) {
+      <option [value]="user.name">{{ user.name }}</option>
+    }</select
+  ><label for="location" class="cartridge-form__label-location">локація*</label>
   <select
     id="location"
     class="cartridge-form__input-location"
@@ -68,31 +100,9 @@
       <option [value]="location.name">{{ location.name }}</option>
     }
   </select>
-  <label for="compatiblePrinters" class="cartridge-form__label-printers"
-    >сумісні принтери</label
-  >
-  <input
-    type="text"
-    id="compatiblePrinters"
-    class="cartridge-form__input-printers"
-    name="compatiblePrinters"
-    formControlName="compatiblePrinters"
-    placeholder="Введіть принтери через кому"
-    autocomplete="on"
-  />
-  <label for="responsible" class="cartridge-form__label-responsible"
-    >відповідальний*</label
-  >
-  <select
-    id="responsible"
-    class="cartridge-form__input-responsible"
-    formControlName="responsible"
-  >
-    @for (user of users(); track user.id) {
-      <option [value]="user.name">{{ user.name }}</option>
-    }
-  </select>
-  <label for="notes" class="cartridge-form__label-notes">примітки</label>
+  <label for="notes" class="cartridge-form__label-notes">{{
+    TEXT.fields.notes
+  }}</label>
   <input
     type="text"
     id="notes"
@@ -101,6 +111,8 @@
     formControlName="notes"
   />
   <button type="submit" class="cartridge-form__submit">
-    {{ cartridgeData() ? "Редагувати картридж" : "Додати картридж" }}
+    {{
+      cartridgeData() ? TEXT.buttons.editCartridge : TEXT.buttons.addCartridge
+    }}
   </button>
 </form>

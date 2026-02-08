@@ -1,13 +1,14 @@
 .cartridge-card {
   width: 100%;
-  max-width: 370px;
-  min-height: 375px;
+  max-width: 300px;
+  min-width: 300px;
+  min-height: 420px;
   margin-top: 15px;
   margin-bottom: 15px;
   margin-left: 20px;
   margin-left: 0px;
   margin-right: 0;
-  padding: 30px 10px;
+  padding: 15px;
   background-color: var(--card-background-color);
   border: 1px solid var(--card-border-color);
   border-radius: 10px;
@@ -26,7 +27,9 @@
 }
 
 .cartridge-card__barcode {
+  margin-bottom: 15px;
   font-size: 18px;
+  color: var(--value-text-color);
 }
 
 .cartridge-card__actions {
@@ -261,17 +264,18 @@
   }
 }
 
-.cartridge-card__data {
+.cartridge-card__list {
   list-style: none;
   padding: 0;
   margin-bottom: 10px;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px 0;
 
   &:last-child {
     margin-bottom: 0;
   }
+}
+
+.cartridge-card__list > li p {
+  margin-left: 5px;
 }
 
 .cartridge-card__responsible-wrapper,
@@ -295,33 +299,37 @@
 }
 
 @media screen and (max-width: 479px) {
-  :host {
+  /* :host {
     margin-left: auto;
     margin-right: auto;
-  }
+  } */
   .cartridge-card {
     width: 100%;
-    max-width: 350px;
+    max-width: 300px;
+    min-width: 300px;
+    min-height: 420px;
     margin-top: 10px;
     margin-bottom: 10px;
-    min-height: auto;
   }
 }
 
 @media screen and (min-width: 480px) and (max-width: 1599px) {
-  :host {
+  /* :host {
     margin-left: auto;
     margin-right: auto;
-  }
+  } */
   .cartridge-card {
     width: 100%;
-    max-width: 420px;
+    max-width: 300px;
+    min-width: 300px;
+    min-height: 420px;
+    margin-right: 10px;
   }
 }
 
-@media screen and (min-width: 1600px) {
+/* @media screen and (min-width: 1600px) {
   :host {
     margin-left: 10px;
     margin-right: 0;
   }
-}
+} */

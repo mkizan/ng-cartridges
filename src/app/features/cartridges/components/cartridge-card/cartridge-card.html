@@ -3,9 +3,6 @@
   <div class="cartridge-card__wrapper">
     <h3 class="cartridge-card__title">
       {{ cartridgeVariable.brand }} {{ cartridgeVariable.model }}
-      <span class="cartridge-card__barcode"
-        >(ШК: {{ cartridgeVariable.barcode }})</span
-      >
     </h3>
 
     <div class="cartridge-card__actions">
@@ -56,7 +53,9 @@
       </div>
     </div>
   </div>
-  <br />
+  <p class="cartridge-card__barcode">
+    [ SKU: {{ cartridgeVariable.barcode }} ]
+  </p>
   <div class="cartrdige-card__status-wrapper">
     <span
       class="cartridge-card__status"
@@ -101,36 +100,34 @@
       </li>
     }
   </ul>
-  <div class="cartridge-card__data">
-    <div class="cartridge-card__responsible-wrapper">
+  <ul class="cartridge-card__list">
+    <li class="cartridge-card__responsible-wrapper">
       <lucide-icon [img]="User" size="18"></lucide-icon>
       <p class="cartridge-card__responsible">відповідальний:</p>
       <p class="cartridge-card__responsible-value">
         {{ cartridgeVariable.responsible }}
       </p>
-    </div>
-    <div class="cartridge-card__location-wrapper">
+    </li>
+    <li class="cartridge-card__location-wrapper">
       <lucide-icon [img]="MapPin" size="18"></lucide-icon>
       <p class="cartridge-card__location">локація:</p>
       <p class="cartridge-card__location-value">
         {{ cartridgeVariable.location }}
       </p>
-    </div>
-  </div>
-  <div class="cartridge-card__data">
-    <div class="cartridge-card__refill-wrapper">
+    </li>
+    <li class="cartridge-card__refill-wrapper">
       <lucide-icon [img]="PaintBucket" size="18"></lucide-icon>
       <p class="cartridge-card__last-refill">ост. заправка:</p>
       <time datetime="15-09-2025" class="cartridge-card__refill-value"
         >15.09.2025
       </time>
-    </div>
-    <div class="cartridge-card__refill-wrapper">
+    </li>
+    <li class="cartridge-card__refill-wrapper">
       <lucide-icon [img]="PaintBucket" size="18"></lucide-icon>
       <p class="cartridge-card__next-refill">наст. заправка:</p>
       <time datetime="30-09-2025" class="cartridge-card__refill-value"
         >30.09.2025
       </time>
-    </div>
-  </div>
+    </li>
+  </ul>
 </div>

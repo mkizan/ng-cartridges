@@ -17,6 +17,7 @@ import {
 import { ModalService } from '../../../../core/services/modal/modal-service';
 import { HttpClient } from '@angular/common/http';
 import { BASE_URL } from '../../../../shared/utils/server-url';
+import { TEXT } from '../../../../core/constants/text';
 
 @Component({
   selector: 'app-cartridge-form',
@@ -25,7 +26,8 @@ import { BASE_URL } from '../../../../shared/utils/server-url';
   styleUrl: './cartridge-form.css',
 })
 export class CartridgeForm implements OnInit {
-  nnfb = new FormBuilder().nonNullable;
+  // nnfb = new FormBuilder().nonNullable;
+  protected readonly TEXT = TEXT;
   cartridgeData = input<ICartridge | undefined>();
   constructor(private http: HttpClient) {}
 
@@ -48,19 +50,11 @@ export class CartridgeForm implements OnInit {
     }),
     brand: new FormControl('', {
       nonNullable: true,
-      validators: [
-        Validators.required,
-        Validators.minLength(2),
-        Validators.maxLength(20),
-      ],
+      validators: [Validators.required, Validators.minLength(2)],
     }),
     model: new FormControl('', {
       nonNullable: true,
-      validators: [
-        Validators.required,
-        Validators.minLength(2),
-        Validators.maxLength(20),
-      ],
+      validators: [Validators.required, Validators.minLength(2)],
     }),
     alternativeCartridges: new FormControl<string | string[]>('', {
       nonNullable: true,
@@ -71,11 +65,7 @@ export class CartridgeForm implements OnInit {
     }),
     location: new FormControl<any>('', {
       nonNullable: true,
-      validators: [
-        Validators.required,
-        Validators.minLength(2),
-        Validators.maxLength(20),
-      ],
+      validators: [Validators.required, Validators.minLength(2)],
     }),
     compatiblePrinters: new FormControl<string | string[]>('', {
       nonNullable: true,
@@ -83,11 +73,7 @@ export class CartridgeForm implements OnInit {
     }),
     responsible: new FormControl<ICartridgeUser['name']>('Микола', {
       nonNullable: true,
-      validators: [
-        Validators.required,
-        Validators.minLength(2),
-        Validators.maxLength(20),
-      ],
+      validators: [Validators.required, Validators.minLength(2)],
     }),
     notes: new FormControl('', { nonNullable: true }),
   });

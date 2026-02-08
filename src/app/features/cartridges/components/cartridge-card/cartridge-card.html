@@ -16,20 +16,22 @@
         <ul class="cartridge-card__actions-list">
           <li class="cartridge-card__show-sku">
             <lucide-icon [img]="ScanBarcode" size="16"></lucide-icon>
-            <p>показати штрихкод</p>
+            <p>{{ TEXT.buttons.showBarcode }}</p>
           </li>
           <li class="cartridge-card__edit-cartridge">
             <lucide-icon [img]="Pencil" size="16"></lucide-icon>
-            <p (click)="editCartridge()">редагувати</p>
+            <p (click)="editCartridge()">{{ TEXT.buttons.edit }}</p>
             @if (cartridgeVariable) {
               <app-modal>
-                <h3 class="modal__title">Редагувати картридж</h3>
+                <h3 class="modal__title">{{ TEXT.buttons.editCartridge }}</h3>
                 <app-cartridge-form [cartridgeData]="cartridgeVariable" />
               </app-modal>
             }
           </li>
         </ul>
-        <p class="cartridge-card__change-status">змінити статус</p>
+        <p class="cartridge-card__change-status">
+          {{ TEXT.buttons.changeStatus }}
+        </p>
         <ul class="cartridge-card__status-list">
           @for (item of cartridgeStatus(); track item.id) {
             <li
@@ -47,7 +49,7 @@
             class="cartridge-card__delete-btn"
             (click)="removeCartridge()"
           >
-            видалити
+            {{ TEXT.buttons.delete }}
           </button>
         </div>
       </div>
@@ -70,7 +72,9 @@
       size="18"
       class="compatible-printers__icon"
     ></lucide-icon>
-    <p class="compatible-printers__title">сумісні принтери:</p>
+    <p class="compatible-printers__title">
+      {{ TEXT.fields.compatiblePrinters }}
+    </p>
   </div>
 
   <ul class="compatible-printers__list">
@@ -88,7 +92,9 @@
       size="18"
       class="alternative-cartridges__icon"
     ></lucide-icon>
-    <p class="alternative-cartridges__title">альтернативні картриджі:</p>
+    <p class="alternative-cartridges__title">
+      {{ TEXT.fields.alternativeCartridges }}
+    </p>
   </div>
   <ul class="alternative-cartridges__list">
     @for (
@@ -103,28 +109,32 @@
   <ul class="cartridge-card__list">
     <li class="cartridge-card__responsible-wrapper">
       <lucide-icon [img]="User" size="18"></lucide-icon>
-      <p class="cartridge-card__responsible">відповідальний:</p>
+      <p class="cartridge-card__responsible">{{ TEXT.fields.responsible }}:</p>
       <p class="cartridge-card__responsible-value">
         {{ cartridgeVariable.responsible }}
       </p>
     </li>
     <li class="cartridge-card__location-wrapper">
       <lucide-icon [img]="MapPin" size="18"></lucide-icon>
-      <p class="cartridge-card__location">локація:</p>
+      <p class="cartridge-card__location">{{ TEXT.fields.location }}:</p>
       <p class="cartridge-card__location-value">
         {{ cartridgeVariable.location }}
       </p>
     </li>
     <li class="cartridge-card__refill-wrapper">
       <lucide-icon [img]="PaintBucket" size="18"></lucide-icon>
-      <p class="cartridge-card__last-refill">ост. заправка:</p>
+      <p class="cartridge-card__last-refill">
+        {{ TEXT.fields.lastRefillDate }}:
+      </p>
       <time datetime="15-09-2025" class="cartridge-card__refill-value"
         >15.09.2025
       </time>
     </li>
     <li class="cartridge-card__refill-wrapper">
       <lucide-icon [img]="PaintBucket" size="18"></lucide-icon>
-      <p class="cartridge-card__next-refill">наст. заправка:</p>
+      <p class="cartridge-card__next-refill">
+        {{ TEXT.fields.nextRefillDate }}:
+      </p>
       <time datetime="30-09-2025" class="cartridge-card__refill-value"
         >30.09.2025
       </time>

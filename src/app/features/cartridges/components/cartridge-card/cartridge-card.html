@@ -1,10 +1,8 @@
+@let cartridgeVariable = cartridge();
 <div class="cartridge-card">
   <div class="cartridge-card__wrapper">
     <h3 class="cartridge-card__title">
-      {{ cartridge().brand }} {{ cartridge().model }}
-      <span class="cartridge-card__barcode"
-        >(ШК: {{ cartridge().barcode }})</span
-      >
+      {{ cartridgeVariable.brand }} {{ cartridgeVariable.model }}
     </h3>
 
     <div class="cartridge-card__actions">
@@ -23,10 +21,10 @@
           <li class="cartridge-card__edit-cartridge">
             <lucide-icon [img]="Pencil" size="16"></lucide-icon>
             <p (click)="editCartridge()">редагувати</p>
-            @if (cartridge()) {
+            @if (cartridgeVariable) {
               <app-modal>
                 <h3 class="modal__title">Редагувати картридж</h3>
-                <app-cartridge-form [cartridgeData]="cartridge()" />
+                <app-cartridge-form [cartridgeData]="cartridgeVariable" />
               </app-modal>
             }
           </li>
@@ -55,13 +53,15 @@
       </div>
     </div>
   </div>
-  <br />
+  <p class="cartridge-card__barcode">
+    [ SKU: {{ cartridgeVariable.barcode }} ]
+  </p>
   <div class="cartrdige-card__status-wrapper">
     <span
       class="cartridge-card__status"
-      [class]="cartridge().status | translateStatus"
+      [class]="cartridgeVariable.status | translateStatus"
     >
-      {{ cartridge().status }}
+      {{ cartridgeVariable.status }}
     </span>
   </div>
   <div class="compatible-printers__wrapper">
@@ -74,7 +74,10 @@
   </div>
 
   <ul class="compatible-printers__list">
-    @for (compatiblePrinter of cartridge().compatiblePrinters; track $index) {
+    @for (
+      compatiblePrinter of cartridgeVariable.compatiblePrinters;
+      track $index
+    ) {
       <li class="compatible-printers__item">{{ compatiblePrinter }}</li>
     }
   </ul>
@@ -89,7 +92,7 @@
   </div>
   <ul class="alternative-cartridges__list">
     @for (
-      alternativeCartridge of cartridge().alternativeCartridges;
+      alternativeCartridge of cartridgeVariable.alternativeCartridges;
       track $index
     ) {
       <li class="alternative-cartridges__item">
@@ -97,34 +100,34 @@
       </li>
     }
   </ul>
-  <div class="cartridge-card__data">
-    <div class="cartridge-card__responsible-wrapper">
+  <ul class="cartridge-card__list">
+    <li class="cartridge-card__responsible-wrapper">
       <lucide-icon [img]="User" size="18"></lucide-icon>
       <p class="cartridge-card__responsible">відповідальний:</p>
       <p class="cartridge-card__responsible-value">
-        {{ cartridge().responsible }}
+        {{ cartridgeVariable.responsible }}
       </p>
-    </div>
-    <div class="cartridge-card__location-wrapper">
+    </li>
+    <li class="cartridge-card__location-wrapper">
       <lucide-icon [img]="MapPin" size="18"></lucide-icon>
       <p class="cartridge-card__location">локація:</p>
-      <p class="cartridge-card__location-value">{{ cartridge().location }}</p>
-    </div>
-  </div>
-  <div class="cartridge-card__data">
-    <div class="cartridge-card__refill-wrapper">
+      <p class="cartridge-card__location-value">
+        {{ cartridgeVariable.location }}
+      </p>
+    </li>
+    <li class="cartridge-card__refill-wrapper">
       <lucide-icon [img]="PaintBucket" size="18"></lucide-icon>
       <p class="cartridge-card__last-refill">ост. заправка:</p>
       <time datetime="15-09-2025" class="cartridge-card__refill-value"
         >15.09.2025
       </time>
-    </div>
-    <div class="cartridge-card__refill-wrapper">
+    </li>
+    <li class="cartridge-card__refill-wrapper">
       <lucide-icon [img]="PaintBucket" size="18"></lucide-icon>
       <p class="cartridge-card__next-refill">наст. заправка:</p>
       <time datetime="30-09-2025" class="cartridge-card__refill-value"
         >30.09.2025
       </time>
-    </div>
-  </div>
+    </li>
+  </ul>
 </div>

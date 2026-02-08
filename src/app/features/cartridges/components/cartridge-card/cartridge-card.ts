@@ -23,6 +23,7 @@ import { CartridgesService } from '../../services/cartridges-service';
 import { ModalService } from '../../../../core/services/modal/modal-service';
 import { CartridgeForm } from '../cartridge-form/cartridge-form';
 import { Modal } from '../../../../shared/components/modal/modal/modal';
+import { TEXT } from '../../../../core/constants/text';
 
 @Component({
   selector: 'app-cartridge-card',
@@ -42,6 +43,7 @@ export class CartridgeCard {
   readonly User = User;
   readonly MapPin = MapPin;
 
+  protected readonly TEXT = TEXT;
   modalService = inject(ModalService);
   cartridgesService = inject(CartridgesService);
   cartridgeStatus = this.cartridgesService.allCartridgeStatuses;

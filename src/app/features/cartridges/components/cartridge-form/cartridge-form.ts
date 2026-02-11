@@ -1,17 +1,10 @@
 import { Component, inject, input, OnInit, signal } from '@angular/core';
-import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CartridgesService } from '../../services/cartridges-service';
 import {
+  CartridgeStatus,
   ICartridge,
   ICartridgeLocation,
-  ICartridgeLocations,
-  ICartridgeStatuses,
   ICartridgeUser,
 } from '../../models/cartridge-interfaces';
 import { ModalService } from '../../../../core/services/modal/modal-service';
@@ -26,7 +19,7 @@ import { TEXT } from '../../../../core/constants/text';
   styleUrl: './cartridge-form.css',
 })
 export class CartridgeForm implements OnInit {
-  // nnfb = new FormBuilder().nonNullable;
+  private fb = inject(FormBuilder).nonNullable;
   protected readonly TEXT = TEXT;
   cartridgeData = input<ICartridge | undefined>();
   constructor(private http: HttpClient) {}
@@ -38,44 +31,27 @@ export class CartridgeForm implements OnInit {
   locations = signal<ICartridgeLocation[]>([]);
   users = signal<ICartridgeUser[]>([]);
 
-  cartridgeForm = new FormGroup({
-    barcode: new FormControl('', {
-      nonNullable: true,
-      validators: [
+  cartridgeForm = this.fb.group({
+    barcode: [
+      '',
+      [
         Validators.required,
         Validators.minLength(13),
         Validators.maxLength(13),
         Validators.pattern(/^\d+$/),
       ],
-    }),
-    brand: new FormControl('', {
-      nonNullable: true,
-      validators: [Validators.required, Validators.minLength(2)],
-    }),
-    model: new FormControl('', {
-      nonNullable: true,
-      validators: [Validators.required, Validators.minLength(2)],
-    }),
-    alternativeCartridges: new FormControl<string | string[]>('', {
-      nonNullable: true,
-    }),
-    status: new FormControl<any>('', {
-      nonNullable: true,
-      validators: [Validators.required],
-    }),
-    location: new FormControl<any>('', {
-      nonNullable: true,
-      validators: [Validators.required, Validators.minLength(2)],
-    }),
-    compatiblePrinters: new FormControl<string | string[]>('', {
-      nonNullable: true,
-      validators: [Validators.required, Validators.minLength(1)],
-    }),
-    responsible: new FormControl<ICartridgeUser['name']>('Микола', {
-      nonNullable: true,
-      validators: [Validators.required, Validators.minLength(2)],
-    }),
-    notes: new FormControl('', { nonNullable: true }),
+    ],
+    brand: ['', [Validators.required, Validators.minLength(2)]],
+    model: ['', [Validators.required, Validators.minLength(2)]],
+    alternativeCartridges: <string | string[]>[''],
+    status: ['', [Validators.required]],
+    location: ['', [Validators.required, Validators.minLength(2)]],
+    compatiblePrinters: <string | string[]>[
+      '',
+      [Validators.required, Validators.minLength(1)],
+    ],
+    responsible: ['', [Validators.required, Validators.minLength(2)]],
+    notes: [''],
   });
 
   ngOnInit(): void {
@@ -109,6 +85,7 @@ export class CartridgeForm implements OnInit {
 
     const payload = {
       ...cartridgeFormData,
+      status: cartridgeFormData.status as CartridgeStatus,
       alternativeCartridges:
         typeof cartridgeFormData.alternativeCartridges === 'string'
           ? cartridgeFormData.alternativeCartridges
@@ -126,7 +103,7 @@ export class CartridgeForm implements OnInit {
           : cartridgeFormData.compatiblePrinters,
     };
 
-    console.log(payload);
+    console.log('Payload: ', payload);
 
     if (this.cartridgeData()) {
       this.cartridgesService.editCartridge(this.cartridgeData()!.id, payload);
@@ -134,6 +111,7 @@ export class CartridgeForm implements OnInit {
     } else {
       this.cartridgesService.addCartridge(payload);
       this.modalService.toggleModalBtn();
+      this.cartridgeForm.reset();
     }
   }
 }

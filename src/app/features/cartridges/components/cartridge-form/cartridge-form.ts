@@ -19,7 +19,7 @@ import { TEXT } from '../../../../core/constants/text';
   styleUrl: './cartridge-form.css',
 })
 export class CartridgeForm implements OnInit {
-  private fb = inject(FormBuilder).nonNullable;
+  private formBuilder = inject(FormBuilder).nonNullable;
   protected readonly TEXT = TEXT;
   cartridgeData = input<ICartridge | undefined>();
   constructor(private http: HttpClient) {}
@@ -31,7 +31,7 @@ export class CartridgeForm implements OnInit {
   locations = signal<ICartridgeLocation[]>([]);
   users = signal<ICartridgeUser[]>([]);
 
-  cartridgeForm = this.fb.group({
+  cartridgeForm = this.formBuilder.group({
     barcode: [
       '',
       [
@@ -103,7 +103,7 @@ export class CartridgeForm implements OnInit {
           : cartridgeFormData.compatiblePrinters,
     };
 
-    console.log('Payload: ', payload);
+    // console.log('Payload: ', payload);
 
     if (this.cartridgeData()) {
       this.cartridgesService.editCartridge(this.cartridgeData()!.id, payload);
@@ -113,5 +113,33 @@ export class CartridgeForm implements OnInit {
       this.modalService.toggleModalBtn();
       this.cartridgeForm.reset();
     }
+  }
+
+  get barcode() {
+    return this.cartridgeForm.get('barcode');
+  }
+  get brand() {
+    return this.cartridgeForm.get('brand');
+  }
+  get model() {
+    return this.cartridgeForm.get('model');
+  }
+  get alternativeCartridges() {
+    return this.cartridgeForm.get('alternative-cartridges');
+  }
+  get compatiblePrinters() {
+    return this.cartridgeForm.get('compatiblePrinters');
+  }
+  get status() {
+    return this.cartridgeForm.get('status');
+  }
+  get responsible() {
+    return this.cartridgeForm.get('responsible');
+  }
+  get location() {
+    return this.cartridgeForm.get('location');
+  }
+  get notes() {
+    return this.cartridgeForm.get('notes');
   }
 }

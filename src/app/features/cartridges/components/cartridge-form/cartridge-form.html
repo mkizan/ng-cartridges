@@ -16,6 +16,19 @@
     formControlName="barcode"
     autocomplete="on"
   />
+  @if (barcode?.invalid && (barcode?.dirty || barcode?.touched)) {
+    <div class="alert">
+      @if (barcode?.hasError("required")) {
+        <p>{{ TEXT.validation.required }}</p>
+      }
+      @if (barcode?.hasError("minlength")) {
+        <p>{{ TEXT.validation.minLengthBarcode }}</p>
+      }
+      @if (barcode?.hasError("maxlength")) {
+        <p>{{ TEXT.validation.maxLengthBarcode }}</p>
+      }
+    </div>
+  }
   <label for="brand" class="cartridge-form__label-brand">{{
     TEXT.fields.brand
   }}</label>
@@ -27,6 +40,16 @@
     formControlName="brand"
     autocomplete="on"
   />
+  @if (brand?.invalid && (brand?.dirty || brand?.touched)) {
+    <div class="alert">
+      @if (brand?.hasError("required")) {
+        <p>{{ TEXT.validation.required }}</p>
+      }
+      @if (brand?.hasError("minlength")) {
+        <p>{{ TEXT.validation.minLengthBrand }}</p>
+      }
+    </div>
+  }
   <label for="model" class="cartridge-form__label-model">{{
     TEXT.fields.model
   }}</label>
@@ -38,6 +61,41 @@
     formControlName="model"
     autocomplete="on"
   />
+  @if (model?.invalid && (model?.dirty || model?.touched)) {
+    <div class="alert">
+      @if (model?.hasError("required")) {
+        <p>{{ TEXT.validation.required }}</p>
+      }
+      @if (model?.hasError("minlength")) {
+        <p>{{ TEXT.validation.minLengthModel }}</p>
+      }
+    </div>
+  }
+  <label for="compatiblePrinters" class="cartridge-form__label-printers">{{
+    TEXT.fields.compatiblePrinters
+  }}</label>
+  <input
+    type="text"
+    id="compatiblePrinters"
+    class="cartridge-form__input-printers"
+    name="compatiblePrinters"
+    formControlName="compatiblePrinters"
+    placeholder="{{ TEXT.placeholders.enterCompatiblePrinters }}"
+    autocomplete="on"
+  />
+  @if (
+    compatiblePrinters?.invalid &&
+    (compatiblePrinters?.dirty || compatiblePrinters?.touched)
+  ) {
+    <div class="alert">
+      @if (compatiblePrinters?.hasError("required")) {
+        <p>{{ TEXT.validation.required }}</p>
+      }
+      @if (compatiblePrinters?.hasError("minlength")) {
+        <p>{{ TEXT.validation.minLengthCompatiblePrinters }}</p>
+      }
+    </div>
+  }
   <label
     for="alternative-cartridges"
     class="cartridge-form__label-alternative-cartridges"
@@ -52,18 +110,7 @@
     placeholder="{{ TEXT.placeholders.enterAlternativeCartridges }}"
     autocomplete="on"
   />
-  <label for="compatiblePrinters" class="cartridge-form__label-printers">{{
-    TEXT.fields.compatiblePrinters
-  }}</label>
-  <input
-    type="text"
-    id="compatiblePrinters"
-    class="cartridge-form__input-printers"
-    name="compatiblePrinters"
-    formControlName="compatiblePrinters"
-    placeholder="{{ TEXT.placeholders.enterCompatiblePrinters }}"
-    autocomplete="on"
-  />
+
   <label for="status" class="cartridge-form__label-status">{{
     TEXT.fields.status
   }}</label>
@@ -79,6 +126,9 @@
       </option>
     }
   </select>
+  @if (status?.invalid && (status?.dirty || status?.touched)) {
+    <p class="alert">{{ TEXT.validation.required }}</p>
+  }
   <label for="responsible" class="cartridge-form__label-responsible">{{
     TEXT.fields.responsible
   }}</label>
@@ -89,8 +139,14 @@
   >
     @for (user of users(); track user.id) {
       <option [value]="user.name">{{ user.name }}</option>
-    }</select
-  ><label for="location" class="cartridge-form__label-location">локація*</label>
+    }
+  </select>
+  @if (responsible?.invalid && (responsible?.dirty || responsible?.touched)) {
+    <p class="alert">{{ TEXT.validation.required }}</p>
+  }
+  <label for="location" class="cartridge-form__label-location">{{
+    TEXT.fields.location
+  }}</label>
   <select
     id="location"
     class="cartridge-form__input-location"
@@ -100,6 +156,9 @@
       <option [value]="location.name">{{ location.name }}</option>
     }
   </select>
+  @if (location?.invalid && (location?.dirty || location?.touched)) {
+    <p class="alert">{{ TEXT.validation.required }}</p>
+  }
   <label for="notes" class="cartridge-form__label-notes">{{
     TEXT.fields.notes
   }}</label>
@@ -110,7 +169,11 @@
     name="notes"
     formControlName="notes"
   />
-  <button type="submit" class="cartridge-form__submit">
+  <button
+    type="submit"
+    class="cartridge-form__submit"
+    [disabled]="!cartridgeForm.valid"
+  >
     {{
       cartridgeData() ? TEXT.buttons.editCartridge : TEXT.buttons.addCartridge
     }}

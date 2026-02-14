@@ -2,7 +2,7 @@ export const TEXT = {
   fields: {
     totalCartridges: 'Всього картриджів',
     actionsTitle: 'Дії',
-    sku: 'SKU',
+    sku: 'ШК',
     compatiblePrinters: 'Сумісні принтери',
     alternativeCartridges: 'Альтернативні картриджі',
     responsible: 'Відповідальний',
@@ -31,13 +31,14 @@ export const TEXT = {
   },
   validation: {
     required: "Це поле є обов'язковим",
-    skuLength: 'SKU має містити 13 цифр',
+    minLengthBarcode: 'ШК має містити  не менше 13 цифр',
+    maxLengthBarcode: 'ШК має містити не більше 13 цифр',
     invalidBarcode: 'Штрихкод має містить лише цифри',
-    minimalLengthBrand: 'Бренд має містити щонайменше 2 символи',
-    minimalLengthModel: 'Модель має містити щонайменше 2 символи',
-    minimalLengthCompatiblePrinters:
+    minLengthBrand: 'Бренд має містити щонайменше 2 символи',
+    minLengthModel: 'Модель має містити щонайменше 2 символи',
+    minLengthCompatiblePrinters:
       'Сумісні принтери мають містить щонайменше 1 символ',
-    minimalLengthLocation: 'Розташування має містить щонайменше 2 символи',
-    minimalLengthResponsible: 'Відповідальний має містити щонайменше 2 символи',
+    minLengthLocation: 'Розташування має містить щонайменше 2 символи',
+    minLengthResponsible: 'Відповідальний має містити щонайменше 2 символи',
   },
 } as const;

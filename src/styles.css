@@ -20,6 +20,7 @@
   --field-border-color: rgb(71, 68, 68, 0.2);
   --dashboard-card-title-text-size: 14px;
   --dashboard-title-text-size: 26px;
+  --alert-text-color: #f02929;
 }
 
 .dark-theme {
@@ -41,6 +42,7 @@
   --field-border-color: rgb(71, 68, 68, 0.2);
   --dashboard-card-title-text-size: 14px;
   --dashboard-title-text-size: 26px;
+  --alert-text-color: #f02929;
 }
 
 * {
@@ -63,4 +65,8 @@ body {
   overflow: hidden;
   border: 0;
   clip: rect(0 0 0 0);
+}
+
+.alert {
+  color: var(--alert-text-color);
 }

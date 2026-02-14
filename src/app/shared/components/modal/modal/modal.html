@@ -1,6 +1,6 @@
 <div
   class="modal-overlay"
-  [class.is-open]="modalService.isOpen()"
+  [class.active]="isOpen()"
   (click)="modalService.handleOverlayClick($event)"
 >
   <div class="modal" (click)="$event.stopPropagation()">

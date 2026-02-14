@@ -22,7 +22,7 @@
             <lucide-icon [img]="Pencil" size="16"></lucide-icon>
             <p (click)="editCartridge()">{{ TEXT.buttons.edit }}</p>
             @if (cartridgeVariable) {
-              <app-modal>
+              <app-modal [modalType]="'edit-cartridge'">
                 <h3 class="modal__title">{{ TEXT.buttons.editCartridge }}</h3>
                 <app-cartridge-form [cartridgeData]="cartridgeVariable" />
               </app-modal>

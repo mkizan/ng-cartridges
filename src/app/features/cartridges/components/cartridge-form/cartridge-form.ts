@@ -103,14 +103,16 @@ export class CartridgeForm implements OnInit {
           : cartridgeFormData.compatiblePrinters,
     };
 
-    // console.log('Payload: ', payload);
+    console.log('Payload: ', payload);
 
     if (this.cartridgeData()) {
       this.cartridgesService.editCartridge(this.cartridgeData()!.id, payload);
-      this.modalService.toggleModalBtn();
+      // this.modalService.toggleModalBtn();
+      this.modalService.closeModal();
     } else {
       this.cartridgesService.addCartridge(payload);
-      this.modalService.toggleModalBtn();
+      // this.modalService.toggleModalBtn();
+      this.modalService.closeModal();
       this.cartridgeForm.reset();
     }
   }

@@ -59,7 +59,8 @@ export class CartridgeCard {
   }
 
   editCartridge() {
-    this.modalService.toggleModalBtn();
+    // this.modalService.toggleModalBtn();
+    this.modalService.openModalEdit();
     this.cartridgesService.editCartridge(this.cartridge().id, this.cartridge());
   }
 

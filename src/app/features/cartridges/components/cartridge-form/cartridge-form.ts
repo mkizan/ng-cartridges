@@ -1,4 +1,11 @@
-import { Component, inject, input, OnInit, signal } from '@angular/core';
+import {
+  Component,
+  inject,
+  input,
+  OnInit,
+  output,
+  signal,
+} from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CartridgesService } from '../../services/cartridges-service';
 import {
@@ -21,7 +28,10 @@ import { TEXT } from '../../../../core/constants/text';
 export class CartridgeForm implements OnInit {
   private formBuilder = inject(FormBuilder).nonNullable;
   protected readonly TEXT = TEXT;
+
   cartridgeData = input<ICartridge | undefined>();
+  // success = output<void>();
+
   constructor(private http: HttpClient) {}
 
   modalService = inject(ModalService);
@@ -75,11 +85,7 @@ export class CartridgeForm implements OnInit {
   }
 
   handleSubmit() {
-    if (this.cartridgeForm.invalid) {
-      console.log(this.cartridgeForm);
-      console.log('Form is invalid');
-      return;
-    }
+    if (this.cartridgeForm.invalid) return;
 
     const cartridgeFormData = this.cartridgeForm.getRawValue();
 

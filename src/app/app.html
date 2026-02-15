@@ -2,3 +2,20 @@
 <app-counter-cartridges />
 <app-add-cartridge-button />
 <app-cartridge-list />
+@let modal = modalService.activeModal();
+
+@if (modal.type !== null) {
+  <app-modal [modalType]="modal.type">
+    @if (modal.type === "create-cartridge") {
+      <h3 class="modal__title">{{ TEXT.titles.addCartridge }}</h3>
+      <app-cartridge-form (success)="modalService.closeModal()" />
+    }
+    @if (modal.type === "edit-cartridge") {
+      <h3 class="modal__title">{{ TEXT.titles.editCartridge }}</h3>
+      <app-cartridge-form
+        [cartridgeData]="modal.data"
+        (success)="modalService.closeModal()"
+      />
+    }
+  </app-modal>
+}

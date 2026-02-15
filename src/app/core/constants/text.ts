@@ -1,4 +1,8 @@
 export const TEXT = {
+  titles: {
+    addCartridge: 'Додати новий картридж',
+    editCartridge: 'Редагувати картридж',
+  },
   fields: {
     totalCartridges: 'Всього картриджів',
     actionsTitle: 'Дії',
@@ -22,7 +26,7 @@ export const TEXT = {
     showBarcode: 'Показати штрихкод',
     changeStatus: 'Змінити статус',
     addCartridge: 'Додати картридж',
-    editCartridge: 'Редагувати картридж',
+    saveChanges: 'Зберегти зміни',
   },
   placeholders: {
     enterBarcode: 'Введіть штрихкод EAN13',

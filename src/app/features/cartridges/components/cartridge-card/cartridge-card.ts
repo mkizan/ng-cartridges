@@ -21,13 +21,11 @@ import { TranslateStatusPipe } from '../../../../shared/pipes/translate-status-p
 import { ICartridge } from '../../models/cartridge-interfaces';
 import { CartridgesService } from '../../services/cartridges-service';
 import { ModalService } from '../../../../core/services/modal/modal-service';
-import { CartridgeForm } from '../cartridge-form/cartridge-form';
-import { Modal } from '../../../../shared/components/modal/modal/modal';
 import { TEXT } from '../../../../core/constants/text';
 
 @Component({
   selector: 'app-cartridge-card',
-  imports: [LucideAngularModule, TranslateStatusPipe, CartridgeForm, Modal],
+  imports: [LucideAngularModule, TranslateStatusPipe],
   templateUrl: './cartridge-card.html',
   styleUrl: './cartridge-card.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -56,11 +54,6 @@ export class CartridgeCard {
       id: this.cartridge().id,
       status,
     });
-  }
-
-  editCartridge() {
-    this.modalService.toggleModalBtn();
-    this.cartridgesService.editCartridge(this.cartridge().id, this.cartridge());
   }
 
   removeCartridge() {

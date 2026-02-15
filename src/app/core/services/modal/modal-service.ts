@@ -1,30 +1,41 @@
 import { computed, effect, Injectable, signal } from '@angular/core';
 
+export type ModalType = 'create-cartridge' | 'edit-cartridge' | null;
+
 @Injectable({
   providedIn: 'root',
 })
 export class ModalService {
-  private _isOpen = signal(false);
-  readonly isOpen = computed(() => this._isOpen());
+  private _activeModal = signal<{ type: ModalType; data?: any }>({
+    type: null,
+  });
+  activeModal = this._activeModal.asReadonly();
 
-  read_IsOpen = this._isOpen.asReadonly();
-
+  // stop scrolling when modal is open
   constructor() {
     effect(() => {
-      const open = this._isOpen();
-      document.body.style.overflow = open ? 'hidden' : '';
+      const modal = this._activeModal();
+      document.body.style.overflow =
+        modal.type === 'create-cartridge' || modal.type === 'edit-cartridge'
+          ? 'hidden'
+          : '';
     });
   }
-  toggleModalBtn() {
-    this._isOpen.update((value) => !value);
+
+  openModalCreate() {
+    this._activeModal.set({ type: 'create-cartridge' });
   }
 
-  ngOnDestroy() {
-    document.body.style.overflow = '';
+  openModalEdit(cartridgeData: any) {
+    this._activeModal.set({ type: 'edit-cartridge', data: cartridgeData });
+  }
+
+  closeModal() {
+    this._activeModal.set({ type: null });
   }
 
   handleOverlayClick(event: MouseEvent) {
     if ((event.target as HTMLElement).classList.contains('modal-overlay'))
-      this.toggleModalBtn();
+      this.closeModal();
   }
 }

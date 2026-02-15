@@ -14,7 +14,7 @@
   transition: opacity 250ms ease-in-out;
 }
 
-.modal-overlay.is-open {
+.modal-overlay.active {
   opacity: 1;
   pointer-events: auto;
 }

@@ -1,25 +1,10 @@
 <app-theme />
 <app-counter-cartridges />
 <app-add-cartridge-button />
-<!-- <app-cartridge-filter
+<app-cartridge-filter
   [allCartridgeStatuses]="cartridges.allCartridgeStatuses()"
   (filterChanged)="activeFilters.set($event)"
-/> -->
-
-<div class="cartridge-filter">
-  <input
-    [(ngModel)]="searchQuery"
-    type="text"
-    name="filter"
-    placeholder="Пошук за брендом, моделлю або штрихкодом"
-  />
-  <select name="status" [(ngModel)]="selectedStatus">
-    <option value=""></option>
-    @for (item of cartridges.allCartridgeStatuses(); track item.id) {
-      <option value="{{ item.status }}">{{ item.status }}</option>
-    }
-  </select>
-</div>
+/>
 
 <app-cartridge-list [childFilteredCartridges]="filteredCartridges()" />
 

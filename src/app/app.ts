@@ -1,4 +1,4 @@
-import { Component, computed, inject, signal } from '@angular/core';
+import { Component, computed, effect, inject, signal } from '@angular/core';
 import { CounterCartridges } from './features/cartridge-dashboard/components/counter-cartridges/counter-cartridges';
 import { CartridgeList } from './features/cartridges/components/cartridge-list/cartridge-list';
 
@@ -26,6 +26,7 @@ import { FormsModule } from '@angular/forms';
     CartridgeForm,
     Modal,
     FormsModule,
+    CartridgeFilter,
   ],
   templateUrl: './app.html',
   styleUrl: './app.css',
@@ -37,13 +38,28 @@ export class App {
   protected readonly TEXT = TEXT;
   protected readonly title = signal('ng-cartridges');
 
-  searchQuery = signal('');
-  selectedStatus = signal<string | null>(null);
+  activeFilters = signal<IFilterCriteria>({ query: '', status: null });
+  debouncedSearchQuery = signal('');
 
-  // MultiFilter
+  constructor() {
+    // Завантажуємо картриджі при ініціалізації додатку
+    this.cartridges.loadCartridges();
+
+    // Debounce ефект для пошукового запиту
+    effect((onCleanup) => {
+      const value = this.activeFilters().query;
+      console.log('Active filters changed: ', this.activeFilters());
+      const timeout = setTimeout(() => {
+        this.debouncedSearchQuery.set(value);
+      }, 500);
+      onCleanup(() => clearTimeout(timeout));
+    });
+  }
+
+  // Логіка мультифільтрування картриджів
   filteredCartridges = computed(() => {
-    const query = this.searchQuery().toLowerCase().trim();
-    const status = this.selectedStatus();
+    const query = this.debouncedSearchQuery().toLowerCase().trim();
+    const status = this.activeFilters().status;
 
     return this.cartridges.allCartridges().filter((cartridge) => {
       const matchesBrand = query
@@ -57,8 +73,4 @@ export class App {
       return (matchesBrand || matchesModel) && matchesStatus;
     });
   });
-
-  ngOnInit(): void {
-    this.cartridges.loadCartridges();
-  }
 }

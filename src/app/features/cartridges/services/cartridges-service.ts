@@ -67,25 +67,8 @@ export class CartridgesService {
 
   // updateStatusCounts(){}
 
-  // --- READ ---
   private isValidStatus(s: any): s is CartridgeStatus {
     return Object.values(CARTRIDGE_STATUSES).includes(s as CartridgeStatus);
-  }
-
-  loadCartridges() {
-    this.http.get<any[]>(`${BASE_URL}/cartridges`).subscribe({
-      next: (data) => {
-        const normalized = data.map((d) => ({
-          ...d,
-          status: this.isValidStatus(d.status)
-            ? d.status
-            : CARTRIDGE_STATUSES.EMPTY,
-        })) as ICartridge[];
-        this.cartridges.set(normalized);
-        // this.updateStatusCounts();
-      },
-      error: (err) => console.error('Load error', err),
-    });
   }
 
   changeCartridgeStatus(cartridgeData: {
@@ -151,6 +134,23 @@ export class CartridgesService {
           // this.updateStatusCounts();
         },
       });
+  }
+
+  // --- READ ---
+  loadCartridges() {
+    this.http.get<any[]>(`${BASE_URL}/cartridges`).subscribe({
+      next: (data) => {
+        const normalized = data.map((d) => ({
+          ...d,
+          status: this.isValidStatus(d.status)
+            ? d.status
+            : CARTRIDGE_STATUSES.EMPTY,
+        })) as ICartridge[];
+        this.cartridges.set(normalized);
+        // this.updateStatusCounts();
+      },
+      error: (err) => console.error('Load error', err),
+    });
   }
 
   // --- UPDATE ---

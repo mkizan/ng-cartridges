@@ -112,12 +112,11 @@ export class CartridgeForm implements OnInit {
     console.log('Payload: ', payload);
 
     if (this.cartridgeData()) {
+      console.log('Barcode type: ', typeof payload.barcode);
       this.cartridgesService.editCartridge(this.cartridgeData()!.id, payload);
-      // this.modalService.toggleModalBtn();
       this.modalService.closeModal();
     } else {
       this.cartridgesService.addCartridge(payload);
-      // this.modalService.toggleModalBtn();
       this.modalService.closeModal();
       this.cartridgeForm.reset();
     }

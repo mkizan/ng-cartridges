@@ -1,0 +1,19 @@
+<div class="cartridge-filter">
+  <input
+    [ngModel]="searchQuery()"
+    (ngModelChange)="updateSearchQuery($event)"
+    type="text"
+    name="filter"
+    placeholder="Пошук за брендом, моделлю або штрихкодом"
+  />
+  <select
+    name="status"
+    [ngModel]="selectedStatus()"
+    (ngModelChange)="updateSelectedStatus($event)"
+  >
+    <option value=""></option>
+    @for (item of allCartridgeStatuses(); track item.id) {
+      <option value="{{ item.status }}">{{ item.status }}</option>
+    }
+  </select>
+</div>

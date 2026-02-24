@@ -1,9 +1,14 @@
 <app-theme />
 <app-counter-cartridges />
 <app-add-cartridge-button />
-<app-cartridge-list />
-@let modal = modalService.activeModal();
+<app-cartridge-filter
+  [allCartridgeStatuses]="cartridges.allCartridgeStatuses()"
+  (filterChanged)="activeFilters.set($event)"
+/>
 
+<app-cartridge-list [childFilteredCartridges]="filteredCartridges()" />
+
+@let modal = modalService.activeModal();
 @if (modal.type !== null) {
   <app-modal [modalType]="modal.type">
     @if (modal.type === "create-cartridge") {

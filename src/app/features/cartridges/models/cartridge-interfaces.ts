@@ -47,6 +47,10 @@ export interface ICartridgeLocation {
   id: string;
   name: string;
 }
+export interface IFilterCriteria {
+  query: string;
+  status: string | null;
+}
 
 // export interface ICartridgeStatuses {
 //   id: string;

@@ -1,11 +1,6 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  inject,
-  OnInit,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { CartridgeCard } from '../cartridge-card/cartridge-card';
-import { CartridgesService } from '../../services/cartridges-service';
+import { ICartridge } from '../../models/cartridge-interfaces';
 
 @Component({
   selector: 'app-cartridge-list',
@@ -14,16 +9,6 @@ import { CartridgesService } from '../../services/cartridges-service';
   styleUrl: './cartridge-list.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CartridgeList implements OnInit {
-  constructor(public service: CartridgesService) {}
-
-  ngOnInit(): void {
-    this.service.loadCartridges();
-  }
-  // cartridgesService = inject(CartridgesService);
-  // cartridges = this.cartridgesService.allCartridges;
-
-  // logCartridges() {
-  //   console.log('Current cartridges:', this.cartridges());
-  // }
+export class CartridgeList {
+  childFilteredCartridges = input.required<ICartridge[]>();
 }

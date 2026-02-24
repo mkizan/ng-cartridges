@@ -4,6 +4,8 @@
   
 </div> -->
 
-@for (cartridge of service.allCartridges(); track cartridge.id) {
-<app-cartridge-card [cartridge]="cartridge" />
+@for (cartridge of childFilteredCartridges(); track cartridge.id) {
+  <app-cartridge-card [cartridge]="cartridge" />
+} @empty {
+  <p>Товарів не знайдено</p>
 }

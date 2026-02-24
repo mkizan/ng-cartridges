@@ -11,6 +11,7 @@
     [ngModel]="selectedStatus()"
     (ngModelChange)="updateSelectedStatus($event)"
   >
+    <option value=""></option>
     @for (item of allCartridgeStatuses(); track item.id) {
       <option value="{{ item.status }}">{{ item.status }}</option>
     }

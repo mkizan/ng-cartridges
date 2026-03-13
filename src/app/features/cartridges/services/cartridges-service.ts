@@ -12,6 +12,7 @@ import {
   ICartridgeStatuses,
   CartridgeStatus,
   CARTRIDGE_STATUSES,
+  IFilterCriteria,
 } from '../models/cartridge-interfaces';
 import { HttpClient } from '@angular/common/http';
 import { BASE_URL } from '../../../shared/utils/server-url';
@@ -34,6 +35,8 @@ export class CartridgesService {
   ]);
   // вираховує кількість картриджів відповідно до статусу
   private cartridgeStatusCounts = signal<ICartridgeStatusCount[]>([]);
+  private activeFilters = signal<IFilterCriteria>({ query: '', status: null });
+  private rawSearchQuery = signal('');
 
   // --- READONLY SIGNALS для компонента ---
   allCartridges = this.cartridges.asReadonly();
@@ -41,7 +44,7 @@ export class CartridgesService {
   allCartridgeStatusCounts = this.cartridgeStatusCounts.asReadonly();
 
   constructor() {
-    effect(() => {
+    effect((onCleanup) => {
       const carts = this.cartridges();
       const statuses = untracked(() => this.cartridgeStatus());
       const counts = new Map<string, number>();
@@ -57,6 +60,14 @@ export class CartridgesService {
           count: counts.get(s.status) ?? 0,
         })),
       );
+
+      // Debounced query filter
+      const query = this.rawSearchQuery();
+      const timeout = setTimeout(() => {
+        this.activeFilters.update((f) => ({ ...f, query }));
+        console.log('Active filters changed: ', this.activeFilters());
+      }, 500);
+      onCleanup(() => clearTimeout(timeout));
     });
   }
 
@@ -103,6 +114,32 @@ export class CartridgesService {
         },
       });
   }
+
+  // Метод для оновлення фільтрів
+  updateSearchQuery(value: string) {
+    this.rawSearchQuery.set(value);
+  }
+  updateStatusFilter(status: string | null) {
+    this.activeFilters.update((f) => ({ ...f, status }));
+  }
+
+  // Логіка фільтрації картриджів
+  filteredCartridges = computed(() => {
+    const query = this.activeFilters().query.toLowerCase().trim();
+    const status = this.activeFilters().status;
+
+    return this.allCartridges().filter((cartridge) => {
+      const matchesBrand = query
+        ? cartridge.brand.toLowerCase().includes(query)
+        : true;
+      const matchesModel = query
+        ? cartridge.model.toLowerCase().includes(query)
+        : true;
+      const matchesStatus = status ? cartridge.status === status : true;
+
+      return (matchesBrand || matchesModel) && matchesStatus;
+    });
+  });
 
   // --- CREATE ---
   addCartridge(cartridgeData: Omit<ICartridge, 'id'>) {

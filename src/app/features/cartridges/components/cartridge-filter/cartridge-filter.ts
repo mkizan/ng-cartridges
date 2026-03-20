@@ -1,9 +1,6 @@
-import { Component, input, output, signal } from '@angular/core';
+import { Component, inject, input, output, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import {
-  ICartridgeStatuses,
-  IFilterCriteria,
-} from '../../models/cartridge-interfaces';
+import { CartridgesService } from '../../services/cartridges-service';
 
 @Component({
   selector: 'app-cartridge-filter',
@@ -12,26 +9,18 @@ import {
   styleUrl: './cartridge-filter.css',
 })
 export class CartridgeFilter {
+  private cartridgesService = inject(CartridgesService);
   searchQuery = signal('');
   selectedStatus = signal<string | null>(null);
 
-  allCartridgeStatuses = input.required<ICartridgeStatuses[]>();
-
-  filterChanged = output<IFilterCriteria>();
-
-  private emitChange() {
-    this.filterChanged.emit({
-      query: this.searchQuery(),
-      status: this.selectedStatus(),
-    });
-  }
+  allCartridgeStatuses = this.cartridgesService.allCartridgeStatuses;
 
   updateSearchQuery(value: string) {
     this.searchQuery.set(value);
-    this.emitChange();
+    this.cartridgesService.updateSearchQuery(value);
   }
   updateSelectedStatus(value: string) {
     this.selectedStatus.set(value);
-    this.emitChange();
+    this.cartridgesService.updateStatusFilter(value);
   }
 }

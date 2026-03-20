@@ -1,6 +1,12 @@
-import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  input,
+} from '@angular/core';
 import { CartridgeCard } from '../cartridge-card/cartridge-card';
 import { ICartridge } from '../../models/cartridge-interfaces';
+import { CartridgesService } from '../../services/cartridges-service';
 
 @Component({
   selector: 'app-cartridge-list',
@@ -10,5 +16,7 @@ import { ICartridge } from '../../models/cartridge-interfaces';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CartridgeList {
-  childFilteredCartridges = input.required<ICartridge[]>();
+  private cartridgesService = inject(CartridgesService);
+  childFilteredCartridges = this.cartridgesService.filteredCartridges;
+  // childFilteredCartridges = input.required<ICartridge[]>();
 }

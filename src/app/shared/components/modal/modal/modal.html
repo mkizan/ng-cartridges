@@ -4,6 +4,17 @@
   (click)="modalService.handleOverlayClick($event)"
 >
   <div class="modal" (click)="$event.stopPropagation()">
-    <ng-content></ng-content>
+    @let modal = modalService.activeModal();
+    @if (modal.type === "create") {
+      <h3 class="modal__title">{{ TEXT.titles.addCartridge }}</h3>
+      <app-cartridge-form (success)="modalService.closeModal()" />
+    }
+    @if (modal.type === "edit") {
+      <h3 class="modal__title">{{ TEXT.titles.editCartridge }}</h3>
+      <app-cartridge-form
+        [cartridgeData]="modal.data"
+        (success)="modalService.closeModal()"
+      />
+    }
   </div>
 </div>

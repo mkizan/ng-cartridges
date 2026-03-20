@@ -4,7 +4,6 @@ import { CounterCartridges } from './features/cartridge-dashboard/components/cou
 import { Theme } from './core/components/theme/theme';
 import { AddCartridgeButton } from './features/cartridges/components/add-cartridge-button/add-cartridge-button';
 import { ModalService } from './core/services/modal/modal-service';
-import { CartridgeForm } from './features/cartridges/components/cartridge-form/cartridge-form';
 import { TEXT } from './core/constants/text';
 import { Modal } from './shared/components/modal/modal/modal';
 import { CartridgeFilter } from './features/cartridges/components/cartridge-filter/cartridge-filter';
@@ -18,7 +17,6 @@ import { RouterOutlet } from '@angular/router';
     CounterCartridges,
     AddCartridgeButton,
     Theme,
-    CartridgeForm,
     Modal,
     FormsModule,
     CartridgeFilter,
@@ -34,21 +32,7 @@ export class App {
   protected readonly TEXT = TEXT;
   protected readonly title = signal('ng-cartridges');
 
-  // activeFilters = signal<IFilterCriteria>({ query: '', status: null });
-  // debouncedSearchQuery = signal('');
-
   constructor() {
-    // Завантажуємо картриджі при ініціалізації додатку
     this.cartridges.loadCartridges();
-
-    // Debounce ефект для пошукового запиту
-    // effect((onCleanup) => {
-    //   const value = this.activeFilters().query;
-    //   console.log('Active filters changed: ', this.activeFilters());
-    //   const timeout = setTimeout(() => {
-    //     this.debouncedSearchQuery.set(value);
-    //   }, 500);
-    //   onCleanup(() => clearTimeout(timeout));
-    // });
   }
 }

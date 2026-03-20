@@ -3,20 +3,4 @@
 <app-add-cartridge-button />
 <app-cartridge-filter />
 <router-outlet />
-
-@let modal = modalService.activeModal();
-@if (modal.type !== null) {
-  <app-modal [modalType]="modal.type">
-    @if (modal.type === "create") {
-      <h3 class="modal__title">{{ TEXT.titles.addCartridge }}</h3>
-      <app-cartridge-form (success)="modalService.closeModal()" />
-    }
-    @if (modal.type === "edit") {
-      <h3 class="modal__title">{{ TEXT.titles.editCartridge }}</h3>
-      <app-cartridge-form
-        [cartridgeData]="modal.data"
-        (success)="modalService.closeModal()"
-      />
-    }
-  </app-modal>
-}
+<app-modal />

@@ -1,28 +1,19 @@
-import {
-  Component,
-  computed,
-  HostListener,
-  inject,
-  input,
-} from '@angular/core';
-import {
-  ModalService,
-  ModalType,
-} from '../../../../core/services/modal/modal-service';
+import { Component, computed, HostListener, inject } from '@angular/core';
+import { ModalService } from '../../../../core/services/modal/modal-service';
+import { CartridgeForm } from '../../../../features/cartridges/components/cartridge-form/cartridge-form';
+import { TEXT } from '../../../../core/constants/text';
 
 @Component({
   selector: 'app-modal',
-  imports: [],
+  imports: [CartridgeForm],
   templateUrl: './modal.html',
   styleUrl: './modal.css',
 })
 export class Modal {
   modalService = inject(ModalService);
-  modalType = input.required<ModalType>();
+  protected readonly TEXT = TEXT;
 
-  isOpen = computed(
-    () => this.modalService.activeModal().type === this.modalType(),
-  );
+  isOpen = computed(() => this.modalService.activeModal().type !== null);
 
   @HostListener('document:keydown.escape') handleOverlayKeydownEscape() {
     // if (this.modalService.read_IsOpen()) this.modalService.toggleModalBtn();

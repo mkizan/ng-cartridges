@@ -1,5 +1,5 @@
 import { computed, effect, Injectable, signal } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 
 export type ModalType = 'create' | 'edit' | null;
 
@@ -13,21 +13,13 @@ export class ModalService {
   activeModal = this._activeModal.asReadonly();
 
   // stop scrolling when modal is open
-  constructor(
-    private route: ActivatedRoute,
-    private router: Router,
-  ) {
+  constructor(private router: Router) {
     effect(() => {
       const modal = this._activeModal();
       document.body.style.overflow =
         modal.type === 'create' || modal.type === 'edit' ? 'hidden' : '';
     });
   }
-
-  // ngOnInit() {
-  //   this._activeModal.set({ type: this.route.snapshot.data['mode'] });
-  //   console.log('mode is: ', this._activeModal());
-  // }
 
   openModalCreate() {
     this.router

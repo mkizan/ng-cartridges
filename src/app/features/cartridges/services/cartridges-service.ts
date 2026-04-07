@@ -201,7 +201,7 @@ export class CartridgesService {
   // --- UPDATE ---
   editCartridge(id: string, cartridge: Omit<ICartridge, 'id'>) {
     this.http
-      .put<ICartridge>(`${BASE_URL}/cartridges/${id}`, {
+      .patch<ICartridge>(`${BASE_URL}/cartridges/${id}`, {
         ...cartridge,
       })
       .subscribe({

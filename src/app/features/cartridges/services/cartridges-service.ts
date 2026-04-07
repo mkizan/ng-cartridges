@@ -144,29 +144,37 @@ export class CartridgesService {
   // --- CREATE ---
   addCartridge(cartridgeData: Omit<ICartridge, 'id'>) {
     const prev = this.cartridges();
-    const newCartridge: ICartridge = {
+    // Create a temporary placeholder with a temp ID for optimistic update
+    const tempId = `temp-${Date.now()}`;
+    const tempCartridge: ICartridge = {
       ...cartridgeData,
-      id: crypto.randomUUID(),
+      id: tempId,
     };
 
-    this.cartridges.update((oldCartridges) => [...oldCartridges, newCartridge]);
+    // Add to UI immediately for better UX
+    this.cartridges.update((oldCartridges) => [
+      ...oldCartridges,
+      tempCartridge,
+    ]);
 
+    // Send only the cartridge data WITHOUT id - MongoDB will generate _id
     this.http
-      .post<ICartridge>(`${BASE_URL}/cartridges`, newCartridge)
+      .post<ICartridge>(`${BASE_URL}/cartridges`, cartridgeData)
       .subscribe({
         next: (saved) => {
-          // якщо сервер повернув щось відмінне
+          // Replace temporary cartridge with server response (which includes MongoDB's generated _id)
           this.cartridges.update((items) =>
             items.map((cartridge) =>
-              cartridge.id === newCartridge.id ? saved : cartridge,
+              cartridge.id === tempId ? saved : cartridge,
             ),
           );
           // this.updateStatusCounts();
+          console.log('Cartridges after request: ', this.cartridges());
         },
         // rollback при помилці
         error: () => {
           this.cartridges.update((items) =>
-            items.filter((cartridge) => cartridge.id !== newCartridge.id),
+            items.filter((cartridge) => cartridge.id !== tempId),
           );
           // this.updateStatusCounts();
         },

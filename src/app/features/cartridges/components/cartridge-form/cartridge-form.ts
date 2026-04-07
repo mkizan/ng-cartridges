@@ -72,7 +72,7 @@ export class CartridgeForm implements OnInit {
       error: (err) => console.error('Locations error', err),
     });
 
-    this.http.get<ICartridgeUser[]>(`${BASE_URL}/users`).subscribe({
+    this.http.get<ICartridgeUser[]>(`${BASE_URL}/persons`).subscribe({
       next: (data) => {
         this.users.set(data);
       },

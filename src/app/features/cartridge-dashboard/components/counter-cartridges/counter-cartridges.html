@@ -2,25 +2,27 @@
   <div class="counter-cartridges">
     <div class="counter-cartridges__wrapper">
       <h3 class="counter-cartridges__title">всього картриджів</h3>
-      <lucide-icon
+      <!-- <lucide-icon
         [img]="ChartNoAxesCombined"
         [size]="20"
         class="counter-cartridges__icon"
-      ></lucide-icon>
+      ></lucide-icon> -->
     </div>
     <p class="counter-cartridges__total-count">
       {{ cartridgesService.totalCartridgesCount() }}
     </p>
     <ul class="counter-cartridges__list">
-      @for (cartridgeStatus of countCartridgesByStatus(); track
-      cartridgeStatus.id){
-      <li
-        class="counter-cartridges__list-item"
-        [class]="cartridgeStatus.status | translateStatus"
-      >
-        <p class="list-item__title">{{ cartridgeStatus.status }}</p>
-        <p class="list-item__count">{{ cartridgeStatus.count }}</p>
-      </li>
+      @for (
+        cartridgeStatus of countCartridgesByStatus();
+        track cartridgeStatus.id
+      ) {
+        <li
+          class="counter-cartridges__list-item"
+          [class]="cartridgeStatus.status | translateStatus"
+        >
+          <p class="list-item__title">{{ cartridgeStatus.status }}</p>
+          <p class="list-item__count">{{ cartridgeStatus.count }}</p>
+        </li>
       }
     </ul>
   </div>

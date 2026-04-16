@@ -23,7 +23,7 @@ import { TEXT } from '../../../../core/constants/text';
   selector: 'app-cartridge-form',
   imports: [ReactiveFormsModule],
   templateUrl: './cartridge-form.html',
-  styleUrl: './cartridge-form.css',
+  styleUrl: './cartridge-form.scss',
 })
 export class CartridgeForm implements OnInit {
   private formBuilder = inject(FormBuilder).nonNullable;

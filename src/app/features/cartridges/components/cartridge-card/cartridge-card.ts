@@ -27,7 +27,7 @@ import { TEXT } from '../../../../core/constants/text';
   selector: 'app-cartridge-card',
   imports: [TranslateStatusPipe],
   templateUrl: './cartridge-card.html',
-  styleUrl: './cartridge-card.css',
+  styleUrl: './cartridge-card.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CartridgeCard {

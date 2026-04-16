@@ -7,7 +7,7 @@ import { TEXT } from '../../../../core/constants/text';
   selector: 'app-modal',
   imports: [CartridgeForm],
   templateUrl: './modal.html',
-  styleUrl: './modal.css',
+  styleUrl: './modal.scss',
 })
 export class Modal {
   modalService = inject(ModalService);

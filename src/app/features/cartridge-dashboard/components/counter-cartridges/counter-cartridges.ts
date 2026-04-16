@@ -7,7 +7,7 @@ import { TranslateStatusPipe } from '../../../../shared/pipes/translate-status-p
   selector: 'app-counter-cartridges',
   imports: [TranslateStatusPipe],
   templateUrl: './counter-cartridges.html',
-  styleUrl: './counter-cartridges.css',
+  styleUrl: './counter-cartridges.scss',
 })
 export class CounterCartridges {
   // readonly ChartNoAxesCombined = ChartNoAxesCombined;

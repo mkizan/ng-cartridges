@@ -1,0 +1,51 @@
+@use "@angular/material" as mat;
+
+@include mat.core();
+
+// ===== СВІТЛА ТЕМА (Azure Blue як база) =====
+$light-theme: mat.define-theme(
+  (
+    color: (
+      theme-type: light,
+      primary: mat.$azure-palette,
+      // дефолтна Azure
+      tertiary: mat.$cyan-palette,
+      // другорядний — твій cyan
+    ),
+    typography: (
+      brand-family: "Roboto, sans-serif",
+    ),
+    density: (
+      scale: 0,
+    ),
+  )
+);
+
+// ===== ТЕМНА ТЕМА (Cyan як база) =====
+$dark-theme: mat.define-theme(
+  (
+    color: (
+      theme-type: dark,
+      primary: mat.$cyan-palette,
+      // дефолтна Cyan
+      tertiary: mat.$red-palette,
+      // другорядний — твій червоний (#ff5c5c)
+    ),
+    typography: (
+      brand-family: "Roboto, sans-serif",
+    ),
+    density: (
+      scale: 0,
+    ),
+  )
+);
+
+//Світла тема — за замовчуванням
+:root {
+  @include mat.all-component-themes($light-theme);
+}
+
+// Темна тема — коли є .dark-theme на body
+.dark-theme {
+  @include mat.all-component-colors($dark-theme);
+}

@@ -12,7 +12,7 @@ import { CartridgesService } from '../../services/cartridges-service';
   selector: 'app-cartridge-list',
   imports: [CartridgeCard],
   templateUrl: './cartridge-list.html',
-  styleUrl: './cartridge-list.css',
+  styleUrl: './cartridge-list.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CartridgeList {

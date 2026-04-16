@@ -6,23 +6,23 @@
     </h3>
 
     <div class="cartridge-card__actions">
-      <lucide-icon
+      <!-- <lucide-icon
         [img]="SquarePen"
         size="20"
         class="cartridge-card__actions-btn"
-      ></lucide-icon>
+      ></lucide-icon> -->
       <div class="cartridge-card__actions-wrapper">
         <p class="cartridge-card__actions-title">дії</p>
         <ul class="cartridge-card__actions-list">
           <li class="cartridge-card__show-sku">
-            <lucide-icon [img]="ScanBarcode" size="16"></lucide-icon>
+            <!-- <lucide-icon [img]="ScanBarcode" size="16"></lucide-icon> -->
             <p>{{ TEXT.buttons.showBarcode }}</p>
           </li>
           <li
             class="cartridge-card__edit-cartridge"
             (click)="modalService.openModalEdit(cartridgeVariable)"
           >
-            <lucide-icon [img]="Pencil" size="16"></lucide-icon>
+            <!-- <lucide-icon [img]="Pencil" size="16"></lucide-icon> -->
             <p>{{ TEXT.buttons.edit }}</p>
           </li>
         </ul>
@@ -41,7 +41,7 @@
           }
         </ul>
         <div class="cartridge-card__delete-cartridge">
-          <lucide-icon [img]="Trash2" size="16"></lucide-icon>
+          <!-- <lucide-icon [img]="Trash2" size="16"></lucide-icon> -->
           <button
             class="cartridge-card__delete-btn"
             (click)="removeCartridge()"
@@ -64,11 +64,11 @@
     </span>
   </div>
   <div class="compatible-printers__wrapper">
-    <lucide-icon
+    <!-- <lucide-icon
       [img]="Printer"
       size="18"
       class="compatible-printers__icon"
-    ></lucide-icon>
+    ></lucide-icon> -->
     <p class="compatible-printers__title">
       {{ TEXT.fields.compatiblePrinters }}
     </p>
@@ -84,11 +84,11 @@
   </ul>
 
   <div class="alternative-cartridges__wrapper">
-    <lucide-icon
+    <!-- <lucide-icon
       [img]="PrinterCheck"
       size="18"
       class="alternative-cartridges__icon"
-    ></lucide-icon>
+    ></lucide-icon> -->
     <p class="alternative-cartridges__title">
       {{ TEXT.fields.alternativeCartridges }}
     </p>
@@ -105,21 +105,21 @@
   </ul>
   <ul class="cartridge-card__list">
     <li class="cartridge-card__responsible-wrapper">
-      <lucide-icon [img]="User" size="18"></lucide-icon>
+      <!-- <lucide-icon [img]="User" size="18"></lucide-icon> -->
       <p class="cartridge-card__responsible">{{ TEXT.fields.responsible }}:</p>
       <p class="cartridge-card__responsible-value">
         {{ cartridgeVariable.responsible }}
       </p>
     </li>
     <li class="cartridge-card__location-wrapper">
-      <lucide-icon [img]="MapPin" size="18"></lucide-icon>
+      <!-- <lucide-icon [img]="MapPin" size="18"></lucide-icon> -->
       <p class="cartridge-card__location">{{ TEXT.fields.location }}:</p>
       <p class="cartridge-card__location-value">
         {{ cartridgeVariable.location }}
       </p>
     </li>
     <li class="cartridge-card__refill-wrapper">
-      <lucide-icon [img]="PaintBucket" size="18"></lucide-icon>
+      <!-- <lucide-icon [img]="PaintBucket" size="18"></lucide-icon> -->
       <p class="cartridge-card__last-refill">
         {{ TEXT.fields.lastRefillDate }}:
       </p>
@@ -128,7 +128,7 @@
       </time>
     </li>
     <li class="cartridge-card__refill-wrapper">
-      <lucide-icon [img]="PaintBucket" size="18"></lucide-icon>
+      <!-- <lucide-icon [img]="PaintBucket" size="18"></lucide-icon> -->
       <p class="cartridge-card__next-refill">
         {{ TEXT.fields.nextRefillDate }}:
       </p>

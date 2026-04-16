@@ -6,7 +6,7 @@ import { TTheme } from '../../models/theme';
   selector: 'app-theme',
   imports: [],
   templateUrl: './theme.html',
-  styleUrl: './theme.css',
+  styleUrl: './theme.scss',
 })
 export class Theme {
   themeService = inject(ThemeService);

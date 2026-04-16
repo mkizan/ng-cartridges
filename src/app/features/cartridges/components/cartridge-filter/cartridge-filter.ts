@@ -6,7 +6,7 @@ import { CartridgesService } from '../../services/cartridges-service';
   selector: 'app-cartridge-filter',
   imports: [FormsModule],
   templateUrl: './cartridge-filter.html',
-  styleUrl: './cartridge-filter.css',
+  styleUrl: './cartridge-filter.scss',
 })
 export class CartridgeFilter {
   private cartridgesService = inject(CartridgesService);

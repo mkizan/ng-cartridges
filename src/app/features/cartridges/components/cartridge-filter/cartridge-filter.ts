@@ -1,10 +1,13 @@
-import { Component, inject, input, output, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { CartridgesService } from '../../services/cartridges-service';
+import { MatSelectModule } from '@angular/material/select';
 
 @Component({
   selector: 'app-cartridge-filter',
-  imports: [FormsModule],
+  imports: [FormsModule, MatInputModule, MatFormFieldModule, MatSelectModule],
   templateUrl: './cartridge-filter.html',
   styleUrl: './cartridge-filter.scss',
 })

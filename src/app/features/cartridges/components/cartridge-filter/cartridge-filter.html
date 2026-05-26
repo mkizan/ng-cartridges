@@ -1,19 +1,28 @@
-<div class="cartridge-filter">
-  <input
-    [ngModel]="searchQuery()"
-    (ngModelChange)="updateSearchQuery($event)"
-    type="text"
-    name="filter"
-    placeholder="Пошук за брендом, моделлю або штрихкодом"
-  />
-  <select
-    name="status"
-    [ngModel]="selectedStatus()"
-    (ngModelChange)="updateSelectedStatus($event)"
-  >
-    <option value=""></option>
-    @for (item of allCartridgeStatuses(); track item.id) {
-      <option value="{{ item.status }}">{{ item.status }}</option>
-    }
-  </select>
-</div>
+<form class="cartridge-filter">
+  <mat-form-field class="cartridge-filter__form-field">
+    <mat-label class="cartridge-filter__">Пошук</mat-label>
+    <input
+      matInput
+      [ngModel]="searchQuery()"
+      (ngModelChange)="updateSearchQuery($event)"
+      type="text"
+      name="filter"
+      placeholder="Введіть бренд, модель або штрихкод"
+    />
+  </mat-form-field>
+</form>
+
+<form class="cartridge-filter">
+  <mat-form-field>
+    <mat-select
+      name="status"
+      [ngModel]="selectedStatus()"
+      (ngModelChange)="updateSelectedStatus($event)"
+    >
+      <mat-option value=""></mat-option>
+      @for (item of allCartridgeStatuses(); track item.id) {
+        <mat-option value="{{ item.status }}">{{ item.status }}</mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+</form>

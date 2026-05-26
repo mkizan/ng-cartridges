@@ -1,28 +1,24 @@
 @let cartridgeVariable = cartridge();
 <div class="cartridge-card">
   <div class="cartridge-card__wrapper">
-    <h3 class="cartridge-card__title">
+    <h1 class="cartridge-card__title">
       {{ cartridgeVariable.brand }} {{ cartridgeVariable.model }}
-    </h3>
+    </h1>
 
     <div class="cartridge-card__actions">
-      <!-- <lucide-icon
-        [img]="SquarePen"
-        size="20"
-        class="cartridge-card__actions-btn"
-      ></lucide-icon> -->
+      <mat-icon aria-hidden="false" aria-label="Example more_vert icon" fontIcon="more_vert"></mat-icon>
       <div class="cartridge-card__actions-wrapper">
         <p class="cartridge-card__actions-title">дії</p>
         <ul class="cartridge-card__actions-list">
-          <li class="cartridge-card__show-sku">
-            <!-- <lucide-icon [img]="ScanBarcode" size="16"></lucide-icon> -->
+          <li class="cartridge-card__show-barcode">
+            <mat-icon aria-hidden="false" aria-label="Example barcode icon" class="cartridge-card__barcode-icon" fontIcon="barcode"></mat-icon>
             <p>{{ TEXT.buttons.showBarcode }}</p>
           </li>
           <li
             class="cartridge-card__edit-cartridge"
             (click)="modalService.openModalEdit(cartridgeVariable)"
           >
-            <!-- <lucide-icon [img]="Pencil" size="16"></lucide-icon> -->
+            <mat-icon aria-hidden="false" aria-label="Example edit icon" class="cartridge-card__edit-icon" fontIcon="edit"></mat-icon>
             <p>{{ TEXT.buttons.edit }}</p>
           </li>
         </ul>
@@ -41,7 +37,7 @@
           }
         </ul>
         <div class="cartridge-card__delete-cartridge">
-          <!-- <lucide-icon [img]="Trash2" size="16"></lucide-icon> -->
+          <mat-icon aria-hidden="false" aria-label="Example delete icon" class="cartridge-card__delete-icon" fontIcon="delete"></mat-icon>
           <button
             class="cartridge-card__delete-btn"
             (click)="removeCartridge()"
@@ -53,7 +49,7 @@
     </div>
   </div>
   <p class="cartridge-card__barcode">
-    [ SKU: {{ cartridgeVariable.barcode }} ]
+    [ {{TEXT.fields.sku}}: {{ cartridgeVariable.barcode }} ]
   </p>
   <div class="cartrdige-card__status-wrapper">
     <span
@@ -64,11 +60,7 @@
     </span>
   </div>
   <div class="compatible-printers__wrapper">
-    <!-- <lucide-icon
-      [img]="Printer"
-      size="18"
-      class="compatible-printers__icon"
-    ></lucide-icon> -->
+  <mat-icon aria-hidden="false" aria-label="Example print icon" class="compatible-printers__icon" fontIcon="print"></mat-icon>
     <p class="compatible-printers__title">
       {{ TEXT.fields.compatiblePrinters }}
     </p>
@@ -84,11 +76,7 @@
   </ul>
 
   <div class="alternative-cartridges__wrapper">
-    <!-- <lucide-icon
-      [img]="PrinterCheck"
-      size="18"
-      class="alternative-cartridges__icon"
-    ></lucide-icon> -->
+    <mat-icon aria-hidden="false" aria-label="Example scanner icon" class="alternative-cartridges__icon" fontIcon="adf_scanner"></mat-icon>
     <p class="alternative-cartridges__title">
       {{ TEXT.fields.alternativeCartridges }}
     </p>

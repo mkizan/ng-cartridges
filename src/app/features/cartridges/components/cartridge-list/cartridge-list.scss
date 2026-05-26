@@ -1,11 +1,13 @@
 :host {
   display: flex;
   flex-wrap: wrap;
-  margin-left: 20px;
-  margin-right: 20px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
-.test-margin {
-  /* margin-left: auto;
-  margin-right: auto; */
+@media screen and (min-width: 480px) {
+  :host {
+    margin-left: 20px;
+    margin-right: 20px;
+  }
 }

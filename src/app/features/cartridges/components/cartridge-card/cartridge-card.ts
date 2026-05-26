@@ -22,10 +22,11 @@ import { ICartridge } from '../../models/cartridge-interfaces';
 import { CartridgesService } from '../../services/cartridges-service';
 import { ModalService } from '../../../../core/services/modal/modal-service';
 import { TEXT } from '../../../../core/constants/text';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-cartridge-card',
-  imports: [TranslateStatusPipe],
+  imports: [TranslateStatusPipe, MatIconModule],
   templateUrl: './cartridge-card.html',
   styleUrl: './cartridge-card.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

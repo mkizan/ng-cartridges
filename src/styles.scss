@@ -18,6 +18,8 @@
   --btn-dark-background-color: #ff5c5c;
   --card-border-color: #dddddd;
   --field-border-color: rgb(71, 68, 68, 0.2);
+  --global-text-size: 14px;
+  --calculate-text-size: 2px;
   --dashboard-card-title-text-size: 14px;
   --dashboard-title-text-size: 26px;
   --alert-text-color: #f02929;
@@ -40,6 +42,8 @@
   --btn-dark-background-color: #ff5c5c;
   --card-border-color: #28292e;
   --field-border-color: rgb(71, 68, 68, 0.2);
+  --global-text-size: 14px;
+  --calculate-text-size: 4px;
   --dashboard-card-title-text-size: 14px;
   --dashboard-title-text-size: 26px;
   --alert-text-color: #f02929;
@@ -51,7 +55,7 @@
 
 body {
   font-family: "Roboto", "sans-serif";
-  font-size: 14px;
+  font-size: var(--global-text-size);
   background-color: var(--primary-background-color);
   overflow-x: hidden;
 }

@@ -102,6 +102,14 @@
   }
 }
 
+.cartridge-card__actions-icon {
+  width: calc(var(--global-text-size) + var(--calculate-icon-siz));
+  height: calc(var(--global-text-size) + var(--calculate-icon-siz));
+  // color: var(--field-text-color);
+  color: var(--value-text-color);
+  font-size: calc(var(--global-text-size) + var(--calculate-text-size));
+}
+
 .cartridge-card__barcode-icon {
   width: var(--global-text-size);
   height: var(--global-text-size);
@@ -270,7 +278,7 @@
 .alternative-cartridges__item {
   margin-right: 5px;
   margin-bottom: 5px;
-  padding: 3px 10px;
+  padding: 3px 5px;
   background-color: var(--primary-background-color);
   border-radius: 10px;
   border: 1px solid var(--card-border-color);

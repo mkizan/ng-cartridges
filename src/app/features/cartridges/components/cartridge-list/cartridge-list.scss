@@ -1,13 +1,23 @@
 :host {
   display: flex;
   flex-wrap: wrap;
-  margin-left: auto;
-  margin-right: auto;
+  justify-content: center;
 }
 
-@media screen and (min-width: 480px) {
+@media screen and (min-width: 576px) and (max-width: 1366px) {
+  :host::after {
+    content: '';
+    flex: 0 0 320px;
+    height: 0;
+    margin-left: 5px;
+    margin-right: 5px;
+  }
+}
+
+@media screen and (min-width: 1367px) {
   :host {
-    margin-left: 20px;
-    margin-right: 20px;
+    justify-content: unset;
+    margin-left: 10px;
+    margin-right: 10px;
   }
 }

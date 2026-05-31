@@ -10,10 +10,10 @@
       <div class="cartridge-card__actions-wrapper">
         <p class="cartridge-card__actions-title">дії</p>
         <ul class="cartridge-card__actions-list">
-          <li class="cartridge-card__show-barcode">
+          <!-- <li class="cartridge-card__show-barcode">
             <mat-icon aria-hidden="false" aria-label="Example barcode icon" class="cartridge-card__barcode-icon" fontIcon="barcode"></mat-icon>
             <p>{{ TEXT.buttons.showBarcode }}</p>
-          </li>
+          </li> -->
           <li
             class="cartridge-card__edit-cartridge"
             (click)="modalService.openModalEdit(cartridgeVariable)"
@@ -93,36 +93,36 @@
   </ul>
   <ul class="cartridge-card__list">
     <li class="cartridge-card__responsible-wrapper">
-      <!-- <lucide-icon [img]="User" size="18"></lucide-icon> -->
+      <mat-icon aria-hidden="false" aria-label="Example person_check icon" class="cartridge-card__responsible-icon" fontIcon="person_check"></mat-icon>
       <p class="cartridge-card__responsible">{{ TEXT.fields.responsible }}:</p>
       <p class="cartridge-card__responsible-value">
         {{ cartridgeVariable.responsible }}
       </p>
     </li>
-    <li class="cartridge-card__location-wrapper">
-      <!-- <lucide-icon [img]="MapPin" size="18"></lucide-icon> -->
+      <li class="cartridge-card__location-wrapper">
+        <mat-icon aria-hidden="false" aria-label="Example location_on icon" class="cartridge-card__location-icon" fontIcon="location_on"></mat-icon>
       <p class="cartridge-card__location">{{ TEXT.fields.location }}:</p>
       <p class="cartridge-card__location-value">
         {{ cartridgeVariable.location }}
       </p>
     </li>
     <li class="cartridge-card__refill-wrapper">
-      <!-- <lucide-icon [img]="PaintBucket" size="18"></lucide-icon> -->
-      <p class="cartridge-card__last-refill">
-        {{ TEXT.fields.lastRefillDate }}:
+      <mat-icon aria-hidden="false" aria-label="Example calendar_month icon" class="cartridge-card__refill-icon" fontIcon="calendar_month"></mat-icon>
+      <p class="cartridge-card__refill">
+        {{ TEXT.fields.refillDate }}:
       </p>
-      <time datetime="15-09-2025" class="cartridge-card__refill-value"
-        >15.09.2025
+      <time datetime="15-09-2025" class="cartridge-card__refill-value">
+        <!-- {{ cartridgeVariable.refillDate | date: 'dd-MM-yyyy' }} -->
       </time>
     </li>
-    <li class="cartridge-card__refill-wrapper">
-      <!-- <lucide-icon [img]="PaintBucket" size="18"></lucide-icon> -->
-      <p class="cartridge-card__next-refill">
-        {{ TEXT.fields.nextRefillDate }}:
+    <li class="cartridge-card__quantity-wrapper">
+      <mat-icon aria-hidden="false" aria-label="Example description icon" class="cartridge-card__quantity-icon" fontIcon="description"></mat-icon>
+      <p class="cartridge-card__quantity-pages">
+        {{ TEXT.fields.quantityPages }}:
       </p>
-      <time datetime="30-09-2025" class="cartridge-card__refill-value"
-        >30.09.2025
-      </time>
+      <p class="cartridge-card__quantity-value">
+        <!-- {{ cartridgeVariable.quantityPages }} -->
+      </p>
     </li>
   </ul>
 </div>

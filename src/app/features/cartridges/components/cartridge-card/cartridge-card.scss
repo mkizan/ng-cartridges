@@ -1,3 +1,18 @@
+@mixin size-icon {
+  width: calc(var(--global-text-size) + var(--calculate-icon-size));
+  height: calc(var(--global-text-size) + var(--calculate-icon-size));
+  font-size: calc(var(--global-text-size) + var(--calculate-icon-size));
+}
+
+@mixin hover-effect {
+  &:hover {
+    font-weight: 500;
+    color: var(--accent-color);
+    scale: 1.05;
+    transition: all 0.2s ease-out;
+  }
+}
+
 .cartridge-card {
   width: 320px;
   min-height: 420px;
@@ -26,7 +41,7 @@
 
 .cartridge-card__barcode {
   margin-bottom: 15px;
-  font-size: calc(var(--global-text-size) + var(--calculate-text-size));
+  font-size: calc(var(--global-text-size) + var(--constant-text-size));
   color: var(--value-text-color);
 }
 
@@ -38,6 +53,10 @@
 .cartridge-card__actions-btn {
   color: var(--btn-dark-background-color);
   cursor: pointer;
+
+  &:hover {
+    color: var(--field-text-color);
+  }
 }
 
 .cartridge-card__actions-wrapper {
@@ -90,44 +109,26 @@
   color: var(--value-text-color);
 }
 
-.cartridge-card__show-barcode {
-  display: flex;
-  align-items: center;
-}
+// .cartridge-card__show-barcode {
+//   display: flex;
+//   align-items: center;
+// }
 
-.cartridge-card__show-barcode > p {
-  padding-left: 3px;
-  &::first-letter {
-    text-transform: capitalize;
-  }
-}
+// .cartridge-card__show-barcode > p {
+//   padding-left: 3px;
+//   &::first-letter {
+//     text-transform: capitalize;
+//   }
+// }
 
 .cartridge-card__actions-icon {
-  width: calc(var(--global-text-size) + var(--calculate-icon-siz));
-  height: calc(var(--global-text-size) + var(--calculate-icon-siz));
-  // color: var(--field-text-color);
   color: var(--value-text-color);
-  font-size: calc(var(--global-text-size) + var(--calculate-text-size));
-}
-
-.cartridge-card__barcode-icon {
-  width: var(--global-text-size);
-  height: var(--global-text-size);
-  font-size: calc(var(--global-text-size) + var(--calculate-text-size));
-  color: var(--field-text-color);
 }
 
 .cartridge-card__edit-cartridge {
   display: flex;
   align-items: center;
-  color: var(--field-text-color);
-}
 
-.cartridge-card__edit-icon {
-  width: var(--global-text-size);
-  height: var(--global-text-size);
-  font-size: calc(var(--global-text-size) + var(--calculate-text-size));
-  color: var(--field-text-color);
 }
 
 .cartridge-card__edit-cartridge > p {
@@ -135,6 +136,7 @@
   &::first-letter {
     text-transform: capitalize;
   }
+  @include hover-effect;
 }
 
 .cartridge-card__status-list {
@@ -160,10 +162,10 @@
   &:first-child {
     margin-top: 5px;
   }
-}
-
-.cartridge-card__status-item:last-child {
-  margin-bottom: 0;
+  &:last-child {
+    margin-bottom: 0;
+  }
+  @include hover-effect;
 }
 
 .cartridge-status::before {
@@ -223,12 +225,8 @@
   text-transform: capitalize;
   text-align: start;
   cursor: pointer;
-}
 
-.cartridge-card__delete-icon {
-  width: var(--global-text-size);
-  height: var(--global-text-size);
-  font-size: calc(var(--global-text-size) + var(--calculate-text-size));
+  @include hover-effect;
 }
 
 .cartrdige-card__status-wrapper {
@@ -253,16 +251,7 @@
 
 .compatible-printers__icon,
 .alternative-cartridges__icon {
-  width: var(--global-text-size);
-  height: var(--global-text-size);
-  color: var(--field-text-color);
-  font-size: calc(var(--global-text-size) + var(--calculate-text-size));
   margin-right: 5px;
-}
-
-.compatible-printers__title,
-.alternative-cartridges__title {
-  color: var(--field-text-color);
 }
 
 .compatible-printers__list,
@@ -298,10 +287,11 @@
 .cartridge-card__list > li p {
   margin-left: 5px;
 }
-
+.compatible-printers__wrapper,
+.alternative-cartridges__wrapper,
 .cartridge-card__responsible-wrapper,
 .cartridge-card__location-wrapper,
-.cartridge-card__refill-wrapper {
+.cartridge-card__refill-wrapper, .cartridge-card__quantity-wrapper {
   display: flex;
   align-items: center;
   color: var(--field-text-color);
@@ -309,14 +299,23 @@
 
 .cartridge-card__responsible-value,
 .cartridge-card__location-value,
-.cartridge-card__refill-value {
+.cartridge-card__refill-value,
+.cartridge-card__quantity-value {
   margin-left: 5px;
   color: var(--value-text-color);
   font-weight: 500;
 }
 
-.cartridge-card__location-wrapper {
-  color: var(--field-text-color);
+.cartridge-card__actions-icon,
+.cartridge-card__edit-icon,
+.cartridge-card__delete-icon,
+.compatible-printers__icon,
+.alternative-cartridges__icon,
+.cartridge-card__responsible-icon,
+.cartridge-card__location-icon,
+.cartridge-card__refill-icon,
+.cartridge-card__quantity-icon {
+  @include size-icon;
 }
 
 @media screen and (min-width: 480px) {
@@ -326,7 +325,7 @@
     min-width: 320px;
     min-height: 420px;
     margin-top: 5px;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
     margin-left: 5px;
     margin-right: 5px;
   }

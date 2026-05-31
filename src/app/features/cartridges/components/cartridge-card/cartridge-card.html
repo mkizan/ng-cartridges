@@ -111,8 +111,8 @@
       <p class="cartridge-card__refill">
         {{ TEXT.fields.refillDate }}:
       </p>
-      <time datetime="15-09-2025" class="cartridge-card__refill-value">
-        <!-- {{ cartridgeVariable.refillDate | date: 'dd-MM-yyyy' }} -->
+      <time class="cartridge-card__refill-value">
+        {{ cartridgeVariable.refillDate | date: 'dd.MM.yyyy' }}
       </time>
     </li>
     <li class="cartridge-card__quantity-wrapper">
@@ -121,7 +121,16 @@
         {{ TEXT.fields.quantityPages }}:
       </p>
       <p class="cartridge-card__quantity-value">
-        <!-- {{ cartridgeVariable.quantityPages }} -->
+        {{ cartridgeVariable.quantityPages }}
+      </p>
+    </li>
+    <li class="cartridge-card__note-wrapper">
+      <mat-icon aria-hidden="false" aria-label="Example note icon" class="cartridge-card__note-icon" fontIcon="notes"></mat-icon>
+      <p class="cartridge-card__note">
+        {{ TEXT.fields.notes}}:
+      </p>
+      <p class="cartridge-card__note-value">
+        {{ cartridgeVariable.notes }}
       </p>
     </li>
   </ul>

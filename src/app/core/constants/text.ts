@@ -17,7 +17,7 @@ export const TEXT = {
     brand: 'Бренд',
     model: 'Модель',
     status: 'Статус',
-    notes: 'Примітки',
+    notes: 'Примітка',
   },
   buttons: {
     add: 'Додати',

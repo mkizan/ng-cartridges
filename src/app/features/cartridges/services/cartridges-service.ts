@@ -143,7 +143,6 @@ export class CartridgesService {
 
   // --- CREATE ---
   addCartridge(cartridgeData: Omit<ICartridge, 'id'>) {
-    const prev = this.cartridges();
     // Create a temporary placeholder with a temp ID for optimistic update
     const tempId = `temp-${Date.now()}`;
     const tempCartridge: ICartridge = {

@@ -291,7 +291,9 @@
 .alternative-cartridges__wrapper,
 .cartridge-card__responsible-wrapper,
 .cartridge-card__location-wrapper,
-.cartridge-card__refill-wrapper, .cartridge-card__quantity-wrapper {
+.cartridge-card__refill-wrapper,
+.cartridge-card__quantity-wrapper,
+.cartridge-card__note-wrapper {
   display: flex;
   align-items: center;
   color: var(--field-text-color);
@@ -300,7 +302,8 @@
 .cartridge-card__responsible-value,
 .cartridge-card__location-value,
 .cartridge-card__refill-value,
-.cartridge-card__quantity-value {
+.cartridge-card__quantity-value,
+.cartridge-card__note-value {
   margin-left: 5px;
   color: var(--value-text-color);
   font-weight: 500;
@@ -314,7 +317,8 @@
 .cartridge-card__responsible-icon,
 .cartridge-card__location-icon,
 .cartridge-card__refill-icon,
-.cartridge-card__quantity-icon {
+.cartridge-card__quantity-icon,
+.cartridge-card__note-icon {
   @include size-icon;
 }
 

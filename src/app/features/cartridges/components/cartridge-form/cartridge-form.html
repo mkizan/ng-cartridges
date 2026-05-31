@@ -159,9 +159,29 @@
   @if (location?.invalid && (location?.dirty || location?.touched)) {
     <p class="alert">{{ TEXT.validation.required }}</p>
   }
-  <label for="notes" class="cartridge-form__label-notes">{{
-    TEXT.fields.notes
+  <label for="refillDate" class="cartridge-form__label-refillDate">{{
+    TEXT.fields.refillDate
   }}</label>
+  <input
+    type="date"
+    id="refillDate"
+    class="cartridge-form__input-refillDate"
+    name="refillDate"
+    formControlName="refillDate"
+  />
+  <label for="quantityPages" class="cartridge-form__label-quantityPages">{{
+    TEXT.fields.quantityPages
+  }}</label>
+  <input
+    type="number"
+    id="quantityPages"
+    class="cartridge-form__input-quantityPages"
+    name="quantityPages"
+    formControlName="quantityPages"
+  />
+    <label for="quantityPages" class="cartridge-form__label-notes">{{
+      TEXT.fields.notes
+      }}</label>
   <input
     type="text"
     id="notes"

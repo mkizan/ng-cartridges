@@ -61,6 +61,8 @@ export class CartridgeForm implements OnInit {
       [Validators.required, Validators.minLength(1)],
     ],
     responsible: ['', [Validators.required, Validators.minLength(2)]],
+    refillDate: ['', [Validators.required]],
+    quantityPages: [0, [Validators.required, Validators.min(0)]],
     notes: [''],
   });
 
@@ -107,6 +109,7 @@ export class CartridgeForm implements OnInit {
               .map((s) => s.trim())
               .filter((s) => s !== '')
           : cartridgeFormData.compatiblePrinters,
+      refillDate: new Date(cartridgeFormData.refillDate!).toISOString(),
     };
 
     console.log('Payload: ', payload);
@@ -145,6 +148,12 @@ export class CartridgeForm implements OnInit {
   }
   get location() {
     return this.cartridgeForm.get('location');
+  }
+  get refillDate() {
+    return this.cartridgeForm.get('refillDate');
+  }
+  get quantityPages() {
+    return this.cartridgeForm.get('quantityPages');
   }
   get notes() {
     return this.cartridgeForm.get('notes');

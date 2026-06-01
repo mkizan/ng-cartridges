@@ -21,6 +21,8 @@ export interface ICartridge {
   status: CartridgeStatus;
   location: string;
   responsible: string;
+  refillDate: string;
+  quantityPages: number;
   notes: string;
 }
 export interface ICartridgeStatusCount {
@@ -51,38 +53,3 @@ export interface IFilterCriteria {
   query: string;
   status: string | null;
 }
-
-// export interface ICartridgeStatuses {
-//   id: string;
-// status:
-//   | 'заправлений'
-//   | 'на заправці'
-//   | 'в принтері'
-//   | 'закінчився'
-//   | 'в ремонті'
-//   | 'неробочий';
-// }
-
-// export interface ICartridgeUser {
-//   id: string;
-//   name: 'Микола' | 'Дмитро';
-// }
-
-// export interface ICartridgeLocations {
-//   id: string;
-//   name:
-//     | 'Цех 1'
-//     | 'Цех 2'
-//     | 'Цех 3'
-//     | 'Цех 5'
-//     | 'Цех 7'
-//     | 'Цех 9'
-//     | 'Офіс'
-//     | 'Склад 1'
-//     | 'Склад 2'
-//     | 'Склад 3'
-//     | 'Склад 5'
-//     | 'Склад 6'
-//     | 'Склад 7'
-//     | 'Склад 9';
-// }

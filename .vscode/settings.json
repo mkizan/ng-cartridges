@@ -43,5 +43,6 @@
     "сумісні",
     "через",
     "Штрихкод"
-  ]
+  ],
+  "window.autoDetectColorScheme": true
 }

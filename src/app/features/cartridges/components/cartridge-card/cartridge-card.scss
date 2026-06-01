@@ -1,13 +1,25 @@
+@mixin size-icon {
+  width: calc(var(--global-text-size) + var(--calculate-icon-size));
+  height: calc(var(--global-text-size) + var(--calculate-icon-size));
+  font-size: calc(var(--global-text-size) + var(--calculate-icon-size));
+}
+
+@mixin hover-effect {
+  &:hover {
+    font-weight: 500;
+    color: var(--accent-color);
+    scale: 1.05;
+    transition: all 0.2s ease-out;
+  }
+}
+
 .cartridge-card {
-  width: 100%;
-  max-width: 320px;
-  min-width: 320px;
+  width: 320px;
   min-height: 420px;
-  margin-top: 15px;
-  margin-bottom: 15px;
-  margin-left: 20px;
+  margin-top: 10px;
+  margin-bottom: 10px;
   margin-left: 0px;
-  margin-right: 0;
+  margin-right: 0px;
   padding: 15px;
   background-color: var(--card-background-color);
   border: 1px solid var(--card-border-color);
@@ -23,12 +35,14 @@
 
 .cartridge-card__title {
   color: var(--value-text-color);
-  font-size: 20px;
+  font-size: 18px;
+  font-weight: 500;
+  text-transform: capitalize;
 }
 
 .cartridge-card__barcode {
   margin-bottom: 15px;
-  font-size: 18px;
+  font-size: calc(var(--global-text-size) + var(--constant-text-size));
   color: var(--value-text-color);
 }
 
@@ -40,6 +54,10 @@
 .cartridge-card__actions-btn {
   color: var(--btn-dark-background-color);
   cursor: pointer;
+
+  &:hover {
+    color: var(--field-text-color);
+  }
 }
 
 .cartridge-card__actions-wrapper {
@@ -92,22 +110,14 @@
   color: var(--value-text-color);
 }
 
-.cartridge-card__show-sku {
-  display: flex;
-  align-items: center;
-}
-
-.cartridge-card__show-sku > p {
-  padding-left: 3px;
-  &::first-letter {
-    text-transform: capitalize;
-  }
+.cartridge-card__actions-icon {
+  color: var(--value-text-color);
 }
 
 .cartridge-card__edit-cartridge {
   display: flex;
   align-items: center;
-  color: var(--field-text-color);
+
 }
 
 .cartridge-card__edit-cartridge > p {
@@ -115,13 +125,13 @@
   &::first-letter {
     text-transform: capitalize;
   }
+  @include hover-effect;
 }
 
 .cartridge-card__status-list {
   margin-top: 5px;
   margin-bottom: 5px;
   padding-bottom: 5px;
-  font-size: 14px;
   color: var(--value-text-color);
   border-bottom: 1px solid var(--field-border-color);
 }
@@ -141,10 +151,10 @@
   &:first-child {
     margin-top: 5px;
   }
-}
-
-.cartridge-card__status-item:last-child {
-  margin-bottom: 0;
+  &:last-child {
+    margin-bottom: 0;
+  }
+  @include hover-effect;
 }
 
 .cartridge-status::before {
@@ -204,6 +214,8 @@
   text-transform: capitalize;
   text-align: start;
   cursor: pointer;
+
+  @include hover-effect;
 }
 
 .cartrdige-card__status-wrapper {
@@ -216,47 +228,40 @@
   padding: 3px 10px;
   border-radius: 10px;
   color: var(--value-text-color);
-  font-weight: 700;
 }
 
 .compatible-printers__wrapper,
 .alternative-cartridges__wrapper {
   display: flex;
-  align-items: center;
+  align-items: start;
   margin-left: 2px;
   margin-bottom: 5px;
 }
 
 .compatible-printers__icon,
 .alternative-cartridges__icon {
-  color: var(--field-text-color);
   margin-right: 5px;
-}
-
-.compatible-printers__title,
-.alternative-cartridges__title {
-  color: var(--field-text-color);
 }
 
 .compatible-printers__list,
 .alternative-cartridges__list {
   display: flex;
   flex-wrap: wrap;
-  margin-bottom: 10px;
-  padding-bottom: 10px;
+  margin-bottom: 5px;
   color: var(--value-text-color);
   border-bottom: 1px solid var(--field-border-color);
+  text-transform: capitalize;
 }
 
 .compatible-printers__item,
 .alternative-cartridges__item {
   margin-right: 5px;
   margin-bottom: 5px;
-  padding: 3px 10px;
+  padding: 3px 5px;
   background-color: var(--primary-background-color);
   border-radius: 10px;
   border: 1px solid var(--card-border-color);
-  font-weight: 700;
+  // font-weight: 500;
 }
 
 .cartridge-card__list {
@@ -272,10 +277,12 @@
 .cartridge-card__list > li p {
   margin-left: 5px;
 }
-
+.compatible-printers__wrapper,
+.alternative-cartridges__wrapper,
 .cartridge-card__responsible-wrapper,
 .cartridge-card__location-wrapper,
-.cartridge-card__refill-wrapper {
+.cartridge-card__refill-wrapper,
+.cartridge-card__quantity-wrapper {
   display: flex;
   align-items: center;
   color: var(--field-text-color);
@@ -283,41 +290,69 @@
 
 .cartridge-card__responsible-value,
 .cartridge-card__location-value,
-.cartridge-card__refill-value {
+.cartridge-card__refill-value,
+.cartridge-card__quantity-value,
+.cartridge-card__note-value {
   margin-left: 5px;
   color: var(--value-text-color);
-  font-weight: 700;
+  // font-weight: 500;
 }
 
-.cartridge-card__location-wrapper {
+.cartridge-card__actions-icon,
+.cartridge-card__edit-icon,
+.cartridge-card__delete-icon,
+.compatible-printers__icon,
+.alternative-cartridges__icon,
+.cartridge-card__responsible-icon,
+.cartridge-card__location-icon,
+.cartridge-card__refill-icon,
+.cartridge-card__quantity-icon,
+.cartridge-card__note-icon {
+  @include size-icon;
+}
+
+.cartridge-card__note-wrapper {
+  display: inline-block;
   color: var(--field-text-color);
+  overflow-wrap: break-word;
+  word-break: break-word;
+  // щоб текст не виходив за межі колонки
+  // display: flex;
+  // align-items: flex-start;
 }
 
-@media screen and (max-width: 479px) {
+.cartridge-card__note {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.cartridge-card__note-icon {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.cartridge-card__note-value {
+  display: inline; /* або block */
+  vertical-align: middle;
+  margin-left: 5px;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  white-space: normal;
+  // щоб текст не виходив за межі колонки
+  // flex: 1;
+  // overflow-wrap: break-word;
+  // word-break: break-word;
+}
+
+@media screen and (min-width: 480px) {
   .cartridge-card {
     width: 100%;
     max-width: 320px;
     min-width: 320px;
     min-height: 420px;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    margin-right: 15px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-left: 5px;
+    margin-right: 5px;
   }
 }
-
-@media screen and (min-width: 480px) and (max-width: 1599px) {
-  .cartridge-card {
-    width: 100%;
-    max-width: 320px;
-    min-width: 320px;
-    min-height: 420px;
-    margin-right: 15px;
-  }
-}
-
-/* @media screen and (min-width: 1600px) {
-  :host {
-    margin-left: 10px;
-    margin-right: 0;
-  }
-} */

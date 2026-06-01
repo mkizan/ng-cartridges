@@ -3,7 +3,7 @@
 
 :root {
   color-scheme: light;
-  --accent-background-color: #5ed5dd;
+  --accent-color: #005CBB;
   --primary-background-color: #f6f7f9;
   --card-background-color: #fcfcfe;
   --field-text-color: #86939b;
@@ -18,6 +18,9 @@
   --btn-dark-background-color: #ff5c5c;
   --card-border-color: #dddddd;
   --field-border-color: rgb(71, 68, 68, 0.2);
+  --global-text-size: 14px;
+  --calculate-icon-size: 4px;
+  --constant-text-size: 2px;
   --dashboard-card-title-text-size: 14px;
   --dashboard-title-text-size: 26px;
   --alert-text-color: #f02929;
@@ -25,7 +28,7 @@
 
 .dark-theme {
   color-scheme: dark;
-  --accent-background-color: #5ed5dd;
+  --accent-color: #029D9E;
   --primary-background-color: #121317;
   --card-background-color: #181a22;
   --field-text-color: #8c8c96;
@@ -40,6 +43,9 @@
   --btn-dark-background-color: #ff5c5c;
   --card-border-color: #28292e;
   --field-border-color: rgb(71, 68, 68, 0.2);
+  --global-text-size: 14px;
+  --calculate-icon-size: 4px;
+  --constant-text-size: 2px;
   --dashboard-card-title-text-size: 14px;
   --dashboard-title-text-size: 26px;
   --alert-text-color: #f02929;
@@ -51,7 +57,7 @@
 
 body {
   font-family: "Roboto", "sans-serif";
-  font-size: 14px;
+  font-size: var(--global-text-size);
   background-color: var(--primary-background-color);
   overflow-x: hidden;
 }

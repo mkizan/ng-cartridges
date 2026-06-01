@@ -4,7 +4,9 @@ import {
   inject,
   input,
   output,
+  DestroyRef,
 } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { TranslateStatusPipe } from '../../../../shared/pipes/translate-status-pipe';
 import { ICartridge } from '../../models/cartridge-interfaces';
 import { CartridgesService } from '../../services/cartridges-service';
@@ -12,6 +14,7 @@ import { ModalService } from '../../../../core/services/modal/modal-service';
 import { TEXT } from '../../../../core/constants/text';
 import { MatIconModule } from '@angular/material/icon';
 import { DatePipe } from '@angular/common';
+import { DialogService } from '../../../../core/services/confirmation/dialog-service';
 
 @Component({
   selector: 'app-cartridge-card',
@@ -23,6 +26,8 @@ import { DatePipe } from '@angular/common';
 export class CartridgeCard {
   protected readonly TEXT = TEXT;
   modalService = inject(ModalService);
+  dialogService = inject(DialogService);
+  destroyRef = inject(DestroyRef);
   cartridgesService = inject(CartridgesService);
   cartridgeStatus = this.cartridgesService.allCartridgeStatuses;
 
@@ -36,7 +41,18 @@ export class CartridgeCard {
     });
   }
 
-  removeCartridge() {
-    this.cartridgesService.removeCartridge(this.cartridge().id);
+  openDialog() {
+    this.dialogService.confirmDialog({
+      title: 'Are you sure you want to delete this cartridge?',
+      message: `Cartridge: ${this.cartridge().brand} ${this.cartridge().model}`,
+      confirmLabel: 'Delete',
+      cancelLabel: 'Cancel',
+    })
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe((confirmed) => {
+        if (confirmed) {
+          this.cartridgesService.removeCartridge(this.cartridge().id);
+        }
+      });
   }
 }

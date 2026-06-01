@@ -1,0 +1,15 @@
+<div class="confirm-dialog">
+    <h2 mat-dialog-title class="confirm-dialog__title">{{data.title}}</h2>
+    <button mat-icon-button [mat-dialog-close]="false">
+        <mat-icon aria-hidden="false" aria-label="Example close icon" fontIcon="close">Close</mat-icon>
+    </button>
+</div>
+
+<div mat-dialog-content>
+    {{data.message}}
+</div>
+
+<div mat-dialog-actions [align]="'end'">
+    <button mat-raised-button [mat-dialog-close]="false">{{data.cancelLabel}}</button>
+    <button mat-raised-button color="primary" [mat-dialog-close]="true">{{data.confirmLabel}}</button>
+</div>

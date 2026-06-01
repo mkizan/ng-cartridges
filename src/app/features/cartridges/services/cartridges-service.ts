@@ -129,6 +129,9 @@ export class CartridgesService {
     const status = this.activeFilters().status;
 
     return this.allCartridges().filter((cartridge) => {
+      const matchesBarcode = query
+        ? cartridge.barcode.toLowerCase().includes(query)
+        : true;
       const matchesBrand = query
         ? cartridge.brand.toLowerCase().includes(query)
         : true;
@@ -137,7 +140,7 @@ export class CartridgesService {
         : true;
       const matchesStatus = status ? cartridge.status === status : true;
 
-      return (matchesBrand || matchesModel) && matchesStatus;
+      return (matchesBarcode || matchesBrand || matchesModel) && matchesStatus;
     });
   });
 

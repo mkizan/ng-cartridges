@@ -45,4 +45,10 @@ export const TEXT = {
     minLengthLocation: 'Розташування має містить щонайменше 2 символи',
     minLengthResponsible: 'Відповідальний має містити щонайменше 2 символи',
   },
+  dialog: {
+    deleteTitle: 'Видалення',
+    message: "Ви впевнені, що хочете видалити?",
+    yesBtn: 'Так',
+    noBtn: 'Ні',
+  }
 } as const;

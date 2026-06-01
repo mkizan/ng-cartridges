@@ -12,7 +12,7 @@ export const TEXT = {
     responsible: 'Відповідальний',
     location: 'Розташування',
     refillDate: 'Дата заправки',
-    quantityPages: 'Кількість сторінок',
+    quantityPages: 'К-сть роздрук. сторінок',
     barcode: 'Штрихкод',
     brand: 'Бренд',
     model: 'Модель',

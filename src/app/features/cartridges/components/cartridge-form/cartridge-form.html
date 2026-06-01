@@ -169,6 +169,9 @@
     name="refillDate"
     formControlName="refillDate"
   />
+  @if (refillDate?.invalid && (refillDate?.dirty || refillDate?.touched)) {
+  <p class="alert">{{ TEXT.validation.required }}</p>
+  }
   <label for="quantityPages" class="cartridge-form__label-quantityPages">{{
     TEXT.fields.quantityPages
   }}</label>

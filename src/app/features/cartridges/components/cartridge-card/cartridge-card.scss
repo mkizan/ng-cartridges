@@ -37,6 +37,7 @@
   color: var(--value-text-color);
   font-size: 18px;
   font-weight: 500;
+  text-transform: capitalize;
 }
 
 .cartridge-card__barcode {
@@ -108,18 +109,6 @@
   cursor: pointer;
   color: var(--value-text-color);
 }
-
-// .cartridge-card__show-barcode {
-//   display: flex;
-//   align-items: center;
-// }
-
-// .cartridge-card__show-barcode > p {
-//   padding-left: 3px;
-//   &::first-letter {
-//     text-transform: capitalize;
-//   }
-// }
 
 .cartridge-card__actions-icon {
   color: var(--value-text-color);
@@ -261,6 +250,7 @@
   margin-bottom: 5px;
   color: var(--value-text-color);
   border-bottom: 1px solid var(--field-border-color);
+  text-transform: capitalize;
 }
 
 .compatible-printers__item,
@@ -271,7 +261,7 @@
   background-color: var(--primary-background-color);
   border-radius: 10px;
   border: 1px solid var(--card-border-color);
-  font-weight: 500;
+  // font-weight: 500;
 }
 
 .cartridge-card__list {
@@ -292,8 +282,7 @@
 .cartridge-card__responsible-wrapper,
 .cartridge-card__location-wrapper,
 .cartridge-card__refill-wrapper,
-.cartridge-card__quantity-wrapper,
-.cartridge-card__note-wrapper {
+.cartridge-card__quantity-wrapper {
   display: flex;
   align-items: center;
   color: var(--field-text-color);
@@ -306,7 +295,7 @@
 .cartridge-card__note-value {
   margin-left: 5px;
   color: var(--value-text-color);
-  font-weight: 500;
+  // font-weight: 500;
 }
 
 .cartridge-card__actions-icon,
@@ -320,6 +309,39 @@
 .cartridge-card__quantity-icon,
 .cartridge-card__note-icon {
   @include size-icon;
+}
+
+.cartridge-card__note-wrapper {
+  display: inline-block;
+  color: var(--field-text-color);
+  overflow-wrap: break-word;
+  word-break: break-word;
+  // щоб текст не виходив за межі колонки
+  // display: flex;
+  // align-items: flex-start;
+}
+
+.cartridge-card__note {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.cartridge-card__note-icon {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.cartridge-card__note-value {
+  display: inline; /* або block */
+  vertical-align: middle;
+  margin-left: 5px;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  white-space: normal;
+  // щоб текст не виходив за межі колонки
+  // flex: 1;
+  // overflow-wrap: break-word;
+  // word-break: break-word;
 }
 
 @media screen and (min-width: 480px) {

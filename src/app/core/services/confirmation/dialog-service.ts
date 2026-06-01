@@ -11,6 +11,6 @@ export class DialogService {
   private readonly dialog = inject(MatDialog);
 
   confirmDialog(data: IConfirmDialog): Observable<boolean> {
-    return this.dialog.open(Confirm, {data, width: "400px", disableClose: false}).afterClosed();
+    return this.dialog.open(Confirm, {data, width: "320px", disableClose: false}).afterClosed();
   }
 }

@@ -43,10 +43,10 @@ export class CartridgeCard {
 
   openDialog() {
     this.dialogService.confirmDialog({
-      title: 'Are you sure you want to delete this cartridge?',
-      message: `Cartridge: ${this.cartridge().brand} ${this.cartridge().model}`,
-      confirmLabel: 'Delete',
-      cancelLabel: 'Cancel',
+      title: TEXT.dialog.deleteTitle,
+      message: TEXT.dialog.message,
+      confirmLabel: TEXT.dialog.yesBtn,
+      cancelLabel: TEXT.dialog.noBtn,
     })
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe((confirmed) => {

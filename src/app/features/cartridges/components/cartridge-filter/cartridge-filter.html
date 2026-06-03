@@ -3,6 +3,7 @@
     <mat-label class="cartridge-filter__">Пошук</mat-label>
     <input
       matInput
+      appAutofocus
       [ngModel]="searchQuery()"
       (ngModelChange)="updateSearchQuery($event)"
       type="text"

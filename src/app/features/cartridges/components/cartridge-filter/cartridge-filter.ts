@@ -4,10 +4,11 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { CartridgesService } from '../../services/cartridges-service';
 import { MatSelectModule } from '@angular/material/select';
+import { AutoFocusDirective } from "../../../../shared/directives/autofocus-directive";
 
 @Component({
   selector: 'app-cartridge-filter',
-  imports: [FormsModule, MatInputModule, MatFormFieldModule, MatSelectModule],
+  imports: [FormsModule, MatInputModule, MatFormFieldModule, MatSelectModule, AutoFocusDirective],
   templateUrl: './cartridge-filter.html',
   styleUrl: './cartridge-filter.scss',
 })

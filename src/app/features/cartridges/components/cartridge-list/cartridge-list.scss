@@ -4,7 +4,7 @@
   justify-content: center;
 }
 
-@media screen and (min-width: 576px) and (max-width: 1366px) {
+@media screen and (min-width: 576px) and (max-width: 1365px) {
   :host::after {
     content: '';
     flex: 0 0 320px;
@@ -14,7 +14,7 @@
   }
 }
 
-@media screen and (min-width: 1367px) {
+@media screen and (min-width: 1366px) {
   :host {
     justify-content: unset;
     margin-left: 10px;

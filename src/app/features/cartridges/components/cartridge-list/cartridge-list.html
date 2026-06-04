@@ -2,8 +2,10 @@
 <app-counter-cartridges />
 <app-add-cartridge-button />
 <app-cartridge-filter />
-@for (cartridge of childFilteredCartridges(); track cartridge.id) {
-  <app-cartridge-card [cartridge]="cartridge" />
-} @empty {
-  <p>Товарів не знайдено</p>
-}
+<div class="cartridge-list">
+  @for (cartridge of childFilteredCartridges(); track cartridge.id) {
+    <app-cartridge-card [cartridge]="cartridge" />
+  } @empty {
+    <p>Товарів не знайдено</p>
+  }
+</div>

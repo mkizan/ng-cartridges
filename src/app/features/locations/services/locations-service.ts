@@ -11,7 +11,9 @@ export class LocationsService {
   private locations = signal<ILocation[]>([])
   readonly readLocations = this.locations.asReadonly();
 
-  constructor() { this.getLocations()}
+  constructor() {
+    this.getLocations()
+  }
 
   getLocations() {
     this.http.get<ILocation[]>(`${BASE_URL}/locations`).subscribe({

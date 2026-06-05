@@ -2,6 +2,8 @@ export const TEXT = {
   titles: {
     addCartridge: 'Додати новий картридж',
     editCartridge: 'Редагувати картридж',
+    addLocation: 'Додати нове місцезнаходження',
+    editLocation: 'Редагувати місцезнаходження',
   },
   fields: {
     totalCartridges: 'Всього картриджів',

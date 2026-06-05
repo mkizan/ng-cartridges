@@ -7,7 +7,7 @@ export type ModalType = 'create' | 'edit' | null;
   providedIn: 'root',
 })
 export class ModalService {
-  private _activeModal = signal<{ type: ModalType; data?: any; id?: string }>({
+  private _activeModal = signal<{ type: ModalType; data?: any; id?: string;base?: string }>({
     type: null,
   });
   activeModal = this._activeModal.asReadonly();
@@ -21,9 +21,17 @@ export class ModalService {
     });
   }
 
+   // helper: return first non-empty segment or fallback
+  private getBaseSegment(): string {
+    const url = this.router.url.split('?')[0].split('#')[0];
+    const segments = url.split('/').filter(Boolean);
+    return segments[0] ?? 'cartridges';
+  }
+
   openModalCreate() {
+    const base = this.getBaseSegment();
     this.router
-      .navigate(['/cartridges/create'])
+      .navigate([`/${base}/create`])
       .then(() => {
         this._activeModal.set({ type: 'create' });
         console.log('mode is: ', this._activeModal());
@@ -33,22 +41,23 @@ export class ModalService {
       });
   }
 
-  openModalEdit(cartridgeData: any) {
+  openModalEdit(itemData: any) {
+    const base = this.getBaseSegment();
     this.router
-      .navigate([`/cartridges/edit/${cartridgeData.id}`])
+      .navigate([`/${base}/edit/${itemData.id}`])
       .then(() => {
         this._activeModal.set({
           type: 'edit',
-          data: cartridgeData,
-          id: cartridgeData.id,
+          data: itemData,
+          id: itemData.id,
         });
         console.log('mode is: ', this._activeModal());
       })
       .catch(() => {
         this._activeModal.set({
           type: 'edit',
-          data: cartridgeData,
-          id: cartridgeData.id,
+          data: itemData,
+          id: itemData.id,
         });
       });
   }

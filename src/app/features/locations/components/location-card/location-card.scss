@@ -1,6 +1,6 @@
 .location-card {
     width: 320px;
-    min-height: 420px;
+    min-height: 220px;
     margin-top: 10px;
     margin-bottom: 10px;
     margin-left: 0px;
@@ -23,4 +23,33 @@
     font-size: 18px;
     font-weight: 500;
     text-transform: capitalize;
+}
+
+.location-card__actions {
+    position: relative;
+    padding: 5px;
+}
+
+.location-card__actions-btn {
+    color: var(--btn-dark-background-color);
+    cursor: pointer;
+
+    &:hover {
+        color: var(--field-text-color);
+    }
+}
+
+.location-card__actions-wrapper {
+    display: none;
+    position: absolute;
+    width: 150px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    border: 1px solid var(--card-border-color);
+    clip: rect(0 0 0 0);
+    background-color: var(--card-background-color);
+    border-radius: 5px;
+    transition: all 0.3s ease-out;
 }

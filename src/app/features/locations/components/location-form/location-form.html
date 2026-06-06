@@ -1,1 +1,53 @@
-<p>location-form works!</p>
+<form
+  class="location-form"
+  [formGroup]="locationForm"
+  (ngSubmit)="handleSubmit()"
+>
+  <label for="name" class="location-form__label-name">{{
+    TEXT.fields.brand
+  }}</label>
+  <input
+    type="text"
+    id="name"
+    class="location-form__input-name"
+    name="name"
+    formControlName="name"
+    autocomplete="on"
+  />
+  @if (name!.invalid && (name!.dirty || name!.touched)) {
+    <div class="alert">
+      @if (name!.hasError("required")) {
+        <p>{{ TEXT.validation.required }}</p>
+      }
+      @if (name!.hasError("minlength")) {
+        <p>{{ TEXT.validation.minLengthBrand }}</p>
+      }
+    </div>
+  }
+
+  <label for="location" class="location-form__label-location">{{
+    TEXT.fields.location
+  }}</label>
+  <input
+    type="text"
+    id="location"
+    class="location-form__input-location"
+    name="location"
+    formControlName="location"
+    autocomplete="on"
+  />
+  @if (location!.invalid && (location!.dirty || location!.touched)) {
+    <div class="alert">
+      @if (location!.hasError("required")) {
+        <p>{{ TEXT.validation.required }}</p>
+      }
+      @if (location!.hasError("minlength")) {
+        <p>{{ TEXT.validation.minLengthLocation }}</p>
+      }
+    </div>
+  }
+
+  <button type="submit" [disabled]="locationForm.invalid">
+    {{ TEXT.buttons.saveChanges }}
+  </button>
+</form>

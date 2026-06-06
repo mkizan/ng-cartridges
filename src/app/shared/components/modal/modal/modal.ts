@@ -33,7 +33,7 @@ export class Modal {
     },
   };
 
-  getFormConfig(base: string) {
+  getFormConfig(base: string | undefined) {
     return this.formConfigMap[base as ResourceType] || this.formConfigMap.cartridges;
   }
 

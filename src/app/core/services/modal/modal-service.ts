@@ -33,11 +33,11 @@ export class ModalService {
     this.router
       .navigate([`/${base}/create`])
       .then(() => {
-        this._activeModal.set({ type: 'create' });
+        this._activeModal.set({ type: 'create', base });
         console.log('mode is: ', this._activeModal());
       })
       .catch(() => {
-        this._activeModal.set({ type: 'create' });
+        this._activeModal.set({ type: 'create', base });
       });
   }
 
@@ -50,6 +50,7 @@ export class ModalService {
           type: 'edit',
           data: itemData,
           id: itemData.id,
+          base,
         });
         console.log('mode is: ', this._activeModal());
       })
@@ -58,13 +59,15 @@ export class ModalService {
           type: 'edit',
           data: itemData,
           id: itemData.id,
+          base,
         });
       });
   }
 
   closeModal() {
+    const base = this.getBaseSegment();
     this._activeModal.set({ type: null });
-    this.router.navigate(['/cartridges']);
+    this.router.navigate([`/${base}`]);
   }
 
   handleOverlayClick(event: MouseEvent) {

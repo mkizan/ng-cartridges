@@ -30,7 +30,7 @@ export class CartridgeForm implements OnInit {
   protected readonly TEXT = TEXT;
 
   cartridgeData = input<ICartridge | undefined>();
-  // success = output<void>();
+  success = output<void>();
 
   constructor(private http: HttpClient) {}
 
@@ -117,10 +117,10 @@ export class CartridgeForm implements OnInit {
     if (this.cartridgeData()) {
       console.log('Barcode type: ', typeof payload.barcode);
       this.cartridgesService.editCartridge(this.cartridgeData()!.id, payload);
-      this.modalService.closeModal();
+      this.success.emit();
     } else {
       this.cartridgesService.addCartridge(payload);
-      this.modalService.closeModal();
+      this.success.emit();
       this.cartridgeForm.reset();
     }
   }

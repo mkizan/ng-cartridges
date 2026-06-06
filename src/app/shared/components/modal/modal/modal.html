@@ -5,16 +5,21 @@
 >
   <div class="modal" (click)="$event.stopPropagation()">
     @let modal = modalService.activeModal();
-    @if (modal.type === "create") {
-      <h3 class="modal__title">{{ TEXT.titles.addCartridge }}</h3>
-      <app-cartridge-form (success)="modalService.closeModal()" />
+    @let config = getFormConfig(modal.base);
+
+    @switch (modal.base) {
+    @case ('cartridges') {
+    <h3 class="modal__title">
+      {{ modal.type === 'create' ? config.createTitle : config.editTitle }}
+    </h3>
+    <app-cartridge-form [cartridgeData]="modal.type === 'edit' ? modal.data : null" (success)="modalService.closeModal()" />
     }
-    @if (modal.type === "edit") {
-      <h3 class="modal__title">{{ TEXT.titles.editCartridge }}</h3>
-      <app-cartridge-form
-        [cartridgeData]="modal.data"
-        (success)="modalService.closeModal()"
-      />
+    @case ('locations') {
+    <h3 class="modal__title">
+      {{ modal.type === 'create' ? config.createTitle : config.editTitle }}
+    </h3>
+    <app-location-form [locationData]="modal.type === 'edit' ? modal.data : null" (success)="modalService.closeModal()" />
     }
+  }
   </div>
 </div>

@@ -42,12 +42,13 @@ export class CartridgeCard {
   }
 
   openDialog() {
-    this.dialogService.confirmDialog({
-      title: TEXT.dialog.deleteTitle,
-      message: TEXT.dialog.message,
-      confirmLabel: TEXT.dialog.yesBtn,
-      cancelLabel: TEXT.dialog.noBtn,
-    })
+    this.dialogService
+      .confirmDialog({
+        title: TEXT.dialog.deleteTitle,
+        message: TEXT.dialog.message,
+        confirmLabel: TEXT.dialog.yesBtn,
+        cancelLabel: TEXT.dialog.noBtn,
+      })
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe((confirmed) => {
         if (confirmed) {

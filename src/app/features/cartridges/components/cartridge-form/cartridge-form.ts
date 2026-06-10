@@ -18,6 +18,8 @@ import { ModalService } from '../../../../core/services/modal/modal-service';
 import { HttpClient } from '@angular/common/http';
 import { BASE_URL } from '../../../../shared/utils/server-url';
 import { TEXT } from '../../../../core/constants/text';
+import { LocationsService } from '../../../locations/services/locations-service';
+import { ILocation } from '../../../locations/models/location-interfaces';
 
 @Component({
   selector: 'app-cartridge-form',
@@ -26,6 +28,8 @@ import { TEXT } from '../../../../core/constants/text';
   styleUrl: './cartridge-form.scss',
 })
 export class CartridgeForm implements OnInit {
+  locationsService = inject(LocationsService);
+  locations = this.locationsService.readLocations;
   private formBuilder = inject(FormBuilder).nonNullable;
   protected readonly TEXT = TEXT;
 
@@ -38,7 +42,7 @@ export class CartridgeForm implements OnInit {
   cartridgesService = inject(CartridgesService);
   cartridgeStatuses = this.cartridgesService.allCartridgeStatuses;
 
-  locations = signal<ICartridgeLocation[]>([]);
+  // locations = signal<ICartridgeLocation[]>([]);
   users = signal<ICartridgeUser[]>([]);
 
   cartridgeForm = this.formBuilder.group({
@@ -55,7 +59,7 @@ export class CartridgeForm implements OnInit {
     model: ['', [Validators.required, Validators.minLength(2)]],
     alternativeCartridges: <string | string[]>[''],
     status: ['', [Validators.required]],
-    location: ['', [Validators.required, Validators.minLength(2)]],
+    location: ['', [Validators.required]],
     compatiblePrinters: <string | string[]>[
       '',
       [Validators.required, Validators.minLength(1)],
@@ -67,12 +71,13 @@ export class CartridgeForm implements OnInit {
   });
 
   ngOnInit(): void {
-    this.http.get<ICartridgeLocation[]>(`${BASE_URL}/locations`).subscribe({
-      next: (data) => {
-        this.locations.set(data);
-      },
-      error: (err) => console.error('Locations error', err),
-    });
+    // this.http.get<ICartridgeLocation[]>(`${BASE_URL}/locations`).subscribe({
+    //   next: (data) => {
+    //     this.locations.set(data);
+    //   },
+    //   error: (err) => console.error('Locations error', err),
+    // });
+    this.locationsService.getLocations();
 
     this.http.get<ICartridgeUser[]>(`${BASE_URL}/persons`).subscribe({
       next: (data) => {
@@ -110,6 +115,11 @@ export class CartridgeForm implements OnInit {
               .filter((s) => s !== '')
           : cartridgeFormData.compatiblePrinters,
       refillDate: new Date(cartridgeFormData.refillDate!).toISOString(),
+      location:
+        typeof cartridgeFormData.location === 'object' &&
+        cartridgeFormData.location !== null
+          ? (cartridgeFormData.location as any).id
+          : cartridgeFormData.location,
     };
 
     console.log('Payload: ', payload);

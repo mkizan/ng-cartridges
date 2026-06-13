@@ -71,12 +71,6 @@ export class CartridgeForm implements OnInit {
   });
 
   ngOnInit(): void {
-    // this.http.get<ICartridgeLocation[]>(`${BASE_URL}/locations`).subscribe({
-    //   next: (data) => {
-    //     this.locations.set(data);
-    //   },
-    //   error: (err) => console.error('Locations error', err),
-    // });
     this.locationsService.getLocations();
 
     this.http.get<ICartridgeUser[]>(`${BASE_URL}/persons`).subscribe({
@@ -86,8 +80,12 @@ export class CartridgeForm implements OnInit {
       error: (err) => console.error('Users error', err),
     });
 
-    if (this.cartridgeData()) {
-      this.cartridgeForm.patchValue(this.cartridgeData() as any);
+    const data = this.cartridgeData();
+    if (data) {
+      this.cartridgeForm.patchValue({
+        ...data,
+        location: data.location.id ?? '', // витягуємо тільки id з об'єкта location для форми, оскільки форма очікує рядок (id), а не об'єкт
+      });
     }
   }
 
@@ -115,6 +113,7 @@ export class CartridgeForm implements OnInit {
               .filter((s) => s !== '')
           : cartridgeFormData.compatiblePrinters,
       refillDate: new Date(cartridgeFormData.refillDate!).toISOString(),
+      // витягуємо тільки id з об'єкта location
       location:
         typeof cartridgeFormData.location === 'object' &&
         cartridgeFormData.location !== null
@@ -124,9 +123,10 @@ export class CartridgeForm implements OnInit {
 
     console.log('Payload: ', payload);
 
-    if (this.cartridgeData()) {
+    const data = this.cartridgeData();
+    if (data) {
       console.log('Barcode type: ', typeof payload.barcode);
-      this.cartridgesService.editCartridge(this.cartridgeData()!.id, payload);
+      this.cartridgesService.editCartridge(data.id, payload);
       this.success.emit();
     } else {
       this.cartridgesService.addCartridge(payload);

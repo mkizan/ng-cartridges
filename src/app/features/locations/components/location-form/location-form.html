@@ -4,7 +4,7 @@
   (ngSubmit)="handleSubmit()"
 >
   <label for="name" class="location-form__label-name">{{
-    TEXT.fields.brand
+    TEXT.fields.name
   }}</label>
   <input
     type="text"
@@ -20,7 +20,7 @@
         <p>{{ TEXT.validation.required }}</p>
       }
       @if (name!.hasError("minlength")) {
-        <p>{{ TEXT.validation.minLengthBrand }}</p>
+        <p>{{ TEXT.validation.minLengthName }}</p>
       }
     </div>
   }

@@ -9,12 +9,14 @@
         aria-label="Example edit icon"
         class="location-card__edit-icon"
         fontIcon="edit"
+        (click)="modalService.openModalEdit(locationVariable)"
       ></mat-icon>
       <mat-icon
         aria-hidden="false"
         aria-label="Example delete icon"
         class="location-card__delete-icon"
         fontIcon="delete"
+        (click)="openDialog()"
       ></mat-icon>
     </div>
   </div>

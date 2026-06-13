@@ -20,6 +20,7 @@ export const TEXT = {
     model: 'Модель',
     status: 'Статус',
     notes: 'Примітка',
+    name: 'Назва',
   },
   buttons: {
     add: 'Додати',
@@ -45,12 +46,13 @@ export const TEXT = {
     minLengthCompatiblePrinters:
       'Сумісні принтери мають містить щонайменше 1 символ',
     minLengthLocation: 'Розташування має містить щонайменше 2 символи',
+    minLengthName: 'Назва має містити щонайменше 2 символи',
     minLengthResponsible: 'Відповідальний має містити щонайменше 2 символи',
   },
   dialog: {
     deleteTitle: 'Видалення',
-    message: "Ви впевнені, що хочете видалити?",
+    message: 'Ви впевнені, що хочете видалити?',
     yesBtn: 'Так',
     noBtn: 'Ні',
-  }
+  },
 } as const;

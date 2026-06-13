@@ -3,10 +3,13 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { LocationsService } from '../../services/locations-service';
 import { ILocation } from '../../models/location-interfaces';
 import { TEXT } from '../../../../core/constants/text';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatButton } from '@angular/material/button';
 
 @Component({
   selector: 'app-location-form',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, MatFormFieldModule, MatInputModule, MatButton],
   templateUrl: './location-form.html',
   styleUrl: './location-form.scss',
 })

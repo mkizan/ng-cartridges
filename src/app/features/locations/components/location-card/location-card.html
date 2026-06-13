@@ -9,6 +9,8 @@
         aria-label="Example edit icon"
         class="location-card__edit-icon"
         fontIcon="edit"
+        matTooltip="{{ TEXT.buttons.edit }}"
+        matTooltipPosition="above"
         (click)="modalService.openModalEdit(locationVariable)"
       ></mat-icon>
       <mat-icon
@@ -16,6 +18,8 @@
         aria-label="Example delete icon"
         class="location-card__delete-icon"
         fontIcon="delete"
+        matTooltip="{{ TEXT.buttons.delete }}"
+        matTooltipPosition="above"
         (click)="openDialog()"
       ></mat-icon>
     </div>

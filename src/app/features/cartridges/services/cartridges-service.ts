@@ -13,15 +13,18 @@ import {
   CartridgeStatus,
   CARTRIDGE_STATUSES,
   IFilterCriteria,
+  ICartridgePayload,
 } from '../models/cartridge-interfaces';
 import { HttpClient } from '@angular/common/http';
 import { BASE_URL } from '../../../shared/utils/server-url';
+import { LocationsService } from '../../locations/services/locations-service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CartridgesService {
   private http = inject(HttpClient);
+  private locationsService = inject(LocationsService);
 
   // --- SIGNALS ---
   private cartridges = signal<ICartridge[]>([]);
@@ -145,12 +148,16 @@ export class CartridgesService {
   });
 
   // --- CREATE ---
-  addCartridge(cartridgeData: Omit<ICartridge, 'id'>) {
+  addCartridge(cartridgeData: ICartridgePayload) {
     // Create a temporary placeholder with a temp ID for optimistic update
     const tempId = `temp-${Date.now()}`;
+    const location = this.locationsService
+      .locationsMap()
+      .get(cartridgeData.location);
     const tempCartridge: ICartridge = {
       ...cartridgeData,
       id: tempId,
+      location: location!,
     };
 
     // Add to UI immediately for better UX

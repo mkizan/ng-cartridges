@@ -1,6 +1,11 @@
 <!-- <button (click)="logCartridges()">Log Current Cartridges</button> -->
-@for (cartridge of childFilteredCartridges(); track cartridge.id) {
-  <app-cartridge-card [cartridge]="cartridge" />
-} @empty {
-  <p>Товарів не знайдено</p>
-}
+<app-counter-cartridges />
+<app-add-cartridge-button />
+<app-cartridge-filter />
+<div class="cartridge-list">
+  @for (cartridge of childFilteredCartridges(); track cartridge.id) {
+    <app-cartridge-card [cartridge]="cartridge" />
+  } @empty {
+    <p>Товарів не знайдено</p>
+  }
+</div>

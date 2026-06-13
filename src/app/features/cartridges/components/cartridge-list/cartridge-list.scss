@@ -1,11 +1,11 @@
-:host {
+.cartridge-list {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
 }
 
-@media screen and (min-width: 576px) and (max-width: 1366px) {
-  :host::after {
+@media screen and (min-width: 576px) and (max-width: 1365px) {
+  .cartridge-list::after {
     content: '';
     flex: 0 0 320px;
     height: 0;
@@ -14,8 +14,8 @@
   }
 }
 
-@media screen and (min-width: 1367px) {
-  :host {
+@media screen and (min-width: 1366px) {
+  .cartridge-list {
     justify-content: unset;
     margin-left: 10px;
     margin-right: 10px;

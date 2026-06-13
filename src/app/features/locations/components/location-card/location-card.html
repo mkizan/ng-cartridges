@@ -1,0 +1,12 @@
+@let locationVariable = location();
+<div class="location-card">
+    <div class="location-card__wrapper">
+        <h1 class="location-card__title">{{locationVariable?.name}}</h1>
+        
+        <div class="location-card__actions">
+            <mat-icon aria-hidden="false" aria-label="Example edit icon" class="cartridge-card__edit-icon"
+                fontIcon="edit"></mat-icon>
+        </div>
+    </div>
+    <p class="location-card__city">{{locationVariable?.location}}</p>
+</div>

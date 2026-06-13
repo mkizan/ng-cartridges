@@ -1,0 +1,4 @@
+<app-add-location />
+@for(location of locations(); track location.id){
+    <app-location-card [location]="location"/>
+}

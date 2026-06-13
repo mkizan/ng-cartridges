@@ -1,13 +1,13 @@
-import { AfterViewInit, Directive, ElementRef, inject } from "@angular/core";
+import { AfterViewInit, Directive, ElementRef, inject, OnInit } from "@angular/core";
 
 @Directive({
     selector: "[appAutofocus]",
     host: {}
 })
 
-export class AutoFocusDirective implements AfterViewInit {
+export class AutoFocusDirective implements OnInit {
     private readonly el = inject(ElementRef<HTMLInputElement>);
-    ngAfterViewInit(): void {
+    ngOnInit(): void {
         this.el.nativeElement.focus();
     }
 }

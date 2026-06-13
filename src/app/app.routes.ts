@@ -24,4 +24,23 @@ export const routes: Routes = [
       },
     ],
   },
+  {
+    path: 'locations',
+    loadComponent: () =>
+      import('./features/locations/components/location-list/location-list').then(
+        (m) => m.LocationList
+      ),
+    children: [
+      {
+        path: 'create',
+        component: Modal,
+        data: { mode: 'create' },
+      },
+      {
+        path: 'edit/:id',
+        component: Modal,
+        data: { mode: 'edit' },
+      },
+    ],
+  }
 ];

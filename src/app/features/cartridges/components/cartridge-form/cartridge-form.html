@@ -153,7 +153,7 @@
     formControlName="location"
   >
     @for (location of locations(); track location.id) {
-      <option [value]="location.name">{{ location.name }}</option>
+      <option [value]="location.id">{{ location.name }}</option>
     }
   </select>
   @if (location?.invalid && (location?.dirty || location?.touched)) {
@@ -170,7 +170,7 @@
     formControlName="refillDate"
   />
   @if (refillDate?.invalid && (refillDate?.dirty || refillDate?.touched)) {
-  <p class="alert">{{ TEXT.validation.required }}</p>
+    <p class="alert">{{ TEXT.validation.required }}</p>
   }
   <label for="quantityPages" class="cartridge-form__label-quantityPages">{{
     TEXT.fields.quantityPages
@@ -182,9 +182,9 @@
     name="quantityPages"
     formControlName="quantityPages"
   />
-    <label for="quantityPages" class="cartridge-form__label-notes">{{
-      TEXT.fields.notes
-      }}</label>
+  <label for="quantityPages" class="cartridge-form__label-notes">{{
+    TEXT.fields.notes
+  }}</label>
   <input
     type="text"
     id="notes"

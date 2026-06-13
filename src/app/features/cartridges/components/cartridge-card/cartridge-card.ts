@@ -14,7 +14,7 @@ import { ModalService } from '../../../../core/services/modal/modal-service';
 import { TEXT } from '../../../../core/constants/text';
 import { MatIconModule } from '@angular/material/icon';
 import { DatePipe } from '@angular/common';
-import { DialogService } from '../../../../core/services/confirmation/dialog-service';
+import { DialogService } from '../../../../core/services/confirm-dialog/dialog-service';
 
 @Component({
   selector: 'app-cartridge-card',
@@ -42,12 +42,13 @@ export class CartridgeCard {
   }
 
   openDialog() {
-    this.dialogService.confirmDialog({
-      title: TEXT.dialog.deleteTitle,
-      message: TEXT.dialog.message,
-      confirmLabel: TEXT.dialog.yesBtn,
-      cancelLabel: TEXT.dialog.noBtn,
-    })
+    this.dialogService
+      .confirmDialog({
+        title: TEXT.dialog.deleteTitle,
+        message: TEXT.dialog.message,
+        confirmLabel: TEXT.dialog.yesBtn,
+        cancelLabel: TEXT.dialog.noBtn,
+      })
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe((confirmed) => {
         if (confirmed) {

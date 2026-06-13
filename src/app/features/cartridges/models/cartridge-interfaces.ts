@@ -1,3 +1,5 @@
+import { ILocation } from '../../locations/models/location-interfaces';
+
 export const CARTRIDGE_STATUSES = {
   EMPTY: '',
   REFILLED: 'заправлений',
@@ -19,12 +21,17 @@ export interface ICartridge {
   compatiblePrinters: string | string[];
   barcode: string;
   status: CartridgeStatus;
-  location: string;
+  location: ILocation;
   responsible: string;
   refillDate: string;
   quantityPages: number;
   notes: string;
 }
+
+export type ICartridgePayload = Omit<ICartridge, 'id' | 'location'> & {
+  location: string;
+  id?: string;
+};
 export interface ICartridgeStatusCount {
   id: string;
   status: string;

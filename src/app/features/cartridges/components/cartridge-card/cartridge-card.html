@@ -6,19 +6,25 @@
     </h1>
 
     <div class="cartridge-card__actions">
-      <mat-icon aria-hidden="false" aria-label="Example more_vert icon" class="cartridge-card__actions-icon" fontIcon="more_vert"></mat-icon>
+      <mat-icon
+        aria-hidden="false"
+        aria-label="Example more_vert icon"
+        class="cartridge-card__actions-icon"
+        fontIcon="more_vert"
+      ></mat-icon>
       <div class="cartridge-card__actions-wrapper">
         <p class="cartridge-card__actions-title">дії</p>
         <ul class="cartridge-card__actions-list">
-          <!-- <li class="cartridge-card__show-barcode">
-            <mat-icon aria-hidden="false" aria-label="Example barcode icon" class="cartridge-card__barcode-icon" fontIcon="barcode"></mat-icon>
-            <p>{{ TEXT.buttons.showBarcode }}</p>
-          </li> -->
           <li
             class="cartridge-card__edit-cartridge"
             (click)="modalService.openModalEdit(cartridgeVariable)"
           >
-            <mat-icon aria-hidden="false" aria-label="Example edit icon" class="cartridge-card__edit-icon" fontIcon="edit"></mat-icon>
+            <mat-icon
+              aria-hidden="false"
+              aria-label="Example edit icon"
+              class="cartridge-card__edit-icon"
+              fontIcon="edit"
+            ></mat-icon>
             <p>{{ TEXT.buttons.edit }}</p>
           </li>
         </ul>
@@ -37,11 +43,13 @@
           }
         </ul>
         <div class="cartridge-card__delete-cartridge">
-          <mat-icon aria-hidden="false" aria-label="Example delete icon" class="cartridge-card__delete-icon" fontIcon="delete"></mat-icon>
-          <button
-            class="cartridge-card__delete-btn"
-            (click)="openDialog()"
-          >
+          <mat-icon
+            aria-hidden="false"
+            aria-label="Example delete icon"
+            class="cartridge-card__delete-icon"
+            fontIcon="delete"
+          ></mat-icon>
+          <button class="cartridge-card__delete-btn" (click)="openDialog()">
             {{ TEXT.buttons.delete }}
           </button>
         </div>
@@ -49,7 +57,7 @@
     </div>
   </div>
   <p class="cartridge-card__barcode">
-    [ {{TEXT.fields.sku}}: {{ cartridgeVariable.barcode }} ]
+    [ {{ TEXT.fields.sku }}: {{ cartridgeVariable.barcode }} ]
   </p>
   <div class="cartrdige-card__status-wrapper">
     <span
@@ -60,7 +68,12 @@
     </span>
   </div>
   <div class="compatible-printers__wrapper">
-  <mat-icon aria-hidden="false" aria-label="Example print icon" class="compatible-printers__icon" fontIcon="print"></mat-icon>
+    <mat-icon
+      aria-hidden="false"
+      aria-label="Example print icon"
+      class="compatible-printers__icon"
+      fontIcon="print"
+    ></mat-icon>
     <p class="compatible-printers__title">
       {{ TEXT.fields.compatiblePrinters }}
     </p>
@@ -76,7 +89,12 @@
   </ul>
 
   <div class="alternative-cartridges__wrapper">
-    <mat-icon aria-hidden="false" aria-label="Example scanner icon" class="alternative-cartridges__icon" fontIcon="adf_scanner"></mat-icon>
+    <mat-icon
+      aria-hidden="false"
+      aria-label="Example scanner icon"
+      class="alternative-cartridges__icon"
+      fontIcon="adf_scanner"
+    ></mat-icon>
     <p class="alternative-cartridges__title">
       {{ TEXT.fields.alternativeCartridges }}
     </p>
@@ -93,30 +111,48 @@
   </ul>
   <ul class="cartridge-card__list">
     <li class="cartridge-card__responsible-wrapper">
-      <mat-icon aria-hidden="false" aria-label="Example person_check icon" class="cartridge-card__responsible-icon" fontIcon="person_check"></mat-icon>
+      <mat-icon
+        aria-hidden="false"
+        aria-label="Example person_check icon"
+        class="cartridge-card__responsible-icon"
+        fontIcon="person_check"
+      ></mat-icon>
       <p class="cartridge-card__responsible">{{ TEXT.fields.responsible }}:</p>
       <p class="cartridge-card__responsible-value">
         {{ cartridgeVariable.responsible }}
       </p>
     </li>
-      <li class="cartridge-card__location-wrapper">
-        <mat-icon aria-hidden="false" aria-label="Example location_on icon" class="cartridge-card__location-icon" fontIcon="location_on"></mat-icon>
+    <li class="cartridge-card__location-wrapper">
+      <mat-icon
+        aria-hidden="false"
+        aria-label="Example location_on icon"
+        class="cartridge-card__location-icon"
+        fontIcon="location_on"
+      ></mat-icon>
       <p class="cartridge-card__location">{{ TEXT.fields.location }}:</p>
       <p class="cartridge-card__location-value">
-        {{ cartridgeVariable.location }}
+        {{ cartridgeVariable.location.name }}
       </p>
     </li>
     <li class="cartridge-card__refill-wrapper">
-      <mat-icon aria-hidden="false" aria-label="Example calendar_month icon" class="cartridge-card__refill-icon" fontIcon="calendar_month"></mat-icon>
-      <p class="cartridge-card__refill">
-        {{ TEXT.fields.refillDate }}:
-      </p>
+      <mat-icon
+        aria-hidden="false"
+        aria-label="Example calendar_month icon"
+        class="cartridge-card__refill-icon"
+        fontIcon="calendar_month"
+      ></mat-icon>
+      <p class="cartridge-card__refill">{{ TEXT.fields.refillDate }}:</p>
       <time class="cartridge-card__refill-value">
-        {{ cartridgeVariable.refillDate | date: 'dd.MM.yyyy' }}
+        {{ cartridgeVariable.refillDate | date: "dd.MM.yyyy" }}
       </time>
     </li>
     <li class="cartridge-card__quantity-wrapper">
-      <mat-icon aria-hidden="false" aria-label="Example description icon" class="cartridge-card__quantity-icon" fontIcon="description"></mat-icon>
+      <mat-icon
+        aria-hidden="false"
+        aria-label="Example description icon"
+        class="cartridge-card__quantity-icon"
+        fontIcon="description"
+      ></mat-icon>
       <p class="cartridge-card__quantity-pages">
         {{ TEXT.fields.quantityPages }}:
       </p>
@@ -125,10 +161,13 @@
       </p>
     </li>
     <li class="cartridge-card__note-wrapper">
-      <mat-icon aria-hidden="false" aria-label="Example note icon" class="cartridge-card__note-icon" fontIcon="notes"></mat-icon>
-      <p class="cartridge-card__note">
-        {{ TEXT.fields.notes}}:
-      </p>
+      <mat-icon
+        aria-hidden="false"
+        aria-label="Example note icon"
+        class="cartridge-card__note-icon"
+        fontIcon="notes"
+      ></mat-icon>
+      <p class="cartridge-card__note">{{ TEXT.fields.notes }}:</p>
       <p class="cartridge-card__note-value">
         {{ cartridgeVariable.notes }}
       </p>

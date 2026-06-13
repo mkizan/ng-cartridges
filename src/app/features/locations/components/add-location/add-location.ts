@@ -11,5 +11,5 @@ import { MatButtonModule } from '@angular/material/button';
 })
 export class AddLocation {
   modalService = inject(ModalService);
-  protected readonly textAddCartridge = TEXT.buttons.addCartridge;
+  protected readonly textAddCartridge = TEXT.buttons.add;
 }

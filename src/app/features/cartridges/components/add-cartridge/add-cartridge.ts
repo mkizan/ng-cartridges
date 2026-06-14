@@ -1,17 +1,17 @@
 import { Component, inject } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
 import { ModalService } from '../../../../core/services/modal/modal-service';
 import { TEXT } from '../../../../core/constants/text';
-import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 
 @Component({
-  selector: 'app-add-location',
+  selector: 'app-add-cartridge',
   imports: [MatButtonModule, MatIconModule, MatTooltipModule],
-  templateUrl: './add-location.html',
-  styleUrl: './add-location.scss',
+  templateUrl: './add-cartridge.html',
+  styleUrl: './add-cartridge.scss',
 })
-export class AddLocation {
+export class AddCartridge {
   protected readonly TEXT = TEXT;
   modalService = inject(ModalService);
 }

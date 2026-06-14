@@ -2,13 +2,14 @@
   mat-fab
   matTooltip="{{ TEXT.buttons.add }}"
   matTooltipPosition="above"
-  class="add-location__btn"
+  aria-label="Додати"
+  class="add-cartridge__btn"
   (click)="modalService.openModalCreate()"
 >
   <mat-icon
     aria-hidden="false"
     aria-label="Example add icon"
-    class="add-location__btn-icon"
+    class="add-cartridge__btn-icon"
     fontIcon="add"
   ></mat-icon>
 </button>

@@ -3,6 +3,6 @@
   @for (location of locations(); track location.id) {
     <app-location-card [location]="location" />
   } @empty {
-    <p>Локацій не знайдено</p>
+    <p class="location-list__empty">Локацій не знайдено</p>
   }
 </div>

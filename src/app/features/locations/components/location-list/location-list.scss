@@ -3,6 +3,12 @@
   flex-wrap: wrap;
   justify-content: center;
   position: relative;
+
+  &__empty {
+    color: var(--value-text-color);
+    text-align: center;
+    width: 100%;
+  }
 }
 
 @media screen and (min-width: 576px) and (max-width: 1365px) {

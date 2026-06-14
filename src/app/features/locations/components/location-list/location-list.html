@@ -1,4 +1,8 @@
 <app-add-location />
-@for(location of locations(); track location.id){
-    <app-location-card [location]="location"/>
-}
+<div class="location-list">
+  @for (location of locations(); track location.id) {
+    <app-location-card [location]="location" />
+  } @empty {
+    <p class="location-list__empty">Локацій не знайдено</p>
+  }
+</div>

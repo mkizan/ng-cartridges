@@ -1,0 +1,30 @@
+.location-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  position: relative;
+
+  &__empty {
+    color: var(--value-text-color);
+    text-align: center;
+    width: 100%;
+  }
+}
+
+@media screen and (min-width: 576px) and (max-width: 1365px) {
+  .location-list::after {
+    content: "";
+    flex: 0 0 320px;
+    height: 0;
+    margin-left: 5px;
+    margin-right: 5px;
+  }
+}
+
+@media screen and (min-width: 1366px) {
+  .location-list {
+    justify-content: unset;
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+}

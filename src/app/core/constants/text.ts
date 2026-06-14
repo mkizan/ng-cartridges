@@ -2,8 +2,8 @@ export const TEXT = {
   titles: {
     addCartridge: 'Додати новий картридж',
     editCartridge: 'Редагувати картридж',
-    addLocation: 'Додати нове місцезнаходження',
-    editLocation: 'Редагувати місцезнаходження',
+    addLocation: 'Додати нове розташування',
+    editLocation: 'Редагувати розташування',
   },
   fields: {
     totalCartridges: 'Всього картриджів',
@@ -20,6 +20,7 @@ export const TEXT = {
     model: 'Модель',
     status: 'Статус',
     notes: 'Примітка',
+    name: 'Назва',
   },
   buttons: {
     add: 'Додати',
@@ -39,18 +40,19 @@ export const TEXT = {
     required: "Це поле є обов'язковим",
     minLengthBarcode: 'ШК має містити  не менше 13 цифр',
     maxLengthBarcode: 'ШК має містити не більше 13 цифр',
-    invalidBarcode: 'Штрихкод має містить лише цифри',
+    invalidBarcode: 'Штрихкод має містити лише цифри',
     minLengthBrand: 'Бренд має містити щонайменше 2 символи',
     minLengthModel: 'Модель має містити щонайменше 2 символи',
     minLengthCompatiblePrinters:
-      'Сумісні принтери мають містить щонайменше 1 символ',
-    minLengthLocation: 'Розташування має містить щонайменше 2 символи',
+      'Сумісні принтери мають містити щонайменше 1 символ',
+    minLengthLocation: 'Розташування має містити щонайменше 2 символи',
+    minLengthName: 'Назва має містити щонайменше 2 символи',
     minLengthResponsible: 'Відповідальний має містити щонайменше 2 символи',
   },
   dialog: {
     deleteTitle: 'Видалення',
-    message: "Ви впевнені, що хочете видалити?",
+    message: 'Ви впевнені, що хочете видалити?',
     yesBtn: 'Так',
     noBtn: 'Ні',
-  }
+  },
 } as const;

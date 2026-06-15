@@ -19,11 +19,25 @@ import { HttpClient } from '@angular/common/http';
 import { BASE_URL } from '../../../../shared/utils/server-url';
 import { TEXT } from '../../../../core/constants/text';
 import { LocationsService } from '../../../locations/services/locations-service';
-import { ILocation } from '../../../locations/models/location-interfaces';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatButton } from '@angular/material/button';
+import { MatSelect, MatOption } from '@angular/material/select';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { provideNativeDateAdapter } from '@angular/material/core';
 
 @Component({
   selector: 'app-cartridge-form',
-  imports: [ReactiveFormsModule],
+  imports: [
+    ReactiveFormsModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatButton,
+    MatSelect,
+    MatOption,
+    MatDatepickerModule,
+  ],
+  providers: [provideNativeDateAdapter()],
   templateUrl: './cartridge-form.html',
   styleUrl: './cartridge-form.scss',
 })

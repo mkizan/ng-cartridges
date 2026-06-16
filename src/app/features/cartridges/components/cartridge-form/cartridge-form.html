@@ -9,6 +9,7 @@
     }}</mat-label>
     <input
       matInput
+      appAutofocus
       type="text"
       id="barcode"
       class="cartridge-form__input-barcode"
@@ -171,17 +172,6 @@
   @if (location!.invalid && (location!.dirty || location!.touched)) {
     <mat-error>{{ TEXT.validation.required }}</mat-error>
   }
-  <!-- <mat-form-field>
-  <mat-label for="refillDate" class="cartridge-form__label-refillDate"></mat-label>
-  <input
-    matInput
-    type="date"
-    id="refillDate"
-    class="cartridge-form__input-refillDate"
-    name="refillDate"
-    formControlName="refillDate"
-  />
-  </mat-form-field> -->
   <mat-form-field>
     <mat-label>{{ TEXT.fields.refillDate }}</mat-label>
     <input matInput [matDatepicker]="picker" />

@@ -11,7 +11,6 @@ import { CartridgesService } from '../../services/cartridges-service';
 import {
   CartridgeStatus,
   ICartridge,
-  ICartridgeLocation,
   ICartridgeUser,
 } from '../../models/cartridge-interfaces';
 import { ModalService } from '../../../../core/services/modal/modal-service';
@@ -25,6 +24,7 @@ import { MatButton } from '@angular/material/button';
 import { MatSelect, MatOption } from '@angular/material/select';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { provideNativeDateAdapter } from '@angular/material/core';
+import { AutoFocusDirective } from '../../../../shared/directives/autofocus-directive';
 
 @Component({
   selector: 'app-cartridge-form',
@@ -36,6 +36,7 @@ import { provideNativeDateAdapter } from '@angular/material/core';
     MatSelect,
     MatOption,
     MatDatepickerModule,
+    AutoFocusDirective,
   ],
   providers: [provideNativeDateAdapter()],
   templateUrl: './cartridge-form.html',
@@ -56,7 +57,6 @@ export class CartridgeForm implements OnInit {
   cartridgesService = inject(CartridgesService);
   cartridgeStatuses = this.cartridgesService.allCartridgeStatuses;
 
-  // locations = signal<ICartridgeLocation[]>([]);
   users = signal<ICartridgeUser[]>([]);
 
   cartridgeForm = this.formBuilder.group({

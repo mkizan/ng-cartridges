@@ -8,52 +8,22 @@
     <div class="cartridge-card__actions">
       <mat-icon
         aria-hidden="false"
-        aria-label="Example more_vert icon"
-        class="cartridge-card__actions-icon"
-        fontIcon="more_vert"
+        aria-label="Example edit icon"
+        class="cartridge-card__edit-icon"
+        fontIcon="edit"
+        matTooltip="{{ TEXT.buttons.edit }}"
+        matTooltipPosition="above"
+        (click)="modalService.openModalEdit(cartridgeVariable)"
       ></mat-icon>
-      <div class="cartridge-card__actions-wrapper">
-        <p class="cartridge-card__actions-title">дії</p>
-        <ul class="cartridge-card__actions-list">
-          <li
-            class="cartridge-card__edit-cartridge"
-            (click)="modalService.openModalEdit(cartridgeVariable)"
-          >
-            <mat-icon
-              aria-hidden="false"
-              aria-label="Example edit icon"
-              class="cartridge-card__edit-icon"
-              fontIcon="edit"
-            ></mat-icon>
-            <p>{{ TEXT.buttons.edit }}</p>
-          </li>
-        </ul>
-        <p class="cartridge-card__change-status">
-          {{ TEXT.buttons.changeStatus }}
-        </p>
-        <ul class="cartridge-card__status-list">
-          @for (item of cartridgeStatus(); track item.id) {
-            <li
-              class="cartridge-card__status-item cartridge-status"
-              [class]="item.status | translateStatus"
-              (click)="selectStatus(item.status)"
-            >
-              {{ item.status }}
-            </li>
-          }
-        </ul>
-        <div class="cartridge-card__delete-cartridge">
-          <mat-icon
-            aria-hidden="false"
-            aria-label="Example delete icon"
-            class="cartridge-card__delete-icon"
-            fontIcon="delete"
-          ></mat-icon>
-          <button class="cartridge-card__delete-btn" (click)="openDialog()">
-            {{ TEXT.buttons.delete }}
-          </button>
-        </div>
-      </div>
+      <mat-icon
+        aria-hidden="false"
+        aria-label="Example delete icon"
+        class="cartridge-card__delete-icon"
+        fontIcon="delete"
+        matTooltip="{{ TEXT.buttons.delete }}"
+        matTooltipPosition="above"
+        (click)="openDialog()"
+      ></mat-icon>
     </div>
   </div>
   <p class="cartridge-card__barcode">

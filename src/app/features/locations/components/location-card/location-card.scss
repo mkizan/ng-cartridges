@@ -42,21 +42,6 @@
   }
 }
 
-.location-card__actions-wrapper {
-  display: none;
-  position: absolute;
-  width: 150px;
-  height: 1px;
-  margin: -1px;
-  padding: 0;
-  overflow: hidden;
-  border: 1px solid var(--card-border-color);
-  clip: rect(0 0 0 0);
-  background-color: var(--card-background-color);
-  border-radius: 5px;
-  transition: all 0.3s ease-out;
-}
-
 .location-card__city {
   margin-top: 10px;
   color: var(--field-text-color);

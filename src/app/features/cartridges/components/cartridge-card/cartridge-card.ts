@@ -15,10 +15,11 @@ import { TEXT } from '../../../../core/constants/text';
 import { MatIconModule } from '@angular/material/icon';
 import { DatePipe } from '@angular/common';
 import { DialogService } from '../../../../core/services/confirm-dialog/dialog-service';
+import { MatTooltip } from '@angular/material/tooltip';
 
 @Component({
   selector: 'app-cartridge-card',
-  imports: [TranslateStatusPipe, MatIconModule, DatePipe],
+  imports: [TranslateStatusPipe, MatIconModule, DatePipe, MatTooltip],
   templateUrl: './cartridge-card.html',
   styleUrl: './cartridge-card.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

@@ -85,7 +85,7 @@ export class CartridgeForm implements OnInit {
   });
 
   ngOnInit(): void {
-    this.locationsService.getLocations();
+    // this.locationsService.getLocations();
 
     this.http.get<ICartridgeUser[]>(`${BASE_URL}/persons`).subscribe({
       next: (data) => {

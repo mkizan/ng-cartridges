@@ -84,7 +84,27 @@ export class CartridgeForm implements OnInit {
     notes: [''],
   });
 
+  // ngOnInit(): void {
+  //   // this.locationsService.getLocations();
+
+  //   this.http.get<ICartridgeUser[]>(`${BASE_URL}/persons`).subscribe({
+  //     next: (data) => {
+  //       this.users.set(data);
+  //     },
+  //     error: (err) => console.error('Users error', err),
+  //   });
+
+  //   const data = this.cartridgeData();
+  //   if (data) {
+  //     this.cartridgeForm.patchValue({
+  //       ...data,
+  //       location: data.location.id ?? '', // витягуємо тільки id з об'єкта location для форми, оскільки форма очікує рядок (id), а не об'єкт
+  //     });
+  //   }
+  // }
+
   ngOnInit(): void {
+    // не потрібно викликати getLocations() — сервіс уже завантажує їх в конструкторі
     // this.locationsService.getLocations();
 
     this.http.get<ICartridgeUser[]>(`${BASE_URL}/persons`).subscribe({
@@ -98,7 +118,7 @@ export class CartridgeForm implements OnInit {
     if (data) {
       this.cartridgeForm.patchValue({
         ...data,
-        location: data.location.id ?? '', // витягуємо тільки id з об'єкта location для форми, оскільки форма очікує рядок (id), а не об'єкт
+        location: data.location.id ?? '',
       });
     }
   }

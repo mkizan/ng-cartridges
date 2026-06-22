@@ -79,13 +79,34 @@ export class CartridgeForm implements OnInit {
       [Validators.required, Validators.minLength(1)],
     ],
     responsible: ['', [Validators.required, Validators.minLength(2)]],
-    refillDate: ['', [Validators.required]],
+    // refillDate: ['', [Validators.required]],
+    refillDate: [<Date | null>null, [Validators.required]],
     quantityPages: [0, [Validators.required, Validators.min(0)]],
     notes: [''],
   });
 
+  // ngOnInit(): void {
+  //   // this.locationsService.getLocations();
+
+  //   this.http.get<ICartridgeUser[]>(`${BASE_URL}/persons`).subscribe({
+  //     next: (data) => {
+  //       this.users.set(data);
+  //     },
+  //     error: (err) => console.error('Users error', err),
+  //   });
+
+  //   const data = this.cartridgeData();
+  //   if (data) {
+  //     this.cartridgeForm.patchValue({
+  //       ...data,
+  //       location: data.location.id ?? '', // витягуємо тільки id з об'єкта location для форми, оскільки форма очікує рядок (id), а не об'єкт
+  //     });
+  //   }
+  // }
+
   ngOnInit(): void {
-    this.locationsService.getLocations();
+    // не потрібно викликати getLocations() — сервіс уже завантажує їх в конструкторі
+    // this.locationsService.getLocations();
 
     this.http.get<ICartridgeUser[]>(`${BASE_URL}/persons`).subscribe({
       next: (data) => {
@@ -98,7 +119,8 @@ export class CartridgeForm implements OnInit {
     if (data) {
       this.cartridgeForm.patchValue({
         ...data,
-        location: data.location.id ?? '', // витягуємо тільки id з об'єкта location для форми, оскільки форма очікує рядок (id), а не об'єкт
+        location: data.location.id ?? '',
+        refillDate: data.refillDate ? new Date(data.refillDate) : null,
       });
     }
   }
@@ -107,6 +129,9 @@ export class CartridgeForm implements OnInit {
     if (this.cartridgeForm.invalid) return;
 
     const cartridgeFormData = this.cartridgeForm.getRawValue();
+    const refillDate = cartridgeFormData.refillDate
+      ? cartridgeFormData.refillDate.toISOString()
+      : '';
 
     const payload = {
       ...cartridgeFormData,
@@ -126,7 +151,8 @@ export class CartridgeForm implements OnInit {
               .map((s) => s.trim())
               .filter((s) => s !== '')
           : cartridgeFormData.compatiblePrinters,
-      refillDate: new Date(cartridgeFormData.refillDate!).toISOString(),
+      // refillDate: new Date(cartridgeFormData.refillDate!).toISOString(),
+      refillDate,
       // витягуємо тільки id з об'єкта location
       location:
         typeof cartridgeFormData.location === 'object' &&
@@ -159,7 +185,7 @@ export class CartridgeForm implements OnInit {
     return this.cartridgeForm.get('model');
   }
   get alternativeCartridges() {
-    return this.cartridgeForm.get('alternative-cartridges');
+    return this.cartridgeForm.get('alternativeCartridges');
   }
   get compatiblePrinters() {
     return this.cartridgeForm.get('compatiblePrinters');

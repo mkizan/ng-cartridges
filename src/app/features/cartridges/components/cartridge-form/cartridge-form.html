@@ -174,8 +174,14 @@
   }
   <mat-form-field>
     <mat-label>{{ TEXT.fields.refillDate }}</mat-label>
-    <input matInput [matDatepicker]="picker" />
-    <mat-hint>MM/DD/YYYY</mat-hint>
+    <input
+      matInput
+      [matDatepicker]="picker"
+      formControlName="refillDate"
+      class="cartridge-form__input-refillDate"
+      placeholder="Число/Місяць/Рік"
+    />
+    <mat-hint>ДД/ММ/РРРР</mat-hint>
     <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
     <mat-datepicker #picker></mat-datepicker>
   </mat-form-field>

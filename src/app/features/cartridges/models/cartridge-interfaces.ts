@@ -23,7 +23,7 @@ export interface ICartridge {
   status: CartridgeStatus;
   location: ILocation;
   responsible: string;
-  refillDate: string;
+  refilledDate: string;
   inPrinterDate: string;
   onRefillDate: string;
   endDate: string;

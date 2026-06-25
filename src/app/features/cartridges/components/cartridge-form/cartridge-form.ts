@@ -79,7 +79,7 @@ export class CartridgeForm implements OnInit {
       [Validators.required, Validators.minLength(1)],
     ],
     responsible: ['', [Validators.required, Validators.minLength(2)]],
-    refillDate: [<Date | null>null, [Validators.required]],
+    refilledDate: [<Date | null>null, [Validators.required]],
     inPrinterDate: [<Date | null>null],
     onRefillDate: [<Date | null>null],
     endDate: [<Date | null>null],
@@ -101,7 +101,7 @@ export class CartridgeForm implements OnInit {
       this.cartridgeForm.patchValue({
         ...data,
         location: data.location.id ?? '',
-        refillDate: data.refillDate ? new Date(data.refillDate) : null,
+        refilledDate: data.refilledDate ? new Date(data.refilledDate) : null,
         inPrinterDate: data.inPrinterDate ? new Date(data.inPrinterDate) : null,
         onRefillDate: data.onRefillDate ? new Date(data.onRefillDate) : null,
         endDate: data.endDate ? new Date(data.endDate) : null,
@@ -113,8 +113,8 @@ export class CartridgeForm implements OnInit {
     if (this.cartridgeForm.invalid) return;
 
     const cartridgeFormData = this.cartridgeForm.getRawValue();
-    const refillDate = cartridgeFormData.refillDate
-      ? cartridgeFormData.refillDate.toISOString()
+    const refilledDate = cartridgeFormData.refilledDate
+      ? cartridgeFormData.refilledDate.toISOString()
       : '';
     const inPrinterDate = cartridgeFormData.inPrinterDate
       ? cartridgeFormData.inPrinterDate.toISOString()
@@ -144,7 +144,7 @@ export class CartridgeForm implements OnInit {
               .map((s) => s.trim())
               .filter((s) => s !== '')
           : cartridgeFormData.compatiblePrinters,
-      refillDate,
+      refilledDate,
       inPrinterDate,
       onRefillDate,
       endDate,
@@ -194,8 +194,8 @@ export class CartridgeForm implements OnInit {
   get location() {
     return this.cartridgeForm.get('location');
   }
-  get refillDate() {
-    return this.cartridgeForm.get('refillDate');
+  get refilledDate() {
+    return this.cartridgeForm.get('refilledDate');
   }
   get inPrinterDate() {
     return this.cartridgeForm.get('inPrinterDate');

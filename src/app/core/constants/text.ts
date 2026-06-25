@@ -15,7 +15,7 @@ export const TEXT = {
     location: 'Розташування',
     refilledDate: 'Отримали після заправки',
     inPrinterDate: 'Встановлено в принтер',
-    onRefillDate: 'Віддали на заправку',
+    onRefillDate: 'Передали на заправку',
     endDate: 'Закінчився тонер',
     numberPrintedPagesOfPrinter: 'К-сть роздрук. стор. принтера',
     quantityPages: 'К-сть роздрук. сторінок',

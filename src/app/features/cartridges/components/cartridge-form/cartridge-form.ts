@@ -23,7 +23,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButton } from '@angular/material/button';
 import { MatSelect, MatOption } from '@angular/material/select';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { provideNativeDateAdapter } from '@angular/material/core';
+import { provideNativeDateAdapter, MAT_DATE_LOCALE } from '@angular/material/core';
 import { AutoFocusDirective } from '../../../../shared/directives/autofocus-directive';
 
 @Component({
@@ -38,7 +38,7 @@ import { AutoFocusDirective } from '../../../../shared/directives/autofocus-dire
     MatDatepickerModule,
     AutoFocusDirective,
   ],
-  providers: [provideNativeDateAdapter()],
+  providers: [provideNativeDateAdapter(), { provide: MAT_DATE_LOCALE, useValue: 'uk' }],
   templateUrl: './cartridge-form.html',
   styleUrl: './cartridge-form.scss',
 })

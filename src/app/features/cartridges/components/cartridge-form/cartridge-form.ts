@@ -79,35 +79,16 @@ export class CartridgeForm implements OnInit {
       [Validators.required, Validators.minLength(1)],
     ],
     responsible: ['', [Validators.required, Validators.minLength(2)]],
-    // refillDate: ['', [Validators.required]],
     refillDate: [<Date | null>null, [Validators.required]],
+    inPrinterDate: [<Date | null>null],
+    onRefillDate: [<Date | null>null],
+    endDate: [<Date | null>null],
+    numberPrintedPagesOfPrinter: [0, [Validators.required, Validators.min(0)]],
     quantityPages: [0, [Validators.required, Validators.min(0)]],
     notes: [''],
   });
 
-  // ngOnInit(): void {
-  //   // this.locationsService.getLocations();
-
-  //   this.http.get<ICartridgeUser[]>(`${BASE_URL}/persons`).subscribe({
-  //     next: (data) => {
-  //       this.users.set(data);
-  //     },
-  //     error: (err) => console.error('Users error', err),
-  //   });
-
-  //   const data = this.cartridgeData();
-  //   if (data) {
-  //     this.cartridgeForm.patchValue({
-  //       ...data,
-  //       location: data.location.id ?? '', // витягуємо тільки id з об'єкта location для форми, оскільки форма очікує рядок (id), а не об'єкт
-  //     });
-  //   }
-  // }
-
   ngOnInit(): void {
-    // не потрібно викликати getLocations() — сервіс уже завантажує їх в конструкторі
-    // this.locationsService.getLocations();
-
     this.http.get<ICartridgeUser[]>(`${BASE_URL}/persons`).subscribe({
       next: (data) => {
         this.users.set(data);
@@ -121,6 +102,9 @@ export class CartridgeForm implements OnInit {
         ...data,
         location: data.location.id ?? '',
         refillDate: data.refillDate ? new Date(data.refillDate) : null,
+        inPrinterDate: data.inPrinterDate ? new Date(data.inPrinterDate) : null,
+        onRefillDate: data.onRefillDate ? new Date(data.onRefillDate) : null,
+        endDate: data.endDate ? new Date(data.endDate) : null,
       });
     }
   }
@@ -131,6 +115,15 @@ export class CartridgeForm implements OnInit {
     const cartridgeFormData = this.cartridgeForm.getRawValue();
     const refillDate = cartridgeFormData.refillDate
       ? cartridgeFormData.refillDate.toISOString()
+      : '';
+    const inPrinterDate = cartridgeFormData.inPrinterDate
+      ? cartridgeFormData.inPrinterDate.toISOString()
+      : '';
+    const onRefillDate = cartridgeFormData.onRefillDate
+      ? cartridgeFormData.onRefillDate.toISOString()
+      : '';
+    const endDate = cartridgeFormData.endDate
+      ? cartridgeFormData.endDate.toISOString()
       : '';
 
     const payload = {
@@ -151,8 +144,10 @@ export class CartridgeForm implements OnInit {
               .map((s) => s.trim())
               .filter((s) => s !== '')
           : cartridgeFormData.compatiblePrinters,
-      // refillDate: new Date(cartridgeFormData.refillDate!).toISOString(),
       refillDate,
+      inPrinterDate,
+      onRefillDate,
+      endDate,
       // витягуємо тільки id з об'єкта location
       location:
         typeof cartridgeFormData.location === 'object' &&
@@ -201,6 +196,18 @@ export class CartridgeForm implements OnInit {
   }
   get refillDate() {
     return this.cartridgeForm.get('refillDate');
+  }
+  get inPrinterDate() {
+    return this.cartridgeForm.get('inPrinterDate');
+  }
+  get onRefillDate() {
+    return this.cartridgeForm.get('onRefillDate');
+  }
+  get endDate() {
+    return this.cartridgeForm.get('endDate');
+  }
+  get numberPrintedPagesOfPrinter() {
+    return this.cartridgeForm.get('numberPrintedPagesOfPrinter');
   }
   get quantityPages() {
     return this.cartridgeForm.get('quantityPages');

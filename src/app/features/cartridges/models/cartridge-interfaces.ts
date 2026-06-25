@@ -24,6 +24,10 @@ export interface ICartridge {
   location: ILocation;
   responsible: string;
   refillDate: string;
+  inPrinterDate: string;
+  onRefillDate: string;
+  endDate: string;
+  numberPrintedPagesOfPrinter: number;
   quantityPages: number;
   notes: string;
 }

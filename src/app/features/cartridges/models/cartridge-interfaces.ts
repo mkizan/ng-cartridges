@@ -23,10 +23,10 @@ export interface ICartridge {
   status: CartridgeStatus;
   location: ILocation;
   responsible: string;
-  refilledDate: string;
-  inPrinterDate: string;
-  onRefillDate: string;
-  endDate: string;
+  refilledDate: string | null;
+  inPrinterDate: string | null;
+  onRefillDate: string | null;
+  endDate: string | null;
   numberPrintedPagesOfPrinter: number;
   quantityPages: number;
   notes: string;

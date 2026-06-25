@@ -79,7 +79,7 @@ export class CartridgeForm implements OnInit {
       [Validators.required, Validators.minLength(1)],
     ],
     responsible: ['', [Validators.required, Validators.minLength(2)]],
-    refilledDate: [<Date | null>null, [Validators.required]],
+    refilledDate: [<Date | null>null],
     inPrinterDate: [<Date | null>null],
     onRefillDate: [<Date | null>null],
     endDate: [<Date | null>null],
@@ -115,16 +115,16 @@ export class CartridgeForm implements OnInit {
     const cartridgeFormData = this.cartridgeForm.getRawValue();
     const refilledDate = cartridgeFormData.refilledDate
       ? cartridgeFormData.refilledDate.toISOString()
-      : '';
+      : null;
     const inPrinterDate = cartridgeFormData.inPrinterDate
       ? cartridgeFormData.inPrinterDate.toISOString()
-      : '';
+      : null;
     const onRefillDate = cartridgeFormData.onRefillDate
       ? cartridgeFormData.onRefillDate.toISOString()
-      : '';
+      : null;
     const endDate = cartridgeFormData.endDate
       ? cartridgeFormData.endDate.toISOString()
-      : '';
+      : null;
 
     const payload = {
       ...cartridgeFormData,

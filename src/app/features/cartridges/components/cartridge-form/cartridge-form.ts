@@ -23,7 +23,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButton } from '@angular/material/button';
 import { MatSelect, MatOption } from '@angular/material/select';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { provideNativeDateAdapter } from '@angular/material/core';
+import { provideNativeDateAdapter, MAT_DATE_LOCALE } from '@angular/material/core';
 import { AutoFocusDirective } from '../../../../shared/directives/autofocus-directive';
 
 @Component({
@@ -38,7 +38,7 @@ import { AutoFocusDirective } from '../../../../shared/directives/autofocus-dire
     MatDatepickerModule,
     AutoFocusDirective,
   ],
-  providers: [provideNativeDateAdapter()],
+  providers: [provideNativeDateAdapter(), { provide: MAT_DATE_LOCALE, useValue: 'uk' }],
   templateUrl: './cartridge-form.html',
   styleUrl: './cartridge-form.scss',
 })
@@ -79,35 +79,16 @@ export class CartridgeForm implements OnInit {
       [Validators.required, Validators.minLength(1)],
     ],
     responsible: ['', [Validators.required, Validators.minLength(2)]],
-    // refillDate: ['', [Validators.required]],
-    refillDate: [<Date | null>null, [Validators.required]],
+    refilledDate: [<Date | null>null],
+    inPrinterDate: [<Date | null>null],
+    onRefillDate: [<Date | null>null],
+    endDate: [<Date | null>null],
+    numberPrintedPagesOfPrinter: [0, [Validators.required, Validators.min(0)]],
     quantityPages: [0, [Validators.required, Validators.min(0)]],
     notes: [''],
   });
 
-  // ngOnInit(): void {
-  //   // this.locationsService.getLocations();
-
-  //   this.http.get<ICartridgeUser[]>(`${BASE_URL}/persons`).subscribe({
-  //     next: (data) => {
-  //       this.users.set(data);
-  //     },
-  //     error: (err) => console.error('Users error', err),
-  //   });
-
-  //   const data = this.cartridgeData();
-  //   if (data) {
-  //     this.cartridgeForm.patchValue({
-  //       ...data,
-  //       location: data.location.id ?? '', // витягуємо тільки id з об'єкта location для форми, оскільки форма очікує рядок (id), а не об'єкт
-  //     });
-  //   }
-  // }
-
   ngOnInit(): void {
-    // не потрібно викликати getLocations() — сервіс уже завантажує їх в конструкторі
-    // this.locationsService.getLocations();
-
     this.http.get<ICartridgeUser[]>(`${BASE_URL}/persons`).subscribe({
       next: (data) => {
         this.users.set(data);
@@ -120,7 +101,10 @@ export class CartridgeForm implements OnInit {
       this.cartridgeForm.patchValue({
         ...data,
         location: data.location.id ?? '',
-        refillDate: data.refillDate ? new Date(data.refillDate) : null,
+        refilledDate: data.refilledDate ? new Date(data.refilledDate) : null,
+        inPrinterDate: data.inPrinterDate ? new Date(data.inPrinterDate) : null,
+        onRefillDate: data.onRefillDate ? new Date(data.onRefillDate) : null,
+        endDate: data.endDate ? new Date(data.endDate) : null,
       });
     }
   }
@@ -129,9 +113,18 @@ export class CartridgeForm implements OnInit {
     if (this.cartridgeForm.invalid) return;
 
     const cartridgeFormData = this.cartridgeForm.getRawValue();
-    const refillDate = cartridgeFormData.refillDate
-      ? cartridgeFormData.refillDate.toISOString()
-      : '';
+    const refilledDate = cartridgeFormData.refilledDate
+      ? cartridgeFormData.refilledDate.toISOString()
+      : null;
+    const inPrinterDate = cartridgeFormData.inPrinterDate
+      ? cartridgeFormData.inPrinterDate.toISOString()
+      : null;
+    const onRefillDate = cartridgeFormData.onRefillDate
+      ? cartridgeFormData.onRefillDate.toISOString()
+      : null;
+    const endDate = cartridgeFormData.endDate
+      ? cartridgeFormData.endDate.toISOString()
+      : null;
 
     const payload = {
       ...cartridgeFormData,
@@ -151,8 +144,10 @@ export class CartridgeForm implements OnInit {
               .map((s) => s.trim())
               .filter((s) => s !== '')
           : cartridgeFormData.compatiblePrinters,
-      // refillDate: new Date(cartridgeFormData.refillDate!).toISOString(),
-      refillDate,
+      refilledDate,
+      inPrinterDate,
+      onRefillDate,
+      endDate,
       // витягуємо тільки id з об'єкта location
       location:
         typeof cartridgeFormData.location === 'object' &&
@@ -199,8 +194,20 @@ export class CartridgeForm implements OnInit {
   get location() {
     return this.cartridgeForm.get('location');
   }
-  get refillDate() {
-    return this.cartridgeForm.get('refillDate');
+  get refilledDate() {
+    return this.cartridgeForm.get('refilledDate');
+  }
+  get inPrinterDate() {
+    return this.cartridgeForm.get('inPrinterDate');
+  }
+  get onRefillDate() {
+    return this.cartridgeForm.get('onRefillDate');
+  }
+  get endDate() {
+    return this.cartridgeForm.get('endDate');
+  }
+  get numberPrintedPagesOfPrinter() {
+    return this.cartridgeForm.get('numberPrintedPagesOfPrinter');
   }
   get quantityPages() {
     return this.cartridgeForm.get('quantityPages');

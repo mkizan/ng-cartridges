@@ -3,7 +3,7 @@
   [formGroup]="cartridgeForm"
   (ngSubmit)="handleSubmit()"
 >
-  <mat-form-field>
+  <mat-form-field subscriptSizing="dynamic">
     <mat-label for="barcode" class="cartridge-form__label-barcode">{{
       TEXT.fields.barcode
     }}</mat-label>
@@ -31,7 +31,7 @@
       <mat-error>{{ TEXT.validation.maxLengthBarcode }}</mat-error>
     }
   }
-  <mat-form-field>
+  <mat-form-field subscriptSizing="dynamic">
     <mat-label for="brand" class="cartridge-form__label-brand">{{
       TEXT.fields.brand
     }}</mat-label>
@@ -53,7 +53,7 @@
       <mat-error>{{ TEXT.validation.minLengthBrand }}</mat-error>
     }
   }
-  <mat-form-field>
+  <mat-form-field subscriptSizing="dynamic">
     <mat-label for="model" class="cartridge-form__label-model">{{
       TEXT.fields.model
     }}</mat-label>
@@ -75,10 +75,12 @@
       <mat-error>{{ TEXT.validation.minLengthModel }}</mat-error>
     }
   }
-  <mat-form-field>
-    <label for="compatiblePrinters" class="cartridge-form__label-printers">{{
-      TEXT.fields.compatiblePrinters
-    }}</label>
+  <mat-form-field subscriptSizing="dynamic">
+    <mat-label
+      for="compatiblePrinters"
+      class="cartridge-form__label-printers"
+      >{{ TEXT.fields.compatiblePrinters }}</mat-label
+    >
     <input
       matInput
       type="text"
@@ -101,7 +103,7 @@
       <mat-error>{{ TEXT.validation.minLengthCompatiblePrinters }}</mat-error>
     }
   }
-  <mat-form-field>
+  <mat-form-field subscriptSizing="dynamic">
     <mat-label
       for="alternative-cartridges"
       class="cartridge-form__label-alternative-cartridges"
@@ -118,7 +120,7 @@
       autocomplete="on"
     />
   </mat-form-field>
-  <mat-form-field>
+  <mat-form-field subscriptSizing="dynamic">
     <mat-label for="status" class="cartridge-form__label-status">{{
       TEXT.fields.status
     }}</mat-label>
@@ -134,11 +136,11 @@
         </mat-option>
       }
     </mat-select>
-    @if (status!.invalid && (status!.dirty || status!.touched)) {
-      <mat-error>{{ TEXT.validation.required }}</mat-error>
-    }
   </mat-form-field>
-  <mat-form-field>
+  @if (status!.invalid && (status!.dirty || status!.touched)) {
+    <mat-error>{{ TEXT.validation.required }}</mat-error>
+  }
+  <mat-form-field subscriptSizing="dynamic">
     <mat-label for="responsible" class="cartridge-form__label-responsible">{{
       TEXT.fields.responsible
     }}</mat-label>
@@ -153,9 +155,11 @@
     </mat-select>
   </mat-form-field>
   @if (responsible!.invalid && (responsible!.dirty || responsible!.touched)) {
-    <mat-error>{{ TEXT.validation.required }}</mat-error>
+    @if (responsible!.hasError("required")) {
+      <mat-error>{{ TEXT.validation.required }}</mat-error>
+    }
   }
-  <mat-form-field>
+  <mat-form-field subscriptSizing="dynamic">
     <mat-label for="location" class="cartridge-form__label-location">{{
       TEXT.fields.location
     }}</mat-label>
@@ -172,23 +176,106 @@
   @if (location!.invalid && (location!.dirty || location!.touched)) {
     <mat-error>{{ TEXT.validation.required }}</mat-error>
   }
-  <mat-form-field>
-    <mat-label>{{ TEXT.fields.refillDate }}</mat-label>
+  <mat-form-field subscriptSizing="dynamic">
+    <mat-label>{{ TEXT.fields.refilledDate }}</mat-label>
     <input
       matInput
-      [matDatepicker]="picker"
-      formControlName="refillDate"
-      class="cartridge-form__input-refillDate"
+      [matDatepicker]="refilledDatePicker"
+      formControlName="refilledDate"
+      class="cartridge-form__input-refilledDate"
       placeholder="Число/Місяць/Рік"
     />
-    <mat-hint>ДД/ММ/РРРР</mat-hint>
-    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-    <mat-datepicker #picker></mat-datepicker>
+    <mat-datepicker-toggle
+      matIconSuffix
+      [for]="refilledDatePicker"
+    ></mat-datepicker-toggle>
+    <mat-datepicker #refilledDatePicker></mat-datepicker>
   </mat-form-field>
-  @if (refillDate!.invalid && (refillDate!.dirty || refillDate!.touched)) {
+  @if (
+    refilledDate!.invalid && (refilledDate!.dirty || refilledDate!.touched)
+  ) {
     <mat-error>{{ TEXT.validation.required }}</mat-error>
   }
-  <mat-form-field>
+  <mat-form-field subscriptSizing="dynamic">
+    <mat-label>{{ TEXT.fields.inPrinterDate }}</mat-label>
+    <input
+      matInput
+      [matDatepicker]="inPrinterDatePicker"
+      formControlName="inPrinterDate"
+      class="cartridge-form__input-inPrinterDate"
+      placeholder="Число/Місяць/Рік"
+    />
+    <mat-datepicker-toggle
+      matIconSuffix
+      [for]="inPrinterDatePicker"
+    ></mat-datepicker-toggle>
+    <mat-datepicker #inPrinterDatePicker></mat-datepicker>
+  </mat-form-field>
+  @if (
+    inPrinterDate!.invalid && (inPrinterDate!.dirty || inPrinterDate!.touched)
+  ) {
+    <mat-error>{{ TEXT.validation.required }}</mat-error>
+  }
+  <mat-form-field subscriptSizing="dynamic">
+    <mat-label>{{ TEXT.fields.onRefillDate }}</mat-label>
+    <input
+      matInput
+      [matDatepicker]="onRefillDatePicker"
+      formControlName="onRefillDate"
+      class="cartridge-form__input-onRefillDate"
+      placeholder="Число/Місяць/Рік"
+    />
+    <mat-datepicker-toggle
+      matIconSuffix
+      [for]="onRefillDatePicker"
+    ></mat-datepicker-toggle>
+    <mat-datepicker #onRefillDatePicker></mat-datepicker>
+  </mat-form-field>
+  @if (
+    onRefillDate!.invalid && (onRefillDate!.dirty || onRefillDate!.touched)
+  ) {
+    <mat-error>{{ TEXT.validation.required }}</mat-error>
+  }
+  <mat-form-field subscriptSizing="dynamic">
+    <mat-label>{{ TEXT.fields.endDate }}</mat-label>
+    <input
+      matInput
+      [matDatepicker]="endDatePicker"
+      formControlName="endDate"
+      class="cartridge-form__input-endDate"
+      placeholder="Число/Місяць/Рік"
+    />
+    <mat-datepicker-toggle
+      matIconSuffix
+      [for]="endDatePicker"
+    ></mat-datepicker-toggle>
+    <mat-datepicker #endDatePicker></mat-datepicker>
+  </mat-form-field>
+  @if (endDate!.invalid && (endDate!.dirty || endDate!.touched)) {
+    <mat-error>{{ TEXT.validation.required }}</mat-error>
+  }
+  <mat-form-field subscriptSizing="dynamic">
+    <mat-label
+      for="numberPrintedPagesOfPrinter"
+      class="cartridge-form__label-numberPrintedPagesOfPrinter"
+      >{{ TEXT.fields.numberPrintedPagesOfPrinter }}</mat-label
+    >
+    <input
+      matInput
+      type="number"
+      id="numberPrintedPagesOfPrinter"
+      class="cartridge-form__input-numberPrintedPagesOfPrinter"
+      name="numberPrintedPagesOfPrinter"
+      formControlName="numberPrintedPagesOfPrinter"
+    />
+  </mat-form-field>
+  @if (
+    numberPrintedPagesOfPrinter!.invalid &&
+    (numberPrintedPagesOfPrinter!.dirty || numberPrintedPagesOfPrinter!.touched)
+  ) {
+    <mat-error>{{ TEXT.validation.required }}</mat-error>
+  }
+  <mat-form-field subscriptSizing="dynamic">
     <mat-label
       for="quantityPages"
       class="cartridge-form__label-quantityPages"
@@ -203,7 +290,12 @@
       formControlName="quantityPages"
     />
   </mat-form-field>
-  <mat-form-field>
+  @if (
+    quantityPages!.invalid && (quantityPages!.dirty || quantityPages!.touched)
+  ) {
+    <mat-error>{{ TEXT.validation.required }}</mat-error>
+  }
+  <mat-form-field subscriptSizing="dynamic">
     <mat-label for="quantityPages" class="cartridge-form__label-notes">{{
       TEXT.fields.notes
     }}</mat-label>

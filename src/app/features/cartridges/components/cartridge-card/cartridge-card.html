@@ -86,7 +86,7 @@
         aria-label="Example person_check icon"
         class="cartridge-card__responsible-icon"
         fontIcon="person_check"
-      ></mat-icon>
+      />
       <p class="cartridge-card__responsible">{{ TEXT.fields.responsible }}:</p>
       <p class="cartridge-card__responsible-value">
         {{ cartridgeVariable.responsible }}
@@ -98,23 +98,73 @@
         aria-label="Example location_on icon"
         class="cartridge-card__location-icon"
         fontIcon="location_on"
-      ></mat-icon>
+      />
       <p class="cartridge-card__location">{{ TEXT.fields.location }}:</p>
       <p class="cartridge-card__location-value">
         {{ cartridgeVariable.location.name }}
       </p>
     </li>
-    <li class="cartridge-card__refill-wrapper">
+    <li class="cartridge-card__refilled-wrapper">
       <mat-icon
         aria-hidden="false"
         aria-label="Example calendar_month icon"
-        class="cartridge-card__refill-icon"
+        class="cartridge-card__refilled-icon"
         fontIcon="calendar_month"
-      ></mat-icon>
-      <p class="cartridge-card__refill">{{ TEXT.fields.refillDate }}:</p>
-      <time class="cartridge-card__refill-value">
-        {{ cartridgeVariable.refillDate | date: "dd.MM.yyyy" }}
+      />
+      <p class="cartridge-card__refilled">{{ TEXT.fields.refilledDate }}:</p>
+      <time class="cartridge-card__refilled-value">
+        {{ cartridgeVariable.refilledDate | date: "dd.MM.yyyy" }}
       </time>
+    </li>
+    <li class="cartridge-card__in-printer-wrapper">
+      <mat-icon
+        aria-hidden="false"
+        aria-label="Example calendar_month icon"
+        class="cartridge-card__in-printer-icon"
+        fontIcon="calendar_month"
+      />
+      <p class="cartridge-card__in-printer">{{ TEXT.fields.inPrinterDate }}:</p>
+      <time class="cartridge-card__in-printer-value">
+        {{ cartridgeVariable.inPrinterDate | date: "dd.MM.yyyy" }}
+      </time>
+    </li>
+    <li class="cartridge-card__end-wrapper">
+      <mat-icon
+        aria-hidden="false"
+        aria-label="Example calendar_month icon"
+        class="cartridge-card__end-icon"
+        fontIcon="calendar_month"
+      />
+      <p class="cartridge-card__end">{{ TEXT.fields.endDate }}:</p>
+      <time class="cartridge-card__end-value">
+        {{ cartridgeVariable.endDate | date: "dd.MM.yyyy" }}
+      </time>
+    </li>
+    <li class="cartridge-card__on-refill-wrapper">
+      <mat-icon
+        aria-hidden="false"
+        aria-label="Example calendar_month icon"
+        class="cartridge-card__on-refill-icon"
+        fontIcon="calendar_month"
+      />
+      <p class="cartridge-card__on-refill">{{ TEXT.fields.onRefillDate }}:</p>
+      <time class="cartridge-card__on-refill-value">
+        {{ cartridgeVariable.onRefillDate | date: "dd.MM.yyyy" }}
+      </time>
+    </li>
+    <li class="cartridge-card__numberPrintedPagesOfPrinter-wrapper">
+      <mat-icon
+        aria-hidden="false"
+        aria-label="Example description icon"
+        class="cartridge-card__numberPrintedPagesOfPrinter-icon"
+        fontIcon="description"
+      />
+      <p class="cartridge-card__numberPrintedPagesOfPrinter">
+        {{ TEXT.fields.numberPrintedPagesOfPrinter }}:
+      </p>
+      <p class="cartridge-card__numberPrintedPagesOfPrinter-value">
+        {{ cartridgeVariable.numberPrintedPagesOfPrinter }}
+      </p>
     </li>
     <li class="cartridge-card__quantity-wrapper">
       <mat-icon
@@ -122,7 +172,7 @@
         aria-label="Example description icon"
         class="cartridge-card__quantity-icon"
         fontIcon="description"
-      ></mat-icon>
+      />
       <p class="cartridge-card__quantity-pages">
         {{ TEXT.fields.quantityPages }}:
       </p>
@@ -136,7 +186,7 @@
         aria-label="Example note icon"
         class="cartridge-card__note-icon"
         fontIcon="notes"
-      ></mat-icon>
+      />
       <p class="cartridge-card__note">{{ TEXT.fields.notes }}:</p>
       <p class="cartridge-card__note-value">
         {{ cartridgeVariable.notes }}

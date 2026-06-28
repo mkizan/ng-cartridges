@@ -29,6 +29,14 @@ jobs:
             npm ci --legacy-peer-deps
             npm run build
 
+            # Копіюємо білд у директорію Nginx
+            sudo rm -rf /var/www/cartridge/browser
+            sudo cp -r dist/ng-cartridges/browser /var/www/cartridge/browser
+            sudo chown -R www-data:www-data /var/www/cartridge/browser
+
+            # Перевіряємо конфіг і перезавантажуємо Nginx
+            sudo nginx -t && sudo systemctl reload nginx
+
             pm2 delete frontend-cartridges || true
             pm2 serve /home/deployer/apps/frontend-cartridges/dist/ng-cartridges/browser 4201 --name frontend-cartridges --spa
             pm2 save

@@ -1,5 +1,5 @@
 {
-  "name": "front-cartridges",
+  "name": "frontend-cartridges",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",

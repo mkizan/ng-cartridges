@@ -16,7 +16,7 @@ import {
   ICartridgePayload,
 } from '../models/cartridge-interfaces';
 import { HttpClient } from '@angular/common/http';
-import { BASE_URL } from '../../../shared/utils/server-url';
+import { BACKEND_URL } from '../../../shared/utils/server-url';
 import { LocationsService } from '../../locations/services/locations-service';
 
 @Injectable({
@@ -107,7 +107,7 @@ export class CartridgesService {
     // this.updateStatusCounts();
 
     this.http
-      .patch(`${BASE_URL}/cartridges/${cartridgeData.id}`, {
+      .patch(`${BACKEND_URL}/cartridges/${cartridgeData.id}`, {
         status: cartridgeData.status,
       })
       .subscribe({
@@ -168,7 +168,7 @@ export class CartridgesService {
 
     // Send only the cartridge data WITHOUT id - MongoDB will generate _id
     this.http
-      .post<ICartridge>(`${BASE_URL}/cartridges`, cartridgeData)
+      .post<ICartridge>(`${BACKEND_URL}/cartridges`, cartridgeData)
       .subscribe({
         next: (saved) => {
           // Replace temporary cartridge with server response (which includes MongoDB's generated _id)
@@ -192,7 +192,7 @@ export class CartridgesService {
 
   // --- READ ---
   loadCartridges() {
-    this.http.get<any[]>(`${BASE_URL}/cartridges`).subscribe({
+    this.http.get<any[]>(`${BACKEND_URL}/cartridges`).subscribe({
       next: (data) => {
         const normalized = data.map((d) => ({
           ...d,
@@ -210,7 +210,7 @@ export class CartridgesService {
   // --- UPDATE ---
   editCartridge(id: string, cartridge: Omit<ICartridge, 'id'>) {
     this.http
-      .patch<ICartridge>(`${BASE_URL}/cartridges/${id}`, {
+      .patch<ICartridge>(`${BACKEND_URL}/cartridges/${id}`, {
         ...cartridge,
       })
       .subscribe({
@@ -239,7 +239,7 @@ export class CartridgesService {
     );
     // this.updateStatusCounts();
 
-    this.http.delete(`${BASE_URL}/cartridges/${id}`).subscribe({
+    this.http.delete(`${BACKEND_URL}/cartridges/${id}`).subscribe({
       error: () => {
         this.cartridges.set(prev);
         // this.updateStatusCounts();

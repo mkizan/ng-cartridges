@@ -15,7 +15,7 @@ import {
 } from '../../models/cartridge-interfaces';
 import { ModalService } from '../../../../core/services/modal/modal-service';
 import { HttpClient } from '@angular/common/http';
-import { BASE_URL } from '../../../../shared/utils/server-url';
+import { BACKEND_URL } from '../../../../shared/utils/server-url';
 import { TEXT } from '../../../../core/constants/text';
 import { LocationsService } from '../../../locations/services/locations-service';
 import { MatInputModule } from '@angular/material/input';
@@ -23,7 +23,10 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButton } from '@angular/material/button';
 import { MatSelect, MatOption } from '@angular/material/select';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { provideNativeDateAdapter, MAT_DATE_LOCALE } from '@angular/material/core';
+import {
+  provideNativeDateAdapter,
+  MAT_DATE_LOCALE,
+} from '@angular/material/core';
 import { AutoFocusDirective } from '../../../../shared/directives/autofocus-directive';
 
 @Component({
@@ -38,7 +41,10 @@ import { AutoFocusDirective } from '../../../../shared/directives/autofocus-dire
     MatDatepickerModule,
     AutoFocusDirective,
   ],
-  providers: [provideNativeDateAdapter(), { provide: MAT_DATE_LOCALE, useValue: 'uk' }],
+  providers: [
+    provideNativeDateAdapter(),
+    { provide: MAT_DATE_LOCALE, useValue: 'uk' },
+  ],
   templateUrl: './cartridge-form.html',
   styleUrl: './cartridge-form.scss',
 })
@@ -89,7 +95,7 @@ export class CartridgeForm implements OnInit {
   });
 
   ngOnInit(): void {
-    this.http.get<ICartridgeUser[]>(`${BASE_URL}/persons`).subscribe({
+    this.http.get<ICartridgeUser[]>(`${BACKEND_URL}/persons`).subscribe({
       next: (data) => {
         this.users.set(data);
       },

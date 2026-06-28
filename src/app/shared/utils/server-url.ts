@@ -1,2 +1,2 @@
-export const PORT = 3000;
-export const BASE_URL = `http://localhost:${PORT}`;
+export const PORT = 3001;
+export const BACKEND_URL = `http://localhost:${PORT}`;
